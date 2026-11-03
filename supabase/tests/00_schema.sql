@@ -1,6 +1,6 @@
 -- Schema shape and the "closed by default" privilege model (ADR-032).
 begin;
-select plan(9);
+select plan(10);
 
 select tables_are('public', array[
     'businesses', 'permissions', 'roles', 'role_permissions', 'profiles',
@@ -37,6 +37,14 @@ select is(
 );
 
 select is((select count(*)::int from public.permissions), 16, 'permission catalog has 16 codes');
+
+-- RN-13: money is whole colones. No decimal, float or money columns anywhere.
+select is(
+    (select count(*)::int from information_schema.columns
+     where table_schema = 'public' and data_type in ('numeric', 'real', 'double precision', 'money')),
+    0,
+    'no column stores decimal amounts (RN-13: integer colones)'
+);
 
 select has_function('private', 'require_permission', array['text'], 'require_permission exists');
 select has_function('private', 'business_today', array['uuid'], 'business_today exists');
