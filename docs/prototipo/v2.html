@@ -271,7 +271,7 @@ function seed(){
     ['BIS-005','Tobillera plata 925','Bisutería',12000,5200,3,3],
   ];
   const products=P.map(([sku,name,cat,price,cost,stock,min])=>({id:uid(),sku,name,cat,price,cost,stock,min,active:true}));
-  const CL=[['Carolina Méndez','80000014'],['Ana Lucía Pérez','80000009'],['Daniela Vargas','80000017'],['José Pablo Araya','80000003'],['Fabiola Rojas','80000005'],['Andrea Solís','80000012'],['Ricardo Ulate','80000016'],['Mariela Chaves','80000007'],['Rebeca Jiménez','80000001'],['Sofía Castro','80000004'],['Karla Monge','80000010'],['Paola Quesada','80000002'],['Marta Solano','80000015'],['Laura Brenes','80000006'],['Gabriela Mora','80000011']];
+  const CL=[['Tamara Odio','80000014'],['Ana Celia Barquero','80000009'],['Danae Zeledón','80000017'],['Josué Irigaray','80000003'],['Fiorella Cascante','80000005'],['Anabel Quirós','80000012'],['Rodolfo Esquivel','80000016'],['Marisol Ugalde','80000007'],['Ruth Alfaro','80000001'],['Selene Matarrita','80000004'],['Kenia Brizuela','80000010'],['Priscila Obando','80000002'],['Mireya Leitón','80000015'],['Leonor Villalta','80000006'],['Graciela Sibaja','80000011']];
   const clients=CL.map(([name,phone],i)=>({id:uid(),name,phone,created:now-(140-i)*DAY}));
   const cl=n=>clients.find(c=>c.name===n);
   const sales=[], events=[]; let folio=1000;
@@ -289,26 +289,26 @@ function seed(){
     sales.push(s);
     events.push({t:date,type:'sale',sid:s.id,text:type==='contado'?`Venta de contado a ${c.name}`:`Venta a ${plural(s.months,'mes','meses')} a ${c.name}`,amount:total});
   };
-  mk(0,9.5,'Carolina Méndez',[[5,2]],'contado',{method:'SINPE Móvil'});
-  mk(0,8,'Ana Lucía Pérez',[[4,1]],'contado');
-  mk(1,15,'Daniela Vargas',[[0,1]],'pagos',{months:3,down:8000,method:'SINPE Móvil'});
-  mk(1,11,'José Pablo Araya',[[2,1],[8,1]],'contado',{method:'Tarjeta',seller:'u2'});
-  mk(2,16,'Fabiola Rojas',[[6,1]],'contado');
-  mk(3,10,'Andrea Solís',[[3,1],[5,1]],'contado',{method:'SINPE Móvil'});
-  mk(4,14,'Ricardo Ulate',[[4,2]],'contado',{seller:'u2'});
-  mk(5,12,'Mariela Chaves',[[1,1],[9,1]],'pagos',{months:3,down:10000});
-  mk(6,17,'Rebeca Jiménez',[[7,2],[5,1]],'contado');
-  mk(8,13,'Sofía Castro',[[2,1]],'contado',{method:'Tarjeta'});
-  mk(12,10,'Karla Monge',[[0,1],[6,1]],'contado',{method:'SINPE Móvil'});
-  mk(20,11,'Paola Quesada',[[3,1]],'pagos',{months:2,down:5000});
-  mk(25,9,'Marta Solano',[[5,3]],'contado');
-  mk(70,15,'Laura Brenes',[[0,1],[1,1]],'pagos',{months:3,down:10000,paid:[0]});
-  mk(95,12,'Gabriela Mora',[[3,1]],'pagos',{months:2,down:7000,paid:[0,1]});
+  mk(0,9.5,'Tamara Odio',[[5,2]],'contado',{method:'SINPE Móvil'});
+  mk(0,8,'Ana Celia Barquero',[[4,1]],'contado');
+  mk(1,15,'Danae Zeledón',[[0,1]],'pagos',{months:3,down:8000,method:'SINPE Móvil'});
+  mk(1,11,'Josué Irigaray',[[2,1],[8,1]],'contado',{method:'Tarjeta',seller:'u2'});
+  mk(2,16,'Fiorella Cascante',[[6,1]],'contado');
+  mk(3,10,'Anabel Quirós',[[3,1],[5,1]],'contado',{method:'SINPE Móvil'});
+  mk(4,14,'Rodolfo Esquivel',[[4,2]],'contado',{seller:'u2'});
+  mk(5,12,'Marisol Ugalde',[[1,1],[9,1]],'pagos',{months:3,down:10000});
+  mk(6,17,'Ruth Alfaro',[[7,2],[5,1]],'contado');
+  mk(8,13,'Selene Matarrita',[[2,1]],'contado',{method:'Tarjeta'});
+  mk(12,10,'Kenia Brizuela',[[0,1],[6,1]],'contado',{method:'SINPE Móvil'});
+  mk(20,11,'Priscila Obando',[[3,1]],'pagos',{months:2,down:5000});
+  mk(25,9,'Mireya Leitón',[[5,3]],'contado');
+  mk(70,15,'Leonor Villalta',[[0,1],[1,1]],'pagos',{months:3,down:10000,paid:[0]});
+  mk(95,12,'Graciela Sibaja',[[3,1]],'pagos',{months:2,down:7000,paid:[0,1]});
   events.push({t:now-9*DAY,type:'stock',pid:products[5].id,qty:12,text:'Ingreso de 12 × Aretes argolla dorada'});
   events.push({t:now-15*DAY,type:'new',pid:products[9].id,text:'Nuevo producto: Tobillera plata 925'});
   events.sort((a,b)=>a.t-b.t);
   return {v:2,biz:'Mi Negocio',cur:'u1',folio,
-    users:[{id:'u1',name:'María Rojas',phone:'80000013',role:'admin',active:true},{id:'u2',name:'Luis Mora',phone:'80000008',role:'vendedor',active:true}],
+    users:[{id:'u1',name:'Ximena Ledezma',phone:'80000013',role:'admin',active:true},{id:'u2',name:'Bruno Arrieta',phone:'80000008',role:'vendedor',active:true}],
     clients,products,sales,events};
 }
 let S;
@@ -535,7 +535,7 @@ function clientBlock(){
     return `<div class="picked"><span class="ck">✓</span><div style="flex:1;min-width:0"><b>${esc(c.name)}</b><div class="s">${fphone(c.phone)}${bal?` · debe ${fmt(bal)}`:''}</div></div><button class="btn light sm" id="cliChange">Cambiar</button></div>
     ${ov&&CO.type==='pagos'?`<div class="mt">${bannerHTML('warn',`Este cliente tiene ${fmt(ov)} vencido`,'Puedes continuar, pero revisa su cuenta antes de darle otro plazo.')}</div>`:''}`}
   if(CO.newMode) return `<div class="card" style="margin:0;background:#fbf9f6;box-shadow:none;border:1px solid var(--line)">
-    <div class="field"><label for="nN">Nombre completo</label><input class="inp" id="nN" value="${esc(CO.nName)}" placeholder="Ej. Laura Brenes" autocomplete="off"></div>
+    <div class="field"><label for="nN">Nombre completo</label><input class="inp" id="nN" value="${esc(CO.nName)}" placeholder="Ej. Leonor Villalta" autocomplete="off"></div>
     <div class="field"><label for="nP">Teléfono (8 números)</label><input class="inp" id="nP" inputmode="numeric" value="${esc(CO.nPhone)}" placeholder="8888-8888" maxlength="9" autocomplete="off"></div>
     <div class="two"><button class="btn light" id="nCancel">Cancelar</button><button class="btn" id="nOk">Guardar cliente</button></div></div>`;
   return `<input class="inp" id="cliQ" placeholder="Buscar por nombre o teléfono" value="${esc(CO.q)}" autocomplete="off"><div id="cliRes">${matchesHTML()}</div><button class="btn ghost full mt" id="cliNew">＋ Nuevo cliente</button>`;

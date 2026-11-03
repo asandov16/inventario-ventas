@@ -174,14 +174,14 @@ La aplicación tiene seis secciones fijas, en este orden, y se pasa de una a otr
 
 Toda acción que guarda información pasa por uno de estos estados, y la persona siempre sabe si se guardó o no. Este estándar aplica a todos los casos de uso; cada uno detalla sus mensajes en la línea **Confirmación y errores**.
 
-| Situación           | Qué ve la persona                                                                                                                                                                               | Ejemplo                                                                                |
-| ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| Guardando           | El botón cambia de texto y se desactiva; no se puede tocar dos veces.                                                                                                                           | "Guardando abono…"                                                                     |
-| Éxito               | Mensaje verde con ícono de check, visible al menos 4 segundos. El cambio se ve en pantalla (saldo, stock, etiqueta) y el registro nuevo aparece resaltado. El formulario se cierra o se limpia. | "Abono de ₡16 600 guardado · Saldo: ₡33 400"                                           |
-| Error en los datos  | Mensaje rojo junto al campo con el problema, diciendo qué hacer. No se guarda nada y lo escrito se conserva.                                                                                    | "Escribe un monto mayor a ₡0"                                                          |
-| Error de conexión   | Mensaje con botón **Reintentar**. No se guarda nada a medias y lo escrito se conserva.                                                                                                          | "No se pudo guardar. Revisa tu internet y toca Reintentar."                            |
-| Posible duplicado   | Aviso que pide confirmar antes de guardar (RN-18).                                                                                                                                              | "Ya se registró un abono de ₡16 600 para Laura Brenes hace 1 minuto. ¿Registrar otro?" |
-| Acción irreversible | Confirmación previa que explica qué va a pasar.                                                                                                                                                 | "¿Anular la venta #1016? Los productos regresarán al inventario."                      |
+| Situación           | Qué ve la persona                                                                                                                                                                               | Ejemplo                                                                                   |
+| ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| Guardando           | El botón cambia de texto y se desactiva; no se puede tocar dos veces.                                                                                                                           | "Guardando abono…"                                                                        |
+| Éxito               | Mensaje verde con ícono de check, visible al menos 4 segundos. El cambio se ve en pantalla (saldo, stock, etiqueta) y el registro nuevo aparece resaltado. El formulario se cierra o se limpia. | "Abono de ₡16 600 guardado · Saldo: ₡33 400"                                              |
+| Error en los datos  | Mensaje rojo junto al campo con el problema, diciendo qué hacer. No se guarda nada y lo escrito se conserva.                                                                                    | "Escribe un monto mayor a ₡0"                                                             |
+| Error de conexión   | Mensaje con botón **Reintentar**. No se guarda nada a medias y lo escrito se conserva.                                                                                                          | "No se pudo guardar. Revisa tu internet y toca Reintentar."                               |
+| Posible duplicado   | Aviso que pide confirmar antes de guardar (RN-18).                                                                                                                                              | "Ya se registró un abono de ₡16 600 para Leonor Villalta hace 1 minuto. ¿Registrar otro?" |
+| Acción irreversible | Confirmación previa que explica qué va a pasar.                                                                                                                                                 | "¿Anular la venta #1016? Los productos regresarán al inventario."                         |
 
 | ID       | Requerimiento                                                                                                                                                                  | Prioridad |
 | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------- |
@@ -304,7 +304,7 @@ Los dos tipos de venta comparten el inicio y el cliente; solo cambia cómo se pa
 **Confirmación y errores:**
 
 - Cliente elegido: su nombre y teléfono quedan fijos en el campo, con un check y la opción "Cambiar".
-- Cliente nuevo guardado: "Cliente Laura Brenes guardado", y queda seleccionado en la venta.
+- Cliente nuevo guardado: "Cliente Leonor Villalta guardado", y queda seleccionado en la venta.
 - Errores: nombre vacío ("Escribe el nombre del cliente"); teléfono vacío o sin 8 números ("El teléfono debe tener 8 números"); teléfono ya registrado (muestra ese cliente y pregunta si es la misma persona).
 
 **RF-CLI-01 (Debe):** el sistema guarda una lista de clientes reutilizable. **RF-CLI-02 (Debería):** desde el detalle de una venta se puede ver el resto de compras y el saldo total del mismo cliente.
@@ -348,7 +348,7 @@ Los dos tipos de venta comparten el inicio y el cliente; solo cambia cómo se pa
 
 - Antes: confirmación obligatoria que explica qué pasará.
 - Éxito: "Venta #1016 anulada · 2 productos regresaron al inventario". La etiqueta cambia a Anulada en ese momento y el botón Anular desaparece.
-- Errores: sin motivo ("Indica el motivo de la anulación"); la venta ya fue anulada por otra persona ("Esta venta ya fue anulada por María Rojas").
+- Errores: sin motivo ("Indica el motivo de la anulación"); la venta ya fue anulada por otra persona ("Esta venta ya fue anulada por Ximena Ledezma").
 
 ### 5.3 Por cobrar
 
@@ -384,7 +384,7 @@ Los dos tipos de venta comparten el inicio y el cliente; solo cambia cómo se pa
 - Mientras guarda, el botón dice "Guardando abono…" y se desactiva.
 - Éxito: "Abono de ₡16 600 guardado · Saldo: ₡33 400". En la misma pantalla, el pago aparece resaltado en "Pagos recibidos", la cuota cambia de estado y el saldo y la barra de avance se actualizan.
 - Después de guardar, el formulario de abono se cierra. Para registrar otro, hay que tocar **Registrar otro abono** (RF-FB-05).
-- Si el abono liquida la cuenta: "Cuenta liquidada · Laura Brenes ya no tiene saldo".
+- Si el abono liquida la cuenta: "Cuenta liquidada · Leonor Villalta ya no tiene saldo".
 - Errores: monto vacío o ₡0 ("Escribe un monto mayor a ₡0"); monto mayor que el saldo ("El saldo es ₡33 400"); método sin elegir; sin conexión (Reintentar).
 - Posible duplicado: mismo monto para la misma venta en menos de 10 minutos pide confirmar (RN-18).
 
@@ -565,8 +565,8 @@ Los dos tipos de venta comparten el inicio y el cliente; solo cambia cómo se pa
 
 **Confirmación y errores:**
 
-- Usuario creado: "Luis Mora agregado como Vendedor". Cambio de rol: "Luis Mora ahora es Administrador".
-- Desactivar usuario: confirmación previa y luego "Luis Mora desactivado".
+- Usuario creado: "Bruno Arrieta agregado como Vendedor". Cambio de rol: "Bruno Arrieta ahora es Administrador".
+- Desactivar usuario: confirmación previa y luego "Bruno Arrieta desactivado".
 - Datos del negocio, categorías o métodos de pago: "Cambios guardados".
 - Respaldo: "Respaldo descargado: ventas-2026-11-02.xlsx", o "No se pudo generar el respaldo. Intenta de nuevo".
 - Errores: teléfono o correo ya usado por otro usuario; no se permite desactivar ni quitar el rol al único Administrador ("Debe quedar al menos un administrador").
