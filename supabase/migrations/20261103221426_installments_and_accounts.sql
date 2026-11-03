@@ -12,6 +12,18 @@ begin
 end;
 $$;
 
+-- Serializes concurrent requests that share a key (idempotency key, offline id, phone) for the
+-- rest of the transaction. Without it, two identical requests arriving at the same time could
+-- both pass the "already saved?" check and the second would fail on a unique index instead of
+-- returning the saved record (RN-18).
+create or replace function private.lock_key(p_key text)
+returns void
+language sql
+set search_path = ''
+as $$
+    select pg_advisory_xact_lock(hashtextextended(p_key, 0));
+$$;
+
 -- Source of truth for installment plans. The TypeScript preview mirrors it and both are
 -- tested with shared/fixtures/installments.cases.json.
 --   financed  = total - down payment

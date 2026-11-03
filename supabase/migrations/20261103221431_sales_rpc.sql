@@ -126,6 +126,11 @@ begin
     v_business_id := private.current_business_id();
 
     -- 2. Replay: the same key (or the same offline id) returns the sale already saved (RN-18).
+    --    Concurrent retries with the same key wait here for the first one to finish.
+    perform private.lock_key('sale:' || p_idempotency_key::text);
+    if p_id is not null then
+        perform private.lock_key('sale:' || p_id::text);
+    end if;
     select s.id into v_existing_id
     from public.sales as s
     where s.business_id = v_business_id
@@ -323,6 +328,7 @@ declare
 begin
     perform private.require_permission('payments.create');
     v_business_id := private.current_business_id();
+    perform private.lock_key('payment:' || p_idempotency_key::text);
 
     select p.* into v_existing
     from public.payments as p
@@ -493,6 +499,7 @@ declare
 begin
     perform private.require_permission('legacy_balances.import');
     v_business_id := private.current_business_id();
+    perform private.lock_key('sale:' || p_idempotency_key::text);
 
     select s.id into v_sale_id
     from public.sales as s

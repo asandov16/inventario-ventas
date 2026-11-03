@@ -77,6 +77,9 @@ declare
 begin
     perform private.require_permission('customers.edit');
     v_business_id := private.current_business_id();
+    if p_id is not null then
+        perform private.lock_key('customer:' || p_id::text);
+    end if;
 
     if p_id is not null
         and exists (select 1 from public.customers where id = p_id and business_id = v_business_id) then
@@ -85,6 +88,9 @@ begin
 
     v_name := private.validate_customer_name(p_name);
     v_phone := private.normalize_phone(p_phone);
+
+    -- Two phones creating the same customer at once: the second waits and gets "exists".
+    perform private.lock_key('customer:' || v_business_id::text || ':' || v_phone);
 
     -- One phone, one customer: offer the existing one instead of a duplicate (RN-01).
     select c.id into v_existing_id
