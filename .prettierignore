@@ -1,0 +1,7 @@
+pnpm-lock.yaml
+node_modules
+dist
+coverage
+supabase/.temp
+web/src/shared/api/database.types.ts
+docs/prototipo/

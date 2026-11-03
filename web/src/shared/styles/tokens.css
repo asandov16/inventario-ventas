@@ -1,0 +1,76 @@
+/*
+ * Design tokens ported from prototype v2 (docs/prototipo/v2.html, :root block).
+ * Components consume these variables through CSS Modules; never hard-code colors.
+ */
+:root {
+  /* Surfaces and text */
+  --color-bg: #f7f3ee;
+  --color-card: #fff;
+  --color-ink: #231a2b;
+  --color-ink-2: #4a3f52;
+  --color-muted: #7a6f80;
+  --color-line: #ebe4dc;
+
+  /* Brand */
+  --color-brand: #5b2a5e;
+  --color-brand-soft: #f1e8f2;
+  --color-gold: #b8873a;
+  --color-gold-soft: #f7eedf;
+
+  /* Chart series */
+  --color-series-1: #7d4a80;
+  --color-series-2: #b8873a;
+
+  /* Status */
+  --color-ok: #2f7d5b;
+  --color-ok-soft: #e5f3ec;
+  --color-warn: #a86a12;
+  --color-warn-soft: #fbf0dc;
+  --color-bad: #b23a48;
+  --color-bad-soft: #fae8ea;
+
+  /* Shape */
+  --radius-card: 16px;
+  --radius-control: 12px;
+  --shadow-card: 0 1px 2px rgb(35 26 43 / 6%), 0 4px 14px rgb(35 26 43 / 5%);
+  --shadow-floating: 0 8px 24px rgb(35 26 43 / 25%);
+
+  /* Sizing rules from RF-UX-06: touch targets >= 44px, text >= 15px */
+  --touch-target-min: 44px;
+  --font-size-base: 15px;
+
+  /* Safe areas for installed PWA on notched phones */
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+
+  /* Breakpoint reference (CSS variables cannot be used in media queries): desktop >= 900px */
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font:
+    var(--font-size-base) / 1.4 -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    'Helvetica Neue',
+    Arial,
+    sans-serif;
+}
+
+button,
+input,
+select {
+  font: inherit;
+  color: inherit;
+}

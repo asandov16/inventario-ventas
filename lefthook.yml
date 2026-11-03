@@ -1,0 +1,23 @@
+# Git hooks (installed by `pnpm install` through the "prepare" script).
+# Requires the gitleaks binary on PATH: `brew install gitleaks`.
+
+# Activates the Node version from .nvmrc before running hooks.
+rc: scripts/lefthook-rc.sh
+
+pre-commit:
+  parallel: true
+  jobs:
+    - name: secret-scan
+      # Public repository: block any commit that contains a secret.
+      run: gitleaks git --staged --redact --no-banner --config .gitleaks.toml
+    - name: prettier
+      glob: '*.{ts,tsx,js,json,css,md,yml,yaml}'
+      run: pnpm exec prettier --check {staged_files}
+    - name: eslint
+      glob: '*.{ts,tsx,js}'
+      run: pnpm exec eslint --max-warnings=0 {staged_files}
+
+commit-msg:
+  jobs:
+    - name: conventional-commit
+      run: scripts/check-commit-message.sh {1}

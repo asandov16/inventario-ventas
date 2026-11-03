@@ -1,0 +1,53 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build output
+dist/
+dist-ssr/
+*.tsbuildinfo
+coverage/
+.vite/
+
+# Environment and secrets: never commit. Only .env.example is versioned.
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.age
+age-key*.txt
+
+# Supabase local state
+supabase/.branches/
+supabase/.temp/
+supabase/.env
+
+# Database dumps and real data exports must never enter this public repo
+*.dump
+*.sql.gz
+*.backup
+*.xlsx
+*.csv
+!shared/fixtures/**/*.csv
+
+# Playwright
+e2e/test-results/
+e2e/playwright-report/
+e2e/.auth/
+
+# Cloudflare
+.wrangler/
+.dev.vars
+
+# Claude Code local state (worktrees, personal settings)
+.claude/worktrees/
+.claude/settings.local.json
+
+# Editors and OS
+.DS_Store
+.idea/
+.vscode/*
+!.vscode/extensions.json
+*.swp
+*.log
