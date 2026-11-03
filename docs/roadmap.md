@@ -4,6 +4,8 @@
 > Ajustes vigentes: nombres de código en inglés (`docs/glosario.md`) y correcciones en `docs/decisiones/`.
 > Donde este documento y un ADR difieran, manda el ADR.
 
+> **Punto actual (3 nov 2026):** F0, F1 y F2 completas (etapas 0 y 1). Siguiente: Etapa 2 (F3 + F4), que empieza por su plan y espera visto bueno. Bitácora con fechas y PRs: [`docs/avance.md`](avance.md).
+
 Revisión 2: lleva el sistema de un repositorio vacío a una beta en producción en 10 fases (F0–F9), más el modo sin conexión (F10) justo después.
 
 ## 1. Propósito y cómo usar este documento

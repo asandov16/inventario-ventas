@@ -2,7 +2,7 @@
 
 Inventory and sales PWA for a small family business in Costa Rica: cash and installment sales (up to 3 months), collections, inventory and a simple dashboard. React + TypeScript + Vite static site on Cloudflare Pages; Supabase (Postgres, Auth, Realtime) holds every business rule.
 
-**Read before working:** `docs/plan-implementacion.md` (stages, architecture, conventions) and the stage's section in `docs/roadmap.md`. Requirements: `docs/requerimientos-funcionales.md`, `docs/requerimientos-tecnicos.md`. Decisions: `docs/decisiones/` (an ADR overrides the roadmap where they differ). UI and behaviour reference: `docs/prototipo/v2.html`.
+**Read before working:** `docs/avance.md` (where the project stands and what comes next), `docs/plan-implementacion.md` (stages, architecture, conventions) and the stage's section in `docs/roadmap.md`. Requirements: `docs/requerimientos-funcionales.md`, `docs/requerimientos-tecnicos.md`. Decisions: `docs/decisiones/` (an ADR overrides the roadmap where they differ). UI and behaviour reference: `docs/prototipo/v2.html`.
 
 ## ⚠️ This repository is PUBLIC (ADR-020)
 

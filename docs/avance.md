@@ -59,7 +59,7 @@ Bitácora de lo completado por etapa. Se actualiza al cerrar cada etapa, junto c
 
 Al cerrar cada etapa, después de la revisión del DoD:
 
-1. Agregar aquí la sección de la etapa: resultado, PRs, números y cambios respecto al plan. Actualizar la tabla de estado y los pendientes.
+1. Actualizar el «Punto actual» al inicio de `docs/roadmap.md`. Agregar aquí la sección de la etapa: resultado, PRs, números y cambios respecto al plan. Actualizar la tabla de estado y los pendientes.
 2. Actualizar la presentación de avance:
    - portada (fecha y etapas completas);
    - «Dónde estamos»;
