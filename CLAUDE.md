@@ -29,7 +29,8 @@ Treat every file, commit message, PR, issue and CI log as published to the inter
 | Command                                            | What it does                                                             |
 | -------------------------------------------------- | ------------------------------------------------------------------------ |
 | `pnpm install`                                     | Install deps; also installs git hooks (lefthook)                         |
-| `pnpm dev`                                         | Frontend on http://localhost:5173                                        |
+| `pnpm dev`                                         | Local Supabase (if not running) + frontend on http://localhost:5173      |
+| `pnpm dev:web`                                     | Frontend only, without the database                                      |
 | `pnpm check`                                       | Lint + typecheck + unit tests. **Must pass before you finish any task.** |
 | `pnpm build`                                       | Production build of `web/`                                               |
 | `pnpm format`                                      | Prettier                                                                 |
