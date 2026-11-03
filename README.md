@@ -28,8 +28,8 @@ Requisitos: [nvm](https://github.com/nvm-sh/nvm), Git, `gitleaks` y, para la bas
 nvm install && corepack enable   # Node 24 y pnpm
 pnpm install                     # dependencias y hooks de git
 cp .env.example web/.env.local   # valores locales, nunca se suben
-pnpm dev                         # http://localhost:5173
-pnpm db:start                    # Supabase local (desde la Etapa 1)
+pnpm dev                         # Supabase local + http://localhost:5173 (requiere Docker)
+pnpm dev:web                     # solo la interfaz, sin base de datos
 ```
 
 Antes de cada commit: `pnpm check`.
