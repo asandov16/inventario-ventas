@@ -6,14 +6,22 @@ Pasos que hace la persona dueña del proyecto. Claude Code nunca escribe credenc
 
 ## 1. Herramientas locales
 
+El proyecto no necesita Xcode. En esta Mac (Intel, sin soporte de Homebrew) las herramientas se instalaron así:
+
+| Herramienta             | Cómo                                                                |
+| ----------------------- | ------------------------------------------------------------------- |
+| Node 24                 | `nvm install` (lee `.nvmrc`); pnpm lo fija con `devEngines.runtime` |
+| pnpm                    | `corepack enable`                                                   |
+| `gh`, `gitleaks`, `age` | Binarios oficiales de GitHub Releases en `~/.local/bin`             |
+| `sqlfluff`              | `python3 -m pip install --user sqlfluff`                            |
+| Docker                  | OrbStack (prueba de 29 días desde el 3 nov 2026)                    |
+
 ```bash
-sudo xcodebuild -license accept      # desbloquea Homebrew en esta Mac
-brew install gh gitleaks age
-brew install --cask orbstack         # Docker para Supabase local (o Docker Desktop)
-nvm install                          # lee .nvmrc (Node 24)
-corepack enable
+nvm install && corepack enable
 pnpm install
 ```
+
+> **Pendiente — cambiar a Docker Desktop antes del 2 dic 2026.** OrbStack es gratis solo para uso personal no comercial; este proyecto es para un negocio. Docker Desktop es gratis para empresas con menos de 250 empleados y menos de USD 10 millones de ingresos al año. Pasos: instalar Docker Desktop (versión para Mac con chip Intel; confirmar requisitos del sistema), desinstalar OrbStack, `docker info` y `pnpm db:start`. Nada del proyecto cambia.
 
 ## 2. GitHub
 
