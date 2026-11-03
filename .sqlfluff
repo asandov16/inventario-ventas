@@ -2,15 +2,25 @@
 dialect = postgres
 templater = raw
 max_line_length = 120
+# Business vocabulary uses words like "name", "type" and "code" as column names (RF04),
+# and plpgsql bodies are opaque strings, so ambiguous-reference rules add noise (RF02, RF03).
+exclude_rules = RF02, RF03, RF04
 
 [sqlfluff:indentation]
 tab_space_size = 4
 
+# Lowercase SQL, matching Supabase's own style and generated code.
 [sqlfluff:rules:capitalisation.keywords]
-capitalisation_policy = upper
+capitalisation_policy = lower
 
 [sqlfluff:rules:capitalisation.identifiers]
 extended_capitalisation_policy = lower
 
 [sqlfluff:rules:capitalisation.functions]
+extended_capitalisation_policy = lower
+
+[sqlfluff:rules:capitalisation.literals]
+capitalisation_policy = lower
+
+[sqlfluff:rules:capitalisation.types]
 extended_capitalisation_policy = lower

@@ -15,7 +15,8 @@ pre-commit:
       run: pnpm exec prettier --check {staged_files}
     - name: eslint
       glob: '*.{ts,tsx,js}'
-      run: pnpm exec eslint --max-warnings=0 {staged_files}
+      # --no-warn-ignored: generated files (database.types.ts) are ignored without a warning.
+      run: pnpm exec eslint --max-warnings=0 --no-warn-ignored {staged_files}
 
 commit-msg:
   jobs:

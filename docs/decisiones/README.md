@@ -34,3 +34,8 @@ Cada decisión tiene un registro corto. ADR-001 a ADR-019 corresponden a D-01 a 
 | [ADR-028](ADR-028-arquitectura-en-capas-por-funcionalidad.md)                     | Arquitectura en capas por funcionalidad                         | Aceptada                | Plan §5.2    |
 | [ADR-029](ADR-029-nombres-de-migraciones-con-timestamp.md)                        | Nombres de migraciones con timestamp                            | Aceptada                | Plan §8      |
 | [ADR-030](ADR-030-entrega-en-5-etapas-mas-una.md)                                 | Entrega en 5 etapas más una posterior                           | Aceptada                | Plan §2      |
+| [ADR-031](ADR-031-valores-de-estado-en-ingles.md)                                 | Valores de estado y tipos en inglés                             | Aceptada                | Etapa 1      |
+| [ADR-032](ADR-032-permisos-cerrados-por-defecto.md)                               | Permisos cerrados por defecto                                   | Aceptada                | Etapa 1      |
+| [ADR-033](ADR-033-usuarios-de-prueba-solo-en-seed-local.md)                       | Usuarios de prueba solo en el seed local                        | Aceptada                | Etapa 1      |
+| [ADR-035](ADR-035-ayudantes-de-pgtap-fuera-de-migraciones.md)                     | Ayudantes de pgTAP fuera de las migraciones                     | Aceptada                | Etapa 1      |
+| [ADR-036](ADR-036-costos-de-ingresos-en-tabla-aparte.md)                          | Costos de ingresos de stock en tabla aparte                     | Aceptada                | Etapa 1      |
