@@ -107,4 +107,5 @@ SQL: lowercase keywords (sqlfluff enforces it), `snake_case`; plural tables; `_a
 - Commits: Conventional Commits in English (`feat(sales): add customer picker`), enforced by a commit-msg hook.
 - Stay in scope: no unrequested refactors, dependencies or files.
 - Before finishing: `pnpm check` green (plus `pnpm db:test` when SQL changed), then mark the task `[x]` in `docs/roadmap.md`.
+- Closing a stage: formal DoD review (`docs/planes/etapa-<n>-revision-dod.md`), then update `docs/avance.md` and the progress deck as its "Cómo se actualiza" section says.
 - New dependency: exact version, justified in the PR; prefer what is already installed.

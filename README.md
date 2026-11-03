@@ -8,11 +8,16 @@ App web instalable (PWA) para que un negocio familiar registre ventas de contado
 | Datos, reglas y sesión | Supabase: PostgreSQL, Auth, Realtime           |
 | CI/CD                  | GitHub Actions                                 |
 
+## Estado
+
+2 de 6 etapas completas (3 nov 2026): Fundaciones y Núcleo de datos. Siguiente: App y Vender. Detalle en [Avance del proyecto](docs/avance.md).
+
 ## Documentación
 
 | Documento                                                        | Para qué                                        |
 | ---------------------------------------------------------------- | ----------------------------------------------- |
 | [Plan de implementación](docs/plan-implementacion.md)            | Etapas, arquitectura, convenciones              |
+| [Avance del proyecto](docs/avance.md)                            | Etapas completadas, fechas y pendientes         |
 | [Roadmap](docs/roadmap.md)                                       | Tareas por fase, con su avance                  |
 | [Requerimientos funcionales](docs/requerimientos-funcionales.md) | Qué hace el sistema                             |
 | [Requerimientos técnicos](docs/requerimientos-tecnicos.md)       | Cómo se construye                               |
