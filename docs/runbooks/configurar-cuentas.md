@@ -42,16 +42,28 @@ pnpm install
 2. Crea dos proyectos en **us-east-1** (ADR-016): `inv-staging` e `inv-prod`. Guarda cada contraseña de base en el gestor.
 3. En cada proyecto:
    - Authentication → Sign In / Providers → **desactivar** "Allow new users to sign up".
-   - Authentication → Policies (contraseñas): mínimo **10** caracteres.
+   - Authentication → Sign In / Providers → **Email** (abrir el proveedor): _Minimum password length_ = **10**; _Password requirements_ = letras y dígitos como mínimo.
    - Authentication → URL Configuration: _Site URL_ del entorno (se completa en la Etapa 4).
    - Database → Extensions: habilitar `pg_trgm`, `unaccent`, `pg_cron`.
-4. Account → Access Tokens → crea un token para CI.
+4. Account → Access Tokens → token **con alcance limitado** (_scoped_, no el _Legacy_), nombre `github-actions`:
+
+   | Opción                   | Valor                                 |
+   | ------------------------ | ------------------------------------- |
+   | Organización y proyectos | Solo `inv-staging` e `inv-prod`       |
+   | Project Settings         | Read                                  |
+   | API Keys                 | Read                                  |
+   | API Key Secrets          | Read (lo exige `supabase link`)       |
+   | Database                 | Read (generación de tipos)            |
+   | Todo lo demás            | Sin acceso                            |
+   | Vencimiento              | 1 año; anotar la fecha para renovarlo |
+
+   `supabase db push` se conecta con la contraseña de la base, no con este token. Si un workflow falla por permisos, se agrega solo el permiso que nombre el error.
 
 ## 4. Cloudflare
 
 1. Crea la cuenta.
-2. Workers & Pages → crea el proyecto Pages `inv-web` por **Direct Upload** (sin conectar Git).
-3. My Profile → API Tokens → token con permisos solo para _Cloudflare Pages: Edit_ y _Workers Scripts: Edit_.
+2. Desde la Mac: `pnpm dlx wrangler login` (aprobación en el navegador). Claude Code crea el proyecto Pages `inv-web` con esa sesión.
+3. My Profile → API Tokens → plantilla _Edit Cloudflare Workers_ + permiso _Account → Cloudflare Pages → Edit_.
 4. Anota el _Account ID_.
 
 ## 5. Secretos de GitHub
