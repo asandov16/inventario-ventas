@@ -120,3 +120,98 @@ cross join (
     ('Leonor Villalta', '+50680000014'),
     ('Graciela Sibaja', '+50680000015')
 ) as c (name, phone);
+
+-- Sample sales, created through the real RPCs as the admin so they follow every business
+-- rule (folios, stock, plans, activity log). Dates are relative to "now" so there is always
+-- an overdue installment, a partially paid account, a paid one, a carried-over balance and a void.
+do $$
+declare
+    v_admin uuid := '00000000-0000-4000-8000-000000000001';
+    v_cash uuid;
+    v_sinpe uuid;
+    v_sale jsonb;
+    v_customer uuid;
+begin
+    perform set_config(
+        'request.jwt.claims', jsonb_build_object('sub', v_admin, 'role', 'authenticated')::text, true
+    );
+    perform set_config('request.jwt.claim.sub', v_admin::text, true);
+
+    select id into v_cash from public.payment_methods where name = 'Efectivo';
+    select id into v_sinpe from public.payment_methods where name = 'SINPE Móvil';
+
+    -- Cash sale today: 2 x Aretes argolla dorada.
+    perform public.register_sale(
+        gen_random_uuid(), (select id from public.customers where phone_e164 = '+50680000001'), 'cash',
+        jsonb_build_array(jsonb_build_object(
+            'product_id', (select id from public.products where code = 'BIS-001'), 'qty', 2
+        )),
+        v_sinpe, 13000
+    );
+
+    -- Cash sale yesterday: Splash Coco Fresh.
+    perform public.register_sale(
+        gen_random_uuid(), (select id from public.customers where phone_e164 = '+50680000002'), 'cash',
+        jsonb_build_array(jsonb_build_object(
+            'product_id', (select id from public.products where code = 'PER-005'), 'qty', 1
+        )),
+        v_cash, 9500, p_client_created_at => now() - interval '1 day'
+    );
+
+    -- 3 months, 40 days ago, no payment since the down payment: first installment overdue.
+    perform public.register_sale(
+        gen_random_uuid(), (select id from public.customers where phone_e164 = '+50680000003'), 'installments',
+        jsonb_build_array(jsonb_build_object(
+            'product_id', (select id from public.products where code = 'PER-001'), 'qty', 1
+        )),
+        v_sinpe, 38000, p_months => 3, p_down_payment => 8000,
+        p_client_created_at => now() - interval '40 days'
+    );
+
+    -- 3 months, 5 days ago, with one payment: partially paid, nothing overdue.
+    v_sale := public.register_sale(
+        gen_random_uuid(), (select id from public.customers where phone_e164 = '+50680000008'), 'installments',
+        jsonb_build_array(
+            jsonb_build_object('product_id', (select id from public.products where code = 'PER-002'), 'qty', 1),
+            jsonb_build_object('product_id', (select id from public.products where code = 'BIS-005'), 'qty', 1)
+        ),
+        v_cash, 38500, p_months => 3, p_down_payment => 10000,
+        p_client_created_at => now() - interval '5 days'
+    );
+    perform public.register_payment(gen_random_uuid(), (v_sale -> 'sale' ->> 'id')::uuid, 9500, v_sinpe);
+
+    -- 2 months, 70 days ago, fully paid.
+    v_sale := public.register_sale(
+        gen_random_uuid(), (select id from public.customers where phone_e164 = '+50680000005'), 'installments',
+        jsonb_build_array(jsonb_build_object(
+            'product_id', (select id from public.products where code = 'BIS-002'), 'qty', 1
+        )),
+        null, 14500, p_months => 2, p_client_created_at => now() - interval '70 days'
+    );
+    perform public.register_payment(
+        gen_random_uuid(), (v_sale -> 'sale' ->> 'id')::uuid, 7200, v_sinpe,
+        p_client_created_at => now() - interval '40 days'
+    );
+    perform public.register_payment(
+        gen_random_uuid(), (v_sale -> 'sale' ->> 'id')::uuid, 7300, v_cash,
+        p_client_created_at => now() - interval '10 days'
+    );
+
+    -- Balance carried over from the paper notebook (D-12): 50 000 total, 30 000 already paid.
+    v_customer := (select id from public.customers where phone_e164 = '+50680000014');
+    perform public.register_legacy_balance(
+        gen_random_uuid(), v_customer, (now() - interval '60 days')::date, 'Perfume Rosa + aretes',
+        50000, 30000, 2, (now() + interval '15 days')::date
+    );
+
+    -- A voided sale: products return to stock.
+    v_sale := public.register_sale(
+        gen_random_uuid(), (select id from public.customers where phone_e164 = '+50680000007'), 'cash',
+        jsonb_build_array(jsonb_build_object(
+            'product_id', (select id from public.products where code = 'PER-003'), 'qty', 1
+        )),
+        v_cash, 22000, p_client_created_at => now() - interval '2 days'
+    );
+    perform public.void_sale((v_sale -> 'sale' ->> 'id')::uuid, 'Error de registro');
+end;
+$$;

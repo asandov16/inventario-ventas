@@ -105,6 +105,13 @@ Los mensajes que ve la persona están en `web/src/shared/api/errors.ts` (secció
 | —                    | `delete_not_allowed`      |
 | —                    | `immutable_record`        |
 | —                    | `last_admin_required`     |
+| —                    | `invalid_items`           |
+| —                    | `invalid_name`            |
+| —                    | `invalid_amount`          |
+| —                    | `payment_method_required` |
+| —                    | `sale_not_found`          |
+| —                    | `void_reason_required`    |
+| —                    | `description_required`    |
 
 ## Respuestas de RPC (`status`)
 

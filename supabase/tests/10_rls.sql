@@ -13,7 +13,7 @@ select is((select count(*)::int from public.customers), 15, 'seller sees the 15 
 select is((select count(*)::int from public.product_costs), 0, 'seller cannot read product_costs');
 select is((select count(*)::int from public.inventory_movement_costs), 0, 'seller cannot read restock costs');
 select is((select count(*)::int from public.sale_item_costs), 0, 'seller cannot read sale line costs');
-select is((select count(*)::int from public.inventory_movements), 9, 'seller can read the stock ledger');
+select ok((select count(*) from public.inventory_movements) > 0, 'seller can read the stock ledger');
 select ok(
     not (public.get_my_profile()->'permissions' ? 'costs.read'),
     'seller profile does not include costs.read'

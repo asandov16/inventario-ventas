@@ -32,7 +32,8 @@
     "db:reset": "supabase db reset",
     "db:test": "supabase test db",
     "gen:types": "supabase gen types typescript --local --schema public > web/src/shared/api/database.types.ts",
-    "prepare": "lefthook install"
+    "prepare": "lefthook install",
+    "gen:installment-tests": "node scripts/gen-installments-pgtap.ts"
   },
   "devDependencies": {
     "@eslint/js": "10.0.1",
