@@ -1,0 +1,5 @@
+* text=auto eol=lf
+*.png binary
+*.ico binary
+pnpm-lock.yaml linguist-generated=true -diff
+web/src/shared/api/database.types.ts linguist-generated=true

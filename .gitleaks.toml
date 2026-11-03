@@ -1,0 +1,30 @@
+# Secret scanning for a PUBLIC repository. Extends the default ruleset.
+[extend]
+useDefault = true
+
+[[rules]]
+id = "supabase-service-role-jwt"
+description = "Supabase JWT carrying the service_role claim (must never be committed)"
+regex = '''eyJ[A-Za-z0-9_-]{10,}\.eyJ[A-Za-z0-9_-]*c2VydmljZV9yb2xl[A-Za-z0-9_-]*\.[A-Za-z0-9_-]+'''
+keywords = ["eyj"]
+
+[[rules]]
+id = "supabase-secret-key"
+description = "Supabase secret API key"
+regex = '''sb_secret_[A-Za-z0-9_-]{20,}'''
+keywords = ["sb_secret_"]
+
+[[rules]]
+id = "postgres-url-with-password"
+description = "Postgres connection string with an embedded password"
+regex = '''postgres(?:ql)?://[^:\s/]+:[^@\s]{6,}@[^\s'"]+'''
+keywords = ["postgres://", "postgresql://"]
+
+[allowlist]
+description = "Local development defaults that are public by design"
+regexes = [
+  '''postgres(?:ql)?://postgres:postgres@(?:127\.0\.0\.1|localhost)''',
+]
+paths = [
+  '''pnpm-lock\.yaml''',
+]
