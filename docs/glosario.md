@@ -112,6 +112,16 @@ Los mensajes que ve la persona están en `web/src/shared/api/errors.ts` (secció
 | —                    | `sale_not_found`          |
 | —                    | `void_reason_required`    |
 | —                    | `description_required`    |
+| —                    | `invalid_price`           |
+| —                    | `invalid_quantity`        |
+| —                    | `category_required`       |
+| —                    | `product_not_found`       |
+| —                    | `invalid_channel`         |
+| —                    | `no_balance`              |
+| —                    | `name_taken`              |
+| —                    | `invalid_prefix`          |
+| —                    | `prefix_taken`            |
+| —                    | `invalid_period`          |
 
 ## Respuestas de RPC (`status`)
 
