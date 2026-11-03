@@ -94,7 +94,7 @@ web/src/
 
 ## Naming
 
-SQL: `snake_case`; plural tables; `_at` timestamps, `_date` dates, `_id` references; functions `verb_object` with `p_` params; views `v_`; indexes `idx_<table>_<cols>`; triggers `trg_<table>_<action>`. TS: components `PascalCase.tsx`, hooks `useX.ts`, functions and variables `camelCase`, constants `UPPER_SNAKE_CASE`, types `PascalCase` (no `I` prefix), booleans `is/has/can`, money names carry the unit (`totalColones`). Tests: `*.test.ts` (Vitest), `*.spec.ts` (Playwright), `NN_topic.sql` (pgTAP).
+SQL: lowercase keywords (sqlfluff enforces it), `snake_case`; plural tables; `_at` timestamps, `_date` dates, `_id` references; functions `verb_object` with `p_` params; views `v_`; indexes `idx_<table>_<cols>`; triggers `trg_<table>_<action>`. TS: components `PascalCase.tsx`, hooks `useX.ts`, functions and variables `camelCase`, constants `UPPER_SNAKE_CASE`, types `PascalCase` (no `I` prefix), booleans `is/has/can`, money names carry the unit (`totalColones`). Tests: `*.test.ts` (Vitest), `*.spec.ts` (Playwright), `NN_topic.sql` (pgTAP).
 
 ## Workflow
 

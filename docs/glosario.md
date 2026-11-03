@@ -4,45 +4,45 @@ La interfaz y los documentos usan el lenguaje del negocio, en español. El códi
 
 ## Conceptos
 
-| Negocio (interfaz)     | Código                | Notas                                                   |
-| ---------------------- | --------------------- | ------------------------------------------------------- |
-| Venta                  | `sale`                | Tabla `sales`                                           |
-| Línea de venta         | `sale item`           | Tabla `sale_items`                                      |
-| Folio                  | `folio`               | Se conserva el término; consecutivo por negocio (RN-15) |
-| De contado             | `cash`                | `sales.type = 'cash'`                                   |
-| A pagos                | `installments`        | `sales.type = 'installments'`                           |
-| Prima                  | `down payment`        | `sales.down_payment`                                    |
-| Cuota                  | `installment`         | Tabla `installments`                                    |
-| Plazo (meses)          | `months`              | 1 a 3 (D-07)                                            |
-| Abono                  | `payment`             | Tabla `payments`, `kind = 'payment'`                    |
-| Pago de contado        | `payment`             | `kind = 'cash'`                                         |
-| Pago de prima          | `payment`             | `kind = 'down_payment'`                                 |
-| Pago previo al sistema | `payment`             | `kind = 'legacy'` (D-12)                                |
-| Saldo                  | `balance`             | Calculado en vistas, nunca guardado                     |
-| Cuenta por cobrar      | `receivable`          | Carpeta `features/receivables`                          |
-| Cuota vencida          | `overdue installment` | `status = 'overdue'`                                    |
-| Liquidada / Pagada     | `paid`                | `status = 'paid'`                                       |
-| Anular                 | `void`                | `voided_at`, `voided_by`, `void_reason`                 |
-| Saldo anterior         | `legacy balance`      | `sales.source = 'legacy_import'`                        |
-| Cliente                | `customer`            | Tabla `customers`                                       |
-| Producto               | `product`             | Tabla `products`                                        |
-| Código de producto     | `code`                | `PER-001`; se dice "código", nunca "SKU"                |
-| Categoría              | `category`            | Tabla `categories`, con `prefix`                        |
-| Stock / Quedan N       | `stock`               | `products.stock`                                        |
-| Stock mínimo           | `min stock`           | `products.min_stock`                                    |
-| Ingreso de stock       | `restock`             | `inventory_movements.type = 'restock'`                  |
-| Ajuste de conteo       | `adjustment`          | `inventory_movements.type = 'adjustment'`               |
-| Costo                  | `unit cost`           | `product_costs`, `sale_item_costs`                      |
-| Método de pago         | `payment method`      | Tabla `payment_methods`                                 |
-| Recordatorio           | `reminder`            | Tabla `reminders`                                       |
-| Actividad              | `activity log`        | Tabla `activity_log`                                    |
-| Negocio                | `business`            | Tabla `businesses`                                      |
-| Perfil / usuario       | `profile`             | Tabla `profiles`                                        |
-| Administrador          | `admin`               | Código de rol                                           |
-| Vendedor               | `seller`              | Código de rol                                           |
-| Inicio (tablero)       | `dashboard`           | Carpeta `features/dashboard`                            |
-| Historial              | `history`             | Carpeta `features/history`                              |
-| Inventario             | `inventory`           | Carpeta `features/inventory`                            |
+| Negocio (interfaz)     | Código                | Notas                                                                    |
+| ---------------------- | --------------------- | ------------------------------------------------------------------------ |
+| Venta                  | `sale`                | Tabla `sales`                                                            |
+| Línea de venta         | `sale item`           | Tabla `sale_items`                                                       |
+| Folio                  | `folio`               | Se conserva el término; consecutivo por negocio (RN-15)                  |
+| De contado             | `cash`                | `sales.type = 'cash'`                                                    |
+| A pagos                | `installments`        | `sales.type = 'installments'`                                            |
+| Prima                  | `down payment`        | `sales.down_payment`                                                     |
+| Cuota                  | `installment`         | Tabla `installments`                                                     |
+| Plazo (meses)          | `months`              | 1 a 3 (D-07)                                                             |
+| Abono                  | `payment`             | Tabla `payments`, `kind = 'payment'`                                     |
+| Pago de contado        | `payment`             | `kind = 'cash'`                                                          |
+| Pago de prima          | `payment`             | `kind = 'down_payment'`                                                  |
+| Pago previo al sistema | `payment`             | `kind = 'legacy'` (D-12)                                                 |
+| Saldo                  | `balance`             | Calculado en vistas, nunca guardado                                      |
+| Cuenta por cobrar      | `receivable`          | Carpeta `features/receivables`                                           |
+| Cuota vencida          | `overdue installment` | `status = 'overdue'`                                                     |
+| Liquidada / Pagada     | `paid`                | `status = 'paid'`                                                        |
+| Anular                 | `void`                | `voided_at`, `voided_by`, `void_reason`                                  |
+| Saldo anterior         | `legacy balance`      | `sales.source = 'legacy_import'`                                         |
+| Cliente                | `customer`            | Tabla `customers`                                                        |
+| Producto               | `product`             | Tabla `products`                                                         |
+| Código de producto     | `code`                | `PER-001`; se dice "código", nunca "SKU"                                 |
+| Categoría              | `category`            | Tabla `categories`, con `prefix`                                         |
+| Stock / Quedan N       | `stock`               | `products.stock`                                                         |
+| Stock mínimo           | `min stock`           | `products.min_stock`                                                     |
+| Ingreso de stock       | `restock`             | `inventory_movements.type = 'restock'`                                   |
+| Ajuste de conteo       | `adjustment`          | `inventory_movements.type = 'adjustment'`                                |
+| Costo                  | `unit cost`           | `product_costs`, `sale_item_costs`, `inventory_movement_costs` (ADR-036) |
+| Método de pago         | `payment method`      | Tabla `payment_methods`                                                  |
+| Recordatorio           | `reminder`            | Tabla `reminders`                                                        |
+| Actividad              | `activity log`        | Tabla `activity_log`                                                     |
+| Negocio                | `business`            | Tabla `businesses`                                                       |
+| Perfil / usuario       | `profile`             | Tabla `profiles`                                                         |
+| Administrador          | `admin`               | Código de rol                                                            |
+| Vendedor               | `seller`              | Código de rol                                                            |
+| Inicio (tablero)       | `dashboard`           | Carpeta `features/dashboard`                                             |
+| Historial              | `history`             | Carpeta `features/history`                                               |
+| Inventario             | `inventory`           | Carpeta `features/inventory`                                             |
 
 ## Funciones RPC
 
@@ -102,6 +102,9 @@ Los mensajes que ve la persona están en `web/src/shared/api/errors.ts` (secció
 | `sin_permiso`        | `permission_denied`       |
 | `telefono_invalido`  | `invalid_phone`           |
 | `producto_inactivo`  | `inactive_product`        |
+| —                    | `delete_not_allowed`      |
+| —                    | `immutable_record`        |
+| —                    | `last_admin_required`     |
 
 ## Respuestas de RPC (`status`)
 
@@ -109,13 +112,14 @@ Los mensajes que ve la persona están en `web/src/shared/api/errors.ts` (secció
 
 ## Valores de estado
 
-| Interfaz                                                   | Código                                                 |
-| ---------------------------------------------------------- | ------------------------------------------------------ |
-| Pagada / Parcial / Pendiente / Vencida                     | `paid` / `partial` / `pending` / `overdue`             |
-| Anulada                                                    | `voided`                                               |
-| OK / Bajo / Agotado                                        | `ok` / `low` / `out`                                   |
-| Urgente / Atención                                         | `urgent` / `attention`                                 |
-| Movimiento: inicial / ingreso / venta / anulación / ajuste | `initial` / `restock` / `sale` / `void` / `adjustment` |
+| Interfaz                                                                                                  | Código                                                                                                             |
+| --------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| Pagada / Parcial / Pendiente / Vencida                                                                    | `paid` / `partial` / `pending` / `overdue`                                                                         |
+| Anulada                                                                                                   | `voided`                                                                                                           |
+| OK / Bajo / Agotado                                                                                       | `ok` / `low` / `out`                                                                                               |
+| Urgente / Atención                                                                                        | `urgent` / `attention`                                                                                             |
+| Movimiento: inicial / ingreso / venta / anulación / ajuste                                                | `initial` / `restock` / `sale` / `void` / `adjustment`                                                             |
+| Actividad: venta / saldo anterior / abono / anulación / ingreso / ajuste / producto nuevo / cliente nuevo | `sale` / `legacy_balance` / `payment` / `void` / `restock` / `adjustment` / `product_created` / `customer_created` |
 
 ## Lo que se queda en español
 

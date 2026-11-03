@@ -20,7 +20,7 @@
     "build": "pnpm --filter web build",
     "check": "pnpm lint && pnpm typecheck && pnpm test",
     "lint": "eslint . --max-warnings=0",
-    "lint:sql": "python3 -m sqlfluff lint supabase",
+    "lint:sql": "python3 -m sqlfluff lint supabase/migrations supabase/seed.sql supabase/bootstrap",
     "typecheck": "tsc -p tsconfig.json && pnpm --filter web typecheck",
     "test": "vitest run",
     "test:watch": "vitest",

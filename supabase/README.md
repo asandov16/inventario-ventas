@@ -10,4 +10,16 @@ La base es la autoridad de reglas, permisos y datos. Contenido (se llena desde l
 | `seed.sql`           | Datos ficticios locales y de staging, derivados del prototipo v2                              |
 | `functions/`         | Edge Functions (vacío en la beta; listo para WhatsApp)                                        |
 
-Comandos: `pnpm db:start`, `pnpm db:reset`, `pnpm db:test`, `pnpm gen:types`. Requieren Docker.
+Comandos: `pnpm db:start`, `pnpm db:reset`, `pnpm db:test`, `pnpm gen:types`, `pnpm lint:sql`. Requieren Docker.
+
+## Usuarios locales de prueba
+
+Solo existen en la base local (ADR-033). Contraseña: `devpassword-local`.
+
+| Correo                | Rol           |
+| --------------------- | ------------- |
+| `admin@test.local`    | Administrador |
+| `admin2@test.local`   | Administrador |
+| `vendedor@test.local` | Vendedor      |
+
+Supabase Studio local: http://127.0.0.1:54323
