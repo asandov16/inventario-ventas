@@ -109,6 +109,12 @@ isOneToOne: false
 isOneToOne: false
       referencedRelation: "sales"
       referencedColumns: ["id"]
+    },{
+      foreignKeyName: "installments_sale_id_fkey"
+      columns: ["sale_id"]
+isOneToOne: false
+      referencedRelation: "v_sale_accounts"
+      referencedColumns: ["sale_id"]
     }
                   ]
                 },"inventory_movement_costs": {
@@ -167,6 +173,12 @@ isOneToOne: false
 isOneToOne: false
       referencedRelation: "sales"
       referencedColumns: ["id"]
+    },{
+      foreignKeyName: "inventory_movements_sale_id_fkey"
+      columns: ["sale_id"]
+isOneToOne: false
+      referencedRelation: "v_sale_accounts"
+      referencedColumns: ["sale_id"]
     }
                   ]
                 },"notification_outbox": {
@@ -245,6 +257,12 @@ isOneToOne: false
 isOneToOne: false
       referencedRelation: "sales"
       referencedColumns: ["id"]
+    },{
+      foreignKeyName: "payments_sale_id_fkey"
+      columns: ["sale_id"]
+isOneToOne: false
+      referencedRelation: "v_sale_accounts"
+      referencedColumns: ["sale_id"]
     }
                   ]
                 },"permissions": {
@@ -364,6 +382,12 @@ isOneToOne: false
       referencedRelation: "customers"
       referencedColumns: ["id"]
     },{
+      foreignKeyName: "reminders_customer_id_fkey"
+      columns: ["customer_id"]
+isOneToOne: false
+      referencedRelation: "v_customer_balances"
+      referencedColumns: ["customer_id"]
+    },{
       foreignKeyName: "reminders_outbox_id_fkey"
       columns: ["outbox_id"]
 isOneToOne: false
@@ -375,6 +399,12 @@ isOneToOne: false
 isOneToOne: false
       referencedRelation: "sales"
       referencedColumns: ["id"]
+    },{
+      foreignKeyName: "reminders_sale_id_fkey"
+      columns: ["sale_id"]
+isOneToOne: false
+      referencedRelation: "v_sale_accounts"
+      referencedColumns: ["sale_id"]
     },{
       foreignKeyName: "reminders_sent_by_fkey"
       columns: ["sent_by"]
@@ -473,6 +503,12 @@ isOneToOne: false
 isOneToOne: false
       referencedRelation: "sales"
       referencedColumns: ["id"]
+    },{
+      foreignKeyName: "sale_items_sale_id_fkey"
+      columns: ["sale_id"]
+isOneToOne: false
+      referencedRelation: "v_sale_accounts"
+      referencedColumns: ["sale_id"]
     }
                   ]
                 },"sales": {
@@ -500,6 +536,12 @@ isOneToOne: false
       referencedRelation: "customers"
       referencedColumns: ["id"]
     },{
+      foreignKeyName: "sales_customer_id_fkey"
+      columns: ["customer_id"]
+isOneToOne: false
+      referencedRelation: "v_customer_balances"
+      referencedColumns: ["customer_id"]
+    },{
       foreignKeyName: "sales_payment_method_id_fkey"
       columns: ["payment_method_id"]
 isOneToOne: false
@@ -522,14 +564,101 @@ isOneToOne: false
                 }
           }
           Views: {
-            [_ in never]: never
+            "v_customer_balances": {
+                  Row: {
+                    "balance": number | null,"business_id": string,"customer_id": string,"open_sales": number | null,"overdue_amount": number | null
+                  }
+                  ComputedFields: never
+                  Relationships: [
+                    {
+      foreignKeyName: "customers_business_id_fkey"
+      columns: ["business_id"]
+isOneToOne: false
+      referencedRelation: "businesses"
+      referencedColumns: ["id"]
+    }
+                  ]
+                },"v_installment_status": {
+                  Row: {
+                    "amount": number,"business_id": string,"cum_due": number | null,"due_date": string,"id": string,"number": number,"paid_total": number | null,"sale_id": string,"status": string | null
+                  }
+                  ComputedFields: never
+                  Relationships: [
+                    {
+      foreignKeyName: "installments_sale_id_fkey"
+      columns: ["sale_id"]
+isOneToOne: false
+      referencedRelation: "sales"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "installments_sale_id_fkey"
+      columns: ["sale_id"]
+isOneToOne: false
+      referencedRelation: "v_sale_accounts"
+      referencedColumns: ["sale_id"]
+    },{
+      foreignKeyName: "sales_business_id_fkey"
+      columns: ["business_id"]
+isOneToOne: false
+      referencedRelation: "businesses"
+      referencedColumns: ["id"]
+    }
+                  ]
+                },"v_sale_accounts": {
+                  Row: {
+                    "balance": number | null,"business_id": string,"client_created_at": string,"customer_id": string,"folio": number,"next_due_amount": number | null,"next_due_date": string | null,"overdue_amount": number | null,"paid": number | null,"progress_pct": number | null,"sale_id": string,"source": string,"status": string | null,"total": number,"type": string
+                  }
+                  ComputedFields: never
+                  Relationships: [
+                    {
+      foreignKeyName: "sales_business_id_fkey"
+      columns: ["business_id"]
+isOneToOne: false
+      referencedRelation: "businesses"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "sales_customer_id_fkey"
+      columns: ["customer_id"]
+isOneToOne: false
+      referencedRelation: "customers"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "sales_customer_id_fkey"
+      columns: ["customer_id"]
+isOneToOne: false
+      referencedRelation: "v_customer_balances"
+      referencedColumns: ["customer_id"]
+    }
+                  ]
+                }
           }
           Functions: {
-            "get_my_profile":
+            "create_customer":
+{ Args: { "p_email"?: string,"p_id"?: string,"p_name": string,"p_notes"?: string,"p_phone": string,"p_whatsapp_opt_in"?: boolean,"p_zone"?: string }; Returns: Json
+                           },
+"get_my_profile":
 { Args: Record<PropertyKey, never>; Returns: Json
                            },
 "ping":
 { Args: Record<PropertyKey, never>; Returns: Json
+                           },
+"register_legacy_balance":
+{ Args: { "p_customer_id": string,"p_description": string,"p_first_due_date": string,"p_id"?: string,"p_idempotency_key": string,"p_installments": number,"p_paid": number,"p_sale_date": string,"p_total": number }; Returns: Json
+                           },
+"register_payment":
+{ Args: { "p_amount": number,"p_client_created_at"?: string,"p_confirm_duplicate"?: boolean,"p_id"?: string,"p_idempotency_key": string,"p_payment_method_id": string,"p_sale_id": string }; Returns: Json
+                           },
+"register_sale":
+{ Args: { "p_client_created_at"?: string,"p_confirm_duplicate"?: boolean,"p_customer_id": string,"p_down_payment"?: number,"p_expected_total": number,"p_id"?: string,"p_idempotency_key": string,"p_items": Json,"p_months"?: number,"p_payment_method_id": string,"p_type": string }; Returns: Json
+                           },
+"search_customers":
+{ Args: { "p_limit"?: number,"p_query": string }; Returns: Json
+                           },
+"update_customer":
+{ Args: { "p_email"?: string,"p_id": string,"p_name": string,"p_notes"?: string,"p_phone": string,"p_whatsapp_opt_in"?: boolean,"p_zone"?: string }; Returns: Json
+                           },
+"void_sale":
+{ Args: { "p_reason": string,"p_sale_id": string }; Returns: Json
                            }
           }
           Enums: {

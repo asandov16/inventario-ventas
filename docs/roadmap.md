@@ -340,12 +340,12 @@ activity_log(id bigint identity PK, business_id, actor_id, type text, entity tex
 
 | ID         | Tarea                                                                                                                                                                                                             | Tamaño |
 | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ |
-| [ ] F2-T01 | `private.calc_cuotas(total int, prima int, meses int, fecha date, primera date DEFAULT NULL) RETURNS TABLE(number, due_date, amount)`; con `primera`, la cuota i vence en `primera + (i−1) meses` (lo usa F2-T14) | S      |
-| [ ] F2-T02 | Completar `installments.cases.json` y prueba pgTAP que lo recorre (cargado con `pg_read_file` o generado a SQL por script)                                                                                        | S      |
-| [ ] F2-T03 | `registrar_venta`                                                                                                                                                                                                 | L      |
-| [ ] F2-T04 | `crear_cliente`, `actualizar_cliente`, `buscar_clientes`                                                                                                                                                          | M      |
-| [ ] F2-T05 | `registrar_abono`                                                                                                                                                                                                 | M      |
-| [ ] F2-T06 | `anular_venta`                                                                                                                                                                                                    | M      |
+| [x] F2-T01 | `private.calc_cuotas(total int, prima int, meses int, fecha date, primera date DEFAULT NULL) RETURNS TABLE(number, due_date, amount)`; con `primera`, la cuota i vence en `primera + (i−1) meses` (lo usa F2-T14) | S      |
+| [x] F2-T02 | Completar `installments.cases.json` y prueba pgTAP que lo recorre (cargado con `pg_read_file` o generado a SQL por script)                                                                                        | S      |
+| [x] F2-T03 | `registrar_venta`                                                                                                                                                                                                 | L      |
+| [x] F2-T04 | `crear_cliente`, `actualizar_cliente`, `buscar_clientes`                                                                                                                                                          | M      |
+| [x] F2-T05 | `registrar_abono`                                                                                                                                                                                                 | M      |
+| [x] F2-T06 | `anular_venta`                                                                                                                                                                                                    | M      |
 | [ ] F2-T07 | `crear_producto`, `ingresar_stock`, `actualizar_producto` (incluye ajuste de conteo y desactivar)                                                                                                                 | M      |
 | [ ] F2-T08 | `registrar_recordatorio`                                                                                                                                                                                          | S      |
 | [ ] F2-T09 | Configuración: `actualizar_negocio`, `guardar_categoria`, `guardar_metodo_pago`; `mi_perfil()`; `ping()`                                                                                                          | S      |
@@ -353,7 +353,7 @@ activity_log(id bigint identity PK, business_id, actor_id, type text, entity tex
 | [ ] F2-T11 | RPC de lectura agregada: `resumen_inicio`, `resumen_cobros`, `resumen_inventario`, `contadores`, `analisis`, `exportar_datos`                                                                                     | M      |
 | [ ] F2-T12 | Pruebas de concurrencia (Vitest + `pg` contra Postgres local)                                                                                                                                                     | M      |
 | [ ] F2-T13 | Agregar tablas a la publicación `supabase_realtime`: `sales`, `payments`, `products`, `inventory_movements`, `customers`, `activity_log`                                                                          | S      |
-| [ ] F2-T14 | `registrar_saldo_anterior` (D-12)                                                                                                                                                                                 | M      |
+| [x] F2-T14 | `registrar_saldo_anterior` (D-12)                                                                                                                                                                                 | M      |
 
 **F2-T01 · Cálculo de cuotas (RN-03, RN-04, D-09, D-10)**
 

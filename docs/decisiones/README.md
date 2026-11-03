@@ -37,5 +37,6 @@ Cada decisión tiene un registro corto. ADR-001 a ADR-019 corresponden a D-01 a 
 | [ADR-031](ADR-031-valores-de-estado-en-ingles.md)                                 | Valores de estado y tipos en inglés                             | Aceptada                | Etapa 1      |
 | [ADR-032](ADR-032-permisos-cerrados-por-defecto.md)                               | Permisos cerrados por defecto                                   | Aceptada                | Etapa 1      |
 | [ADR-033](ADR-033-usuarios-de-prueba-solo-en-seed-local.md)                       | Usuarios de prueba solo en el seed local                        | Aceptada                | Etapa 1      |
+| [ADR-034](ADR-034-casos-de-cuotas-generan-pruebas-sql.md)                         | Los casos de cuotas generan las pruebas SQL                     | Aceptada                | Etapa 1      |
 | [ADR-035](ADR-035-ayudantes-de-pgtap-fuera-de-migraciones.md)                     | Ayudantes de pgTAP fuera de las migraciones                     | Aceptada                | Etapa 1      |
 | [ADR-036](ADR-036-costos-de-ingresos-en-tabla-aparte.md)                          | Costos de ingresos de stock en tabla aparte                     | Aceptada                | Etapa 1      |

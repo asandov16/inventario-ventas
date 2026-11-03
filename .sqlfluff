@@ -2,6 +2,8 @@
 dialect = postgres
 templater = raw
 max_line_length = 120
+# Never skip a migration silently because it is long (plpgsql bodies are opaque strings).
+large_file_skip_byte_limit = 0
 # Business vocabulary uses words like "name", "type" and "code" as column names (RF04),
 # and plpgsql bodies are opaque strings, so ambiguous-reference rules add noise (RF02, RF03).
 exclude_rules = RF02, RF03, RF04
