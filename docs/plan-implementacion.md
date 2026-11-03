@@ -42,6 +42,8 @@ Hay requerimientos funcionales (rev. 17), requerimientos técnicos (v1), un road
 | **4 Producción y beta** | F8: despliegues, respaldos, monitoreo. F9: datos reales, prueba con la familia               | Cuadre del cuaderno; lanzamiento            | Criterios de lanzamiento de F9: 7 respaldos, 1 restauración, 48 h sin errores nuevos                         |
 | **5 Sin conexión**      | F10, cuando la beta esté estable                                                             | Reglas de conflicto antes de empezar        | Jornada simulada: 20 ventas, 5 abonos y 3 clientes en 2 celulares, sin duplicados                            |
 
+**Avance:** etapas 0 y 1 completas el 3 nov 2026. El estado al día está en [`docs/avance.md`](avance.md).
+
 Dentro de cada etapa se sigue el método del roadmap: plan primero, una rama por grupo de 2–4 tareas, pruebas antes del código y el avance marcado en `docs/roadmap.md`.
 
 ## 3. Pasos de configuración

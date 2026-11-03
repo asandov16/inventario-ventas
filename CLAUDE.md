@@ -2,7 +2,7 @@
 
 Inventory and sales PWA for a small family business in Costa Rica: cash and installment sales (up to 3 months), collections, inventory and a simple dashboard. React + TypeScript + Vite static site on Cloudflare Pages; Supabase (Postgres, Auth, Realtime) holds every business rule.
 
-**Read before working:** `docs/plan-implementacion.md` (stages, architecture, conventions) and the stage's section in `docs/roadmap.md`. Requirements: `docs/requerimientos-funcionales.md`, `docs/requerimientos-tecnicos.md`. Decisions: `docs/decisiones/` (an ADR overrides the roadmap where they differ). UI and behaviour reference: `docs/prototipo/v2.html`.
+**Read before working:** `docs/avance.md` (where the project stands and what comes next), `docs/plan-implementacion.md` (stages, architecture, conventions) and the stage's section in `docs/roadmap.md`. Requirements: `docs/requerimientos-funcionales.md`, `docs/requerimientos-tecnicos.md`. Decisions: `docs/decisiones/` (an ADR overrides the roadmap where they differ). UI and behaviour reference: `docs/prototipo/v2.html`.
 
 ## ⚠️ This repository is PUBLIC (ADR-020)
 
@@ -107,4 +107,5 @@ SQL: lowercase keywords (sqlfluff enforces it), `snake_case`; plural tables; `_a
 - Commits: Conventional Commits in English (`feat(sales): add customer picker`), enforced by a commit-msg hook.
 - Stay in scope: no unrequested refactors, dependencies or files.
 - Before finishing: `pnpm check` green (plus `pnpm db:test` when SQL changed), then mark the task `[x]` in `docs/roadmap.md`.
+- Closing a stage: formal DoD review (`docs/planes/etapa-<n>-revision-dod.md`), then update `docs/avance.md` and the progress deck as its "Cómo se actualiza" section says.
 - New dependency: exact version, justified in the PR; prefer what is already installed.
