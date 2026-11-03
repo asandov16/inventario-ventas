@@ -1,7 +1,14 @@
 {
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "types": ["node"]
+    "types": ["node"],
+    "allowImportingTsExtensions": true
   },
-  "include": ["shared/**/*.ts", "scripts/**/*.ts", "vitest.config.ts"]
+  "include": [
+    "shared/**/*.ts",
+    "scripts/**/*.ts",
+    "supabase/tests/**/*.ts",
+    "vitest.config.ts",
+    "vitest.db.config.ts"
+  ]
 }

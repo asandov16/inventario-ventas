@@ -10,7 +10,7 @@ La base es la autoridad de reglas, permisos y datos. Contenido (se llena desde l
 | `seed.sql`           | Datos ficticios locales y de staging, derivados del prototipo v2                              |
 | `functions/`         | Edge Functions (vacío en la beta; listo para WhatsApp)                                        |
 
-Comandos: `pnpm db:start`, `pnpm db:reset`, `pnpm db:test`, `pnpm gen:types`, `pnpm lint:sql`. Requieren Docker.
+Comandos: `pnpm db:start`, `pnpm db:reset`, `pnpm db:test` (pgTAP), `pnpm test:db` (concurrencia), `pnpm db:demo` (recorrido narrado), `pnpm gen:types`, `pnpm gen:installment-tests`, `pnpm lint:sql`. Requieren Docker.
 
 ## Usuarios locales de prueba
 

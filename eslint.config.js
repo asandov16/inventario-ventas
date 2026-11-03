@@ -34,7 +34,8 @@ export default tseslint.config(
       '**/coverage/**',
       'web/src/shared/api/database.types.ts',
       'docs/**',
-      'supabase/**',
+      'supabase/.temp/**',
+      'supabase/.branches/**',
       '.claude/**',
     ],
   },
@@ -65,7 +66,15 @@ export default tseslint.config(
 
   // Node-side files: configs, scripts, shared fixtures, workers.
   {
-    files: ['*.{js,ts}', 'scripts/**', 'shared/**', 'web/vite.config.ts', 'workers/**', 'e2e/**'],
+    files: [
+      '*.{js,ts}',
+      'scripts/**',
+      'shared/**',
+      'supabase/**',
+      'web/vite.config.ts',
+      'workers/**',
+      'e2e/**',
+    ],
     languageOptions: { globals: globals.node },
   },
 

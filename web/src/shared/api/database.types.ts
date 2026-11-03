@@ -115,6 +115,12 @@ isOneToOne: false
 isOneToOne: false
       referencedRelation: "v_sale_accounts"
       referencedColumns: ["sale_id"]
+    },{
+      foreignKeyName: "installments_sale_id_fkey"
+      columns: ["sale_id"]
+isOneToOne: false
+      referencedRelation: "v_sales_list"
+      referencedColumns: ["sale_id"]
     }
                   ]
                 },"inventory_movement_costs": {
@@ -168,6 +174,12 @@ isOneToOne: false
       referencedRelation: "products"
       referencedColumns: ["id"]
     },{
+      foreignKeyName: "inventory_movements_product_id_fkey"
+      columns: ["product_id"]
+isOneToOne: false
+      referencedRelation: "v_products_status"
+      referencedColumns: ["product_id"]
+    },{
       foreignKeyName: "inventory_movements_sale_id_fkey"
       columns: ["sale_id"]
 isOneToOne: false
@@ -178,6 +190,12 @@ isOneToOne: false
       columns: ["sale_id"]
 isOneToOne: false
       referencedRelation: "v_sale_accounts"
+      referencedColumns: ["sale_id"]
+    },{
+      foreignKeyName: "inventory_movements_sale_id_fkey"
+      columns: ["sale_id"]
+isOneToOne: false
+      referencedRelation: "v_sales_list"
       referencedColumns: ["sale_id"]
     }
                   ]
@@ -263,6 +281,12 @@ isOneToOne: false
 isOneToOne: false
       referencedRelation: "v_sale_accounts"
       referencedColumns: ["sale_id"]
+    },{
+      foreignKeyName: "payments_sale_id_fkey"
+      columns: ["sale_id"]
+isOneToOne: false
+      referencedRelation: "v_sales_list"
+      referencedColumns: ["sale_id"]
     }
                   ]
                 },"permissions": {
@@ -298,6 +322,12 @@ isOneToOne: true
       referencedRelation: "products"
       referencedColumns: ["id"]
     },{
+      foreignKeyName: "product_costs_product_id_fkey"
+      columns: ["product_id"]
+isOneToOne: true
+      referencedRelation: "v_products_status"
+      referencedColumns: ["product_id"]
+    },{
       foreignKeyName: "product_costs_updated_by_fkey"
       columns: ["updated_by"]
 isOneToOne: false
@@ -307,14 +337,14 @@ isOneToOne: false
                   ]
                 },"products": {
                   Row: {
-                    "active": boolean,"business_id": string,"category_id": string,"code": string,"created_at": string,"id": string,"min_stock": number,"name": string,"price": number,"stock": number,"updated_at": string,"version": number
+                    "active": boolean,"business_id": string,"category_id": string,"code": string,"created_at": string,"id": string,"idempotency_key": string | null,"min_stock": number,"name": string,"price": number,"stock": number,"updated_at": string,"version": number
                   }
                   ComputedFields: never
                   Insert: {
-                    "active"?: boolean,"business_id": string,"category_id": string,"code": string,"created_at"?: string,"id"?: string,"min_stock"?: number,"name": string,"price": number,"stock"?: number,"updated_at"?: string,"version"?: number
+                    "active"?: boolean,"business_id": string,"category_id": string,"code": string,"created_at"?: string,"id"?: string,"idempotency_key"?: string | null,"min_stock"?: number,"name": string,"price": number,"stock"?: number,"updated_at"?: string,"version"?: number
                   }
                   Update: {
-                    "active"?: boolean,"business_id"?: string,"category_id"?: string,"code"?: string,"created_at"?: string,"id"?: string,"min_stock"?: number,"name"?: string,"price"?: number,"stock"?: number,"updated_at"?: string,"version"?: number
+                    "active"?: boolean,"business_id"?: string,"category_id"?: string,"code"?: string,"created_at"?: string,"id"?: string,"idempotency_key"?: string | null,"min_stock"?: number,"name"?: string,"price"?: number,"stock"?: number,"updated_at"?: string,"version"?: number
                   }
                   Relationships: [
                     {
@@ -404,6 +434,12 @@ isOneToOne: false
       columns: ["sale_id"]
 isOneToOne: false
       referencedRelation: "v_sale_accounts"
+      referencedColumns: ["sale_id"]
+    },{
+      foreignKeyName: "reminders_sale_id_fkey"
+      columns: ["sale_id"]
+isOneToOne: false
+      referencedRelation: "v_sales_list"
       referencedColumns: ["sale_id"]
     },{
       foreignKeyName: "reminders_sent_by_fkey"
@@ -498,6 +534,12 @@ isOneToOne: false
       referencedRelation: "products"
       referencedColumns: ["id"]
     },{
+      foreignKeyName: "sale_items_product_id_fkey"
+      columns: ["product_id"]
+isOneToOne: false
+      referencedRelation: "v_products_status"
+      referencedColumns: ["product_id"]
+    },{
       foreignKeyName: "sale_items_sale_id_fkey"
       columns: ["sale_id"]
 isOneToOne: false
@@ -508,6 +550,12 @@ isOneToOne: false
       columns: ["sale_id"]
 isOneToOne: false
       referencedRelation: "v_sale_accounts"
+      referencedColumns: ["sale_id"]
+    },{
+      foreignKeyName: "sale_items_sale_id_fkey"
+      columns: ["sale_id"]
+isOneToOne: false
+      referencedRelation: "v_sales_list"
       referencedColumns: ["sale_id"]
     }
                   ]
@@ -564,7 +612,15 @@ isOneToOne: false
                 }
           }
           Views: {
-            "v_customer_balances": {
+            "v_alerts": {
+                  Row: {
+                    "amount": number | null,"business_id": string | null,"due_date": string | null,"entity": string | null,"entity_id": string | null,"folio": number | null,"kind": string | null,"severity": string | null,"title": string | null
+                  }
+                  ComputedFields: never
+                  Relationships: [
+                    
+                  ]
+                },"v_customer_balances": {
                   Row: {
                     "balance": number | null,"business_id": string,"customer_id": string,"open_sales": number | null,"overdue_amount": number | null
                   }
@@ -597,10 +653,36 @@ isOneToOne: false
       referencedRelation: "v_sale_accounts"
       referencedColumns: ["sale_id"]
     },{
+      foreignKeyName: "installments_sale_id_fkey"
+      columns: ["sale_id"]
+isOneToOne: false
+      referencedRelation: "v_sales_list"
+      referencedColumns: ["sale_id"]
+    },{
       foreignKeyName: "sales_business_id_fkey"
       columns: ["business_id"]
 isOneToOne: false
       referencedRelation: "businesses"
+      referencedColumns: ["id"]
+    }
+                  ]
+                },"v_products_status": {
+                  Row: {
+                    "active": boolean,"business_id": string,"category_id": string,"category_name": string,"code": string,"min_stock": number,"name": string,"price": number,"product_id": string,"stock": number,"stock_status": string | null,"units_sold": number | null,"version": number
+                  }
+                  ComputedFields: never
+                  Relationships: [
+                    {
+      foreignKeyName: "products_business_id_fkey"
+      columns: ["business_id"]
+isOneToOne: false
+      referencedRelation: "businesses"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "products_category_id_fkey"
+      columns: ["category_id"]
+isOneToOne: false
+      referencedRelation: "categories"
       referencedColumns: ["id"]
     }
                   ]
@@ -630,17 +712,73 @@ isOneToOne: false
       referencedColumns: ["customer_id"]
     }
                   ]
+                },"v_sales_list": {
+                  Row: {
+                    "balance": number | null,"business_id": string,"client_created_at": string,"customer_id": string,"customer_name": string,"customer_phone_e164": string,"description": string | null,"folio": number,"items_count": number | null,"sale_id": string,"seller_id": string,"seller_name": string,"source": string,"status": string | null,"total": number,"type": string,"voided_at": string | null
+                  }
+                  ComputedFields: never
+                  Relationships: [
+                    {
+      foreignKeyName: "sales_business_id_fkey"
+      columns: ["business_id"]
+isOneToOne: false
+      referencedRelation: "businesses"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "sales_customer_id_fkey"
+      columns: ["customer_id"]
+isOneToOne: false
+      referencedRelation: "customers"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "sales_customer_id_fkey"
+      columns: ["customer_id"]
+isOneToOne: false
+      referencedRelation: "v_customer_balances"
+      referencedColumns: ["customer_id"]
+    },{
+      foreignKeyName: "sales_seller_id_fkey"
+      columns: ["seller_id"]
+isOneToOne: false
+      referencedRelation: "profiles"
+      referencedColumns: ["id"]
+    }
+                  ]
                 }
           }
           Functions: {
             "create_customer":
 { Args: { "p_email"?: string,"p_id"?: string,"p_name": string,"p_notes"?: string,"p_phone": string,"p_whatsapp_opt_in"?: boolean,"p_zone"?: string }; Returns: Json
                            },
+"create_product":
+{ Args: { "p_category_id": string,"p_confirm_similar"?: boolean,"p_id"?: string,"p_idempotency_key": string,"p_initial_qty": number,"p_min_stock": number,"p_name": string,"p_price": number,"p_unit_cost": number }; Returns: Json
+                           },
+"export_data":
+{ Args: Record<PropertyKey, never>; Returns: Json
+                           },
+"get_analytics":
+{ Args: { "p_days": number }; Returns: Json
+                           },
+"get_badge_counts":
+{ Args: Record<PropertyKey, never>; Returns: Json
+                           },
+"get_dashboard_summary":
+{ Args: Record<PropertyKey, never>; Returns: Json
+                           },
+"get_inventory_summary":
+{ Args: Record<PropertyKey, never>; Returns: Json
+                           },
 "get_my_profile":
+{ Args: Record<PropertyKey, never>; Returns: Json
+                           },
+"get_receivables_summary":
 { Args: Record<PropertyKey, never>; Returns: Json
                            },
 "ping":
 { Args: Record<PropertyKey, never>; Returns: Json
+                           },
+"record_reminder":
+{ Args: { "p_channel"?: string,"p_sale_id": string }; Returns: Json
                            },
 "register_legacy_balance":
 { Args: { "p_customer_id": string,"p_description": string,"p_first_due_date": string,"p_id"?: string,"p_idempotency_key": string,"p_installments": number,"p_paid": number,"p_sale_date": string,"p_total": number }; Returns: Json
@@ -651,11 +789,26 @@ isOneToOne: false
 "register_sale":
 { Args: { "p_client_created_at"?: string,"p_confirm_duplicate"?: boolean,"p_customer_id": string,"p_down_payment"?: number,"p_expected_total": number,"p_id"?: string,"p_idempotency_key": string,"p_items": Json,"p_months"?: number,"p_payment_method_id": string,"p_type": string }; Returns: Json
                            },
+"restock_product":
+{ Args: { "p_confirm_duplicate"?: boolean,"p_idempotency_key": string,"p_product_id": string,"p_qty": number,"p_unit_cost"?: number }; Returns: Json
+                           },
+"save_category":
+{ Args: { "p_active"?: boolean,"p_id"?: string,"p_name": string,"p_prefix"?: string,"p_sort"?: number }; Returns: Json
+                           },
+"save_payment_method":
+{ Args: { "p_active"?: boolean,"p_id"?: string,"p_name": string,"p_sort"?: number }; Returns: Json
+                           },
 "search_customers":
 { Args: { "p_limit"?: number,"p_query": string }; Returns: Json
                            },
+"update_business":
+{ Args: { "p_name": string }; Returns: Json
+                           },
 "update_customer":
 { Args: { "p_email"?: string,"p_id": string,"p_name": string,"p_notes"?: string,"p_phone": string,"p_whatsapp_opt_in"?: boolean,"p_zone"?: string }; Returns: Json
+                           },
+"update_product":
+{ Args: { "p_active"?: boolean,"p_counted_stock"?: number,"p_expected_version": number,"p_min_stock": number,"p_name": string,"p_price": number,"p_product_id": string,"p_unit_cost"?: number }; Returns: Json
                            },
 "void_sale":
 { Args: { "p_reason": string,"p_sale_id": string }; Returns: Json

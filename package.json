@@ -33,11 +33,14 @@
     "db:test": "supabase test db",
     "gen:types": "supabase gen types typescript --local --schema public > web/src/shared/api/database.types.ts",
     "prepare": "lefthook install",
-    "gen:installment-tests": "node scripts/gen-installments-pgtap.ts"
+    "gen:installment-tests": "node scripts/gen-installments-pgtap.ts",
+    "test:db": "vitest run --config vitest.db.config.ts",
+    "db:demo": "node scripts/demo-stage-1.ts"
   },
   "devDependencies": {
     "@eslint/js": "10.0.1",
     "@types/node": "^24.19.2",
+    "@types/pg": "8.23.1",
     "eslint": "10.14.0",
     "eslint-import-resolver-typescript": "4.4.5",
     "eslint-plugin-boundaries": "7.4.1",
@@ -45,6 +48,7 @@
     "eslint-plugin-react-refresh": "0.5.7",
     "globals": "17.14.0",
     "lefthook": "2.2.2",
+    "pg": "8.23.1",
     "prettier": "3.9.10",
     "supabase": "3.0.0",
     "typescript": "6.0.3",
