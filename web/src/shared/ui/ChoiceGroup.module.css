@@ -1,0 +1,53 @@
+.group {
+  margin-bottom: 14px;
+}
+
+.label {
+  margin: 0 0 6px;
+  color: var(--color-ink-2);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.labelHint {
+  color: var(--color-muted);
+  font-weight: 400;
+}
+
+.options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.option {
+  flex: 1;
+  min-width: 84px;
+  min-height: var(--touch-target-min);
+  padding: 10px 8px;
+  border: 1.5px solid var(--color-line);
+  border-radius: var(--radius-control);
+  background: var(--color-card);
+  font-size: 15px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.selected {
+  border-color: var(--color-brand);
+  background: var(--color-brand-soft);
+  color: var(--color-brand);
+  font-weight: 600;
+}
+
+.hint {
+  display: block;
+  color: var(--color-muted);
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.option:focus-visible {
+  outline: 3px solid var(--color-gold);
+  outline-offset: 2px;
+}
