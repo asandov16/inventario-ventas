@@ -291,3 +291,52 @@
   color: var(--color-muted);
   font-size: 14px;
 }
+
+.plan {
+  margin: 8px 0;
+  padding: 0;
+  overflow: hidden;
+  list-style: none;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-control);
+}
+
+.plan li {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px 12px;
+  border-bottom: 1px solid var(--color-line);
+  font-size: 15px;
+}
+
+.plan li:last-child {
+  border-bottom: 0;
+}
+
+.sectionLabel {
+  margin: 12px 2px 4px;
+  color: var(--color-ink-2);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* The new record is highlighted for a moment (RF-FB-03). */
+.highlight {
+  border-radius: var(--radius-control);
+  animation: flash 3s ease;
+}
+
+@keyframes flash {
+  0%,
+  40% {
+    box-shadow: 0 0 0 3px var(--color-gold);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .highlight {
+    animation: none;
+  }
+}
