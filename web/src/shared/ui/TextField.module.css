@@ -1,0 +1,44 @@
+.field {
+  margin-bottom: 14px;
+}
+
+.label {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--color-ink-2);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.input {
+  width: 100%;
+  min-height: var(--touch-target-min);
+  padding: 10px 12px;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-control);
+  background: var(--color-card);
+  font-size: 16px; /* 16 px avoids the iPhone zoom on focus */
+}
+
+.input:focus-visible {
+  border-color: var(--color-brand);
+  outline: 2px solid var(--color-brand-soft);
+}
+
+.invalid {
+  border-color: var(--color-bad);
+  background: #fff8f8;
+}
+
+.error {
+  margin: 6px 0 0;
+  color: var(--color-bad);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.hint {
+  margin: 6px 0 0;
+  color: var(--color-muted);
+  font-size: 13px;
+}

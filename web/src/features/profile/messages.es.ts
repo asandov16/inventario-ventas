@@ -1,8 +1,9 @@
 // Spanish copy for the profile feature.
 export const PROFILE_MESSAGES = {
   title: 'Perfil',
-  placeholderTitle: 'Aquí verás tu usuario y la configuración del negocio',
-  placeholderBody: 'Nombre del negocio, métodos de pago, categorías y usuarios.',
+  businessLabel: 'Negocio',
+  roleLabel: 'Rol',
+  settingsSoon: 'La configuración del negocio, los métodos de pago y los usuarios llegan pronto.',
   aboutButton: 'Acerca de la app',
   aboutTitle: 'Acerca de la app',
   aboutBody:

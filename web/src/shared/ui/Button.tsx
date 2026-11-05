@@ -1,14 +1,15 @@
-import type { ButtonHTMLAttributes } from 'react';
+import type { ButtonHTMLAttributes, Ref } from 'react';
 
 import styles from './Button.module.css';
 import { cx } from './cx';
 
 type ButtonVariant = 'primary' | 'light' | 'danger' | 'gold';
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
   /** Takes the full width of its container. */
   block?: boolean;
+  ref?: Ref<HTMLButtonElement>;
 }
 
 /** Base button with a 44 px touch target (RF-UX-06). */

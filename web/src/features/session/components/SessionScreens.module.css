@@ -1,0 +1,51 @@
+.screen {
+  display: grid;
+  place-items: center;
+  min-height: 100dvh;
+  padding: calc(24px + var(--safe-top)) 16px calc(24px + var(--safe-bottom));
+}
+
+.card {
+  width: 100%;
+  max-width: 400px;
+  padding: 24px 20px;
+  border-radius: var(--radius-card);
+  background: var(--color-card);
+  box-shadow: var(--shadow-card);
+}
+
+.logo {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 8px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--color-brand), #8a4a8c);
+  color: #fff;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.appName {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 14px;
+}
+
+.title {
+  margin: 4px 0 6px;
+  font-size: 24px;
+}
+
+.subtitle {
+  margin: 0 0 18px;
+  color: var(--color-ink-2);
+}
+
+.note {
+  margin: 14px 0 0;
+  color: var(--color-muted);
+  font-size: 13px;
+  text-align: center;
+}

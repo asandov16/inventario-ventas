@@ -1,0 +1,22 @@
+// Spanish copy for the session feature (CU-14).
+export const SESSION_MESSAGES = {
+  loginTitle: 'Entrar',
+  loginSubtitle: 'Usa el correo y la contraseña que te dio el administrador.',
+  email: 'Correo',
+  password: 'Contraseña',
+  submit: 'Entrar',
+  submitting: 'Entrando…',
+  emailRequired: 'Escribe tu correo.',
+  passwordRequired: 'Escribe tu contraseña.',
+  forgotPassword: 'Si olvidaste tu contraseña, pídele al administrador que la cambie.',
+  inactiveTitle: 'Tu usuario está desactivado',
+  inactiveBody: 'Habla con el administrador para que lo vuelva a activar.',
+  noProfileTitle: 'Tu usuario todavía no tiene acceso',
+  noProfileBody: 'Habla con el administrador para que te dé acceso al negocio.',
+  signOut: 'Cerrar sesión',
+  signOutTitle: '¿Cerrar sesión?',
+  signOutMessage: 'Para volver a entrar vas a necesitar tu correo y tu contraseña.',
+  signOutCancel: 'Cancelar',
+  signedOut: 'Sesión cerrada.',
+  loadingProfile: 'Cargando tu perfil…',
+} as const;

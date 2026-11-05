@@ -1,0 +1,34 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgb(35 26 43 / 50%);
+}
+
+.dialog {
+  width: 100%;
+  max-width: 420px;
+  padding: 20px;
+  border-radius: 18px;
+  background: var(--color-card);
+  box-shadow: var(--shadow-floating);
+}
+
+.title {
+  margin: 0 0 8px;
+  font-size: 18px;
+}
+
+.message {
+  margin: 0 0 18px;
+  color: var(--color-ink-2);
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
