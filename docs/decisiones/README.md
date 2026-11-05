@@ -42,4 +42,6 @@ Cada decisión tiene un registro corto. ADR-001 a ADR-019 corresponden a D-01 a 
 | [ADR-036](ADR-036-costos-de-ingresos-en-tabla-aparte.md)                          | Costos de ingresos de stock en tabla aparte                     | Aceptada                | Etapa 1      |
 | [ADR-037](ADR-037-rutas-y-hojas-por-parametro-de-url.md)                          | Rutas por sección y hojas por parámetro de URL                  | Aceptada                | Etapa 2      |
 | [ADR-038](ADR-038-vista-previa-por-pr-y-staging-desde-main.md)                    | Vista previa por PR y staging desde `main`                      | Aceptada                | Etapa 2      |
+| [ADR-039](ADR-039-e2e-de-pr-contra-supabase-local.md)                             | Pruebas E2E de cada PR contra Supabase local                    | Aceptada                | Etapa 2      |
 | [ADR-040](ADR-040-fechas-con-intl-sin-date-fns.md)                                | Fechas con `Intl`, sin `date-fns`                               | Aceptada                | Etapa 2      |
+| [ADR-041](ADR-041-dod-de-pwa-sin-lighthouse.md)                                   | DoD de la PWA sin la auditoría PWA de Lighthouse                | Aceptada                | Etapa 2      |

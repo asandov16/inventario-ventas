@@ -1,0 +1,38 @@
+.offline {
+  z-index: 3;
+  padding: 10px 16px;
+  background: var(--color-warn-soft);
+  color: var(--color-ink);
+  font-size: 14px;
+}
+
+/* Floating card so it works on the sign-in screen and inside the app alike. */
+.update {
+  position: fixed;
+  top: calc(12px + var(--safe-top));
+  left: 50%;
+  z-index: 35;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  align-items: center;
+  justify-content: space-between;
+  width: min(92vw, 520px);
+  padding: 12px 14px;
+  border-radius: var(--radius-card);
+  background: var(--color-card);
+  box-shadow: var(--shadow-floating);
+  font-size: 14px;
+  transform: translateX(-50%);
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+@media (min-width: 900px) {
+  .offline {
+    order: 1;
+  }
+}
