@@ -22,8 +22,20 @@ if ! "${wrangler[@]}" pages project list 2>/dev/null | grep -q "\b${PAGES_PROJEC
   "${wrangler[@]}" pages project create "$PAGES_PROJECT" --production-branch="$production_branch"
 fi
 
+log="$workdir/deploy.log"
 "${wrangler[@]}" pages deploy "$dist_dir" \
   --project-name="$PAGES_PROJECT" \
   --branch="$branch" \
   --commit-hash="$commit" \
-  --commit-dirty=true
+  --commit-dirty=true | tee "$log"
+
+# The project's subdomain is assigned by Cloudflare (inv-web.pages.dev was taken), so the
+# stable branch address is read from wrangler's output instead of being assumed.
+url="$(grep -oE 'Deployment alias URL: https://[^ ]+' "$log" | awk '{print $4}' | tail -n 1)"
+if [ -z "$url" ]; then
+  url="$(grep -oE 'https://[a-z0-9.-]+\.pages\.dev' "$log" | tail -n 1)"
+fi
+echo "Published at ${url}"
+if [ -n "${GITHUB_OUTPUT:-}" ]; then
+  echo "url=${url}" >> "$GITHUB_OUTPUT"
+fi

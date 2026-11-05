@@ -13,8 +13,8 @@ El roadmap dejaba los despliegues para F8 (Etapa 4). El proyecto `inv-web` de Cl
 ## Decisión
 
 - **Workflow `staging`**, separado de `ci`:
-  - **PRs del propio repositorio:** construye la app contra `inv-staging`, la publica en Cloudflare Pages como `pr-<número>.inv-web.pages.dev` y comenta el enlace en el PR. Los forks y Dependabot no reciben secretos ni vista previa. Nunca se usa `pull_request_target`.
-  - **Merge a `main`:** `supabase db push` a `inv-staging`, nunca el seed (ADR-033), y publicación en `staging.inv-web.pages.dev`.
+  - **PRs del propio repositorio:** construye la app contra `inv-staging`, la publica en Cloudflare Pages como `pr-<número>.inv-web-326.pages.dev` y comenta el enlace en el PR. Los forks y Dependabot no reciben secretos ni vista previa. Nunca se usa `pull_request_target`.
+  - **Merge a `main`:** `supabase db push` a `inv-staging`, nunca el seed (ADR-033), y publicación en `staging.inv-web-326.pages.dev`.
 - **El proyecto `inv-web`** lo crea el propio CI la primera vez, desde una carpeta temporal fuera del workspace. Su rama de producción es `production` y no se usa hasta la Etapa 4.
 - **`wrangler`** corre con versión exacta (`npx wrangler@<versión>`), no como dependencia del proyecto, para no instalarlo en cada job.
 - **Los datos de staging son ficticios:**

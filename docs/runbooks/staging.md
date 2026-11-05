@@ -3,8 +3,8 @@
 Staging es el entorno de pruebas (ADR-038):
 
 - base `inv-staging`;
-- app en `https://staging.inv-web.pages.dev`;
-- una vista previa por PR en `https://pr-<número>.inv-web.pages.dev`.
+- app en `https://staging.inv-web-326.pages.dev`;
+- una vista previa por PR en `https://pr-<número>.inv-web-326.pages.dev`.
 
 Solo tiene **datos ficticios**. Este runbook se hace **una vez**.
 
@@ -13,7 +13,7 @@ Solo tiene **datos ficticios**. Este runbook se hace **una vez**.
 | Cuándo                     | Qué hace                                                                                                                                                   |
 | -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | En cada PR del repositorio | Construye la app contra staging, la publica en `pr-<número>` y comenta el enlace en el PR. La primera vez también crea el proyecto `inv-web` en Cloudflare |
-| En cada merge a `main`     | Aplica las migraciones nuevas a `inv-staging` (nunca el seed) y publica `staging.inv-web.pages.dev`                                                        |
+| En cada merge a `main`     | Aplica las migraciones nuevas a `inv-staging` (nunca el seed) y publica `staging.inv-web-326.pages.dev`                                                    |
 
 ## Lo que haces tú, una vez
 
@@ -52,7 +52,7 @@ SQL Editor → nueva consulta.
 
 ### 4. Probar
 
-Abre `https://staging.inv-web.pages.dev` en el celular y entra con el Administrador. La pantalla de entrada llega con el PR de sesión de la Etapa 2.
+Abre `https://staging.inv-web-326.pages.dev` en el celular y entra con el Administrador. La pantalla de entrada llega con el PR de sesión de la Etapa 2.
 
 ## Si algo sale mal
 

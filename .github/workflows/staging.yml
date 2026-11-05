@@ -1,8 +1,9 @@
 name: staging
 
 # Staging only (ADR-038): fictional data, test users with secret passwords.
-# - Pull requests from this repository get a preview of the app at https://pr-<n>.inv-web.pages.dev
-# - Every merge to main applies new migrations to inv-staging and publishes https://staging.inv-web.pages.dev
+# - Pull requests from this repository get a preview of the app at https://pr-<n>.inv-web-326.pages.dev
+# - Every merge to main applies new migrations to inv-staging and publishes https://staging.inv-web-326.pages.dev
+# (Cloudflare assigned the subdomain inv-web-326; deploy-pages.sh reads the real address.)
 # Production deploys arrive in Stage 4 with their own reviewed environment.
 
 on:
@@ -54,6 +55,7 @@ jobs:
           VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
         run: pnpm build
       - name: Publish the preview
+        id: deploy
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
@@ -66,10 +68,11 @@ jobs:
           GH_REPO: ${{ github.repository }}
           PR: ${{ github.event.pull_request.number }}
           COMMIT: ${{ github.event.pull_request.head.sha }}
+          PREVIEW_URL: ${{ steps.deploy.outputs.url }}
         run: |
           marker='<!-- staging-preview -->'
           body="${marker}
-          **Vista previa (staging):** https://pr-${PR}.inv-web.pages.dev
+          **Vista previa (staging):** ${PREVIEW_URL}
 
           Datos ficticios de staging; entra con un usuario de prueba de staging. Commit \`${COMMIT::7}\`."
           comment_id=$(gh api "repos/${GH_REPO}/issues/${PR}/comments" --paginate \
@@ -109,8 +112,13 @@ jobs:
           VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
           VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
         run: pnpm build
-      - name: Publish https://staging.inv-web.pages.dev
+      - name: Publish the staging app (branch alias "staging")
+        id: deploy
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: bash "$GITHUB_WORKSPACE/scripts/deploy-pages.sh" "$GITHUB_WORKSPACE/web/dist" staging "$GITHUB_SHA"
+      - name: Show the staging address
+        env:
+          STAGING_URL: ${{ steps.deploy.outputs.url }}
+        run: echo "Staging app ${STAGING_URL}" >> "$GITHUB_STEP_SUMMARY"
