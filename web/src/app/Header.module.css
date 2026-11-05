@@ -1,0 +1,63 @@
+.header {
+  z-index: 3;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: calc(10px + var(--safe-top)) 16px 10px;
+  border-bottom: 1px solid var(--color-line);
+  background: var(--color-card);
+}
+
+.logo {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--color-brand), #8a4a8c);
+  color: #fff;
+  font-weight: 700;
+}
+
+.titles {
+  flex: 1;
+  min-width: 0;
+}
+
+.businessName {
+  margin: 0;
+  overflow: hidden;
+  font-size: 16px;
+  line-height: 1.15;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.section {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 13px;
+}
+
+.avatar {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: var(--touch-target-min);
+  height: var(--touch-target-min);
+  border: 0;
+  border-radius: 50%;
+  background: var(--color-gold-soft);
+  color: var(--color-gold);
+  cursor: pointer;
+}
+
+.avatar svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentcolor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+}

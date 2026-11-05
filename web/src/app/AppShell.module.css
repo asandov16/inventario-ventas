@@ -1,0 +1,43 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+}
+
+/* Desktop arrows beside the content (RF-UX-03); hidden on phones. */
+.navButton {
+  display: none;
+}
+
+@media (min-width: 900px) {
+  .navButton {
+    position: fixed;
+    top: 50%;
+    z-index: 4;
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--color-line);
+    border-radius: 50%;
+    background: var(--color-card);
+    box-shadow: var(--shadow-card);
+    color: var(--color-ink-2);
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .navButton:disabled {
+    opacity: 0.3;
+    cursor: default;
+  }
+
+  .navPrevious {
+    left: 16px;
+  }
+
+  .navNext {
+    right: 16px;
+  }
+}

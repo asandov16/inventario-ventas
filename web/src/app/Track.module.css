@@ -1,0 +1,40 @@
+/* Ported from prototype v2 (.track / .panel / .inner). */
+.track {
+  position: relative;
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  overflow: auto hidden;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.track::-webkit-scrollbar {
+  display: none;
+}
+
+.panel {
+  flex: 0 0 100%;
+  width: 100%;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+.inner {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 16px 16px 110px;
+}
+
+@media (min-width: 900px) {
+  .track {
+    order: 2;
+  }
+
+  .inner {
+    padding-top: 24px;
+  }
+}

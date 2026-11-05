@@ -1,0 +1,17 @@
+.pageTitle {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin: 4px 2px 14px;
+}
+
+.title {
+  margin: 0;
+  font-size: 22px;
+  letter-spacing: -0.2px;
+}
+
+.aside {
+  color: var(--color-muted);
+  font-size: 13px;
+}
