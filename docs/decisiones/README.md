@@ -41,4 +41,5 @@ Cada decisión tiene un registro corto. ADR-001 a ADR-019 corresponden a D-01 a 
 | [ADR-035](ADR-035-ayudantes-de-pgtap-fuera-de-migraciones.md)                     | Ayudantes de pgTAP fuera de las migraciones                     | Aceptada                | Etapa 1      |
 | [ADR-036](ADR-036-costos-de-ingresos-en-tabla-aparte.md)                          | Costos de ingresos de stock en tabla aparte                     | Aceptada                | Etapa 1      |
 | [ADR-037](ADR-037-rutas-y-hojas-por-parametro-de-url.md)                          | Rutas por sección y hojas por parámetro de URL                  | Aceptada                | Etapa 2      |
+| [ADR-038](ADR-038-vista-previa-por-pr-y-staging-desde-main.md)                    | Vista previa por PR y staging desde `main`                      | Aceptada                | Etapa 2      |
 | [ADR-040](ADR-040-fechas-con-intl-sin-date-fns.md)                                | Fechas con `Intl`, sin `date-fns`                               | Aceptada                | Etapa 2      |
