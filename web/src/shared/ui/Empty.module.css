@@ -1,0 +1,17 @@
+.empty {
+  padding: 28px 20px;
+  border-radius: var(--radius-card);
+  background: var(--color-card);
+  box-shadow: var(--shadow-card);
+  color: var(--color-muted);
+  text-align: center;
+}
+
+.empty p {
+  margin: 0 0 6px;
+}
+
+.title {
+  color: var(--color-ink-2);
+  font-weight: 700;
+}
