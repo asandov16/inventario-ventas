@@ -17,7 +17,21 @@ Solo tiene **datos ficticios**. Este runbook se hace **una vez**.
 
 ## Lo que haces tú, una vez
 
-Hazlo después del primer merge a `main` con el workflow de staging: ese merge crea las tablas en `inv-staging`.
+### 0. Dirección del pooler (antes que todo)
+
+Los runners de GitHub no tienen IPv6, así que las migraciones entran por el _pooler_ IPv4 de Supabase. Su dirección no es secreta, pero el CI necesita saberla:
+
+1. Supabase → proyecto `inv-staging` → botón **Connect** → pestaña **Session pooler**.
+2. Copia solo el host de la cadena de conexión: lo que va entre `@` y `:5432`. Por ejemplo, `aws-0-us-east-1.pooler.supabase.com`.
+3. En la Terminal:
+
+   ```bash
+   gh variable set SUPABASE_POOLER_HOST --env staging --body "<host copiado>"
+   ```
+
+4. En GitHub → Actions → workflow `staging`, vuelve a correr la última ejecución de `main` (**Re-run jobs**). Debe quedar en verde: así se crean las tablas en `inv-staging`.
+
+Los pasos siguientes se hacen después de esa ejecución en verde.
 
 ### 1. Cerrar el registro abierto
 
