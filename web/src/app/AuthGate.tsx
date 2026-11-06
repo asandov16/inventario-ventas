@@ -8,7 +8,6 @@ import {
   useAuthSession,
   useMyProfile,
 } from '@/features/session';
-import { API_MESSAGES } from '@/shared/api/messages.es';
 import { PermissionsProvider } from '@/shared/hooks/PermissionsProvider';
 import { ErrorState, Loading } from '@/shared/ui/ErrorState';
 
@@ -50,7 +49,6 @@ function ProfileGate({ userId, children }: { userId: string; children: ReactNode
     return (
       <div className={styles.centered}>
         <ErrorState
-          message={API_MESSAGES.loadFailed}
           onRetry={() => {
             void profile.refetch();
           }}
