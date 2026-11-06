@@ -106,7 +106,13 @@ jobs:
           SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
           SUPABASE_PROJECT_REF: ${{ secrets.SUPABASE_PROJECT_REF }}
           SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
-        run: pnpm exec supabase db push --remote="$SUPABASE_PROJECT_REF" --password "$SUPABASE_DB_PASSWORD" --yes
+          # Not a secret: the pooler hostname (Supabase → Connect → Session pooler).
+          SUPABASE_POOLER_HOST: ${{ vars.SUPABASE_POOLER_HOST }}
+        # Runners have no IPv6, so connect through the project's IPv4 pooler.
+        run: |
+          db_url="$(bash scripts/supabase-pooler-url.sh)"
+          echo "::add-mask::${db_url}"
+          pnpm exec supabase db push --remote="$db_url" --yes
       - name: Build against staging
         env:
           VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
