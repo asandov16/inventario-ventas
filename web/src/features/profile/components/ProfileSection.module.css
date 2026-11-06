@@ -1,0 +1,40 @@
+.card {
+  margin-bottom: 12px;
+  padding: 16px;
+  border-radius: var(--radius-card);
+  background: var(--color-card);
+  box-shadow: var(--shadow-card);
+}
+
+.name {
+  margin: 0 0 10px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 6px 16px;
+  margin: 0;
+}
+
+.facts dt {
+  color: var(--color-muted);
+}
+
+.facts dd {
+  margin: 0;
+  font-weight: 600;
+}
+
+.note {
+  margin: 0 2px 16px;
+  color: var(--color-muted);
+  font-size: 14px;
+}
+
+.actions {
+  display: grid;
+  gap: 10px;
+}

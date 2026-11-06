@@ -85,7 +85,7 @@ La interfaz y los documentos usan el lenguaje del negocio, en español. El códi
 
 ## Códigos de error
 
-Los mensajes que ve la persona están en `web/src/shared/api/errors.ts` (sección 4.1 funcional).
+Los mensajes que ve la persona están en `BUSINESS_ERROR_MESSAGES` de `web/src/shared/api/messages.es.ts` (sección 4.1 funcional). `errors.ts` convierte cada error de la base en un mensaje en español. Un código sin mensaje, un error de red o uno inesperado muestran "No se pudo guardar. Revisa tu internet y toca Reintentar."
 
 | Roadmap              | Código                    |
 | -------------------- | ------------------------- |

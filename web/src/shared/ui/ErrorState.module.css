@@ -1,0 +1,18 @@
+.errorState {
+  padding: 24px 20px;
+  border-radius: var(--radius-card);
+  background: var(--color-bad-soft);
+  text-align: center;
+}
+
+.message {
+  margin: 0 0 12px;
+  color: var(--color-ink);
+  font-weight: 600;
+}
+
+.loading {
+  padding: 24px;
+  color: var(--color-muted);
+  text-align: center;
+}
