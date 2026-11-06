@@ -47,5 +47,22 @@ export function useUrlSheet(param: string) {
     );
   }, [location.pathname, location.search, location.state, navigate, param]);
 
-  return { value, isOpen: value !== null, open, close };
+  /**
+   * Replaces this sheet with another one in the same history entry, e.g. the
+   * checkout becomes the sale detail after saving; "back" then closes it.
+   */
+  const switchTo = useCallback(
+    (otherParam: string, otherValue: string) => {
+      const next = new URLSearchParams(location.search);
+      next.delete(param);
+      next.set(otherParam, otherValue);
+      void navigate(
+        { pathname: location.pathname, search: `?${next.toString()}` },
+        { replace: true, state: location.state as unknown },
+      );
+    },
+    [location.pathname, location.search, location.state, navigate, param],
+  );
+
+  return { value, isOpen: value !== null, open, close, switchTo };
 }
