@@ -1,0 +1,24 @@
+.hint {
+  position: fixed;
+  bottom: calc(80px + var(--safe-bottom));
+  left: 50%;
+  z-index: 10;
+  width: min(88vw, 320px);
+  padding: 16px;
+  border-radius: var(--radius-card);
+  background: var(--color-ink);
+  box-shadow: var(--shadow-floating);
+  color: #fff;
+  text-align: center;
+  transform: translateX(-50%);
+}
+
+.title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.body {
+  margin: 4px 0 12px;
+}

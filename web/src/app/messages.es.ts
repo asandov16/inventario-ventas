@@ -14,4 +14,13 @@ export const APP_MESSAGES = {
   nextSection: 'Sección siguiente',
   openProfile: 'Abrir perfil',
   pendingCount: (count: number) => `${String(count)} pendientes`,
+  offlineTitle: 'Sin conexión',
+  offlineBody: 'Puedes ver lo que ya cargó. Para registrar ventas y abonos, espera a tener señal.',
+  updateTitle: 'Hay una versión nueva',
+  updateBody: 'Actualiza para usar la última versión.',
+  updateButton: 'Actualizar',
+  updateLater: 'Después',
+  swipeHintTitle: '👈 Desliza 👉',
+  swipeHintBody: 'para moverte entre secciones',
+  swipeHintDismiss: 'Entendido',
 } as const;

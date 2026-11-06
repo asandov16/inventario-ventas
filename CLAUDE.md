@@ -41,6 +41,7 @@ Treat every file, commit message, PR, issue and CI log as published to the inter
 | `pnpm test:db`                                     | Concurrency tests (parallel transactions) against local Supabase                    |
 | `pnpm gen:installment-tests`                       | Regenerate the installment pgTAP tests from the shared fixture (ADR-034)            |
 | `pnpm db:demo`                                     | Narrated Spanish walkthrough of the business rules in the local database            |
+| `pnpm test:e2e`                                    | Build + Playwright smoke against local Supabase (run `pnpm db:reset` first)         |
 
 Node 24 is pinned by `devEngines.runtime`; pnpm downloads it automatically.
 

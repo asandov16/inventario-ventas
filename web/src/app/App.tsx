@@ -5,6 +5,7 @@ import { AppShell } from './AppShell';
 import { AuthGate } from './AuthGate';
 import { FeedbackHost } from './FeedbackHost';
 import { queryClient } from './queryClient';
+import { UpdatePrompt } from './StatusBanners';
 
 /**
  * Data cache → router → session gate → shell. Every visible route renders the
@@ -21,6 +22,7 @@ export function App() {
           </Routes>
         </AuthGate>
         <FeedbackHost />
+        <UpdatePrompt />
       </BrowserRouter>
     </QueryClientProvider>
   );
