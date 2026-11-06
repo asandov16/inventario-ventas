@@ -14,16 +14,17 @@ App web instalable (PWA) para que un negocio familiar registre ventas de contado
 
 ## Documentación
 
-| Documento                                                        | Para qué                                        |
-| ---------------------------------------------------------------- | ----------------------------------------------- |
-| [Plan de implementación](docs/plan-implementacion.md)            | Etapas, arquitectura, convenciones              |
-| [Avance del proyecto](docs/avance.md)                            | Etapas completadas, fechas y pendientes         |
-| [Roadmap](docs/roadmap.md)                                       | Tareas por fase, con su avance                  |
-| [Requerimientos funcionales](docs/requerimientos-funcionales.md) | Qué hace el sistema                             |
-| [Requerimientos técnicos](docs/requerimientos-tecnicos.md)       | Cómo se construye                               |
-| [Decisiones (ADR)](docs/decisiones/README.md)                    | Por qué se eligió cada cosa                     |
-| [Glosario](docs/glosario.md)                                     | Términos del negocio y sus nombres en el código |
-| [Configurar cuentas](docs/runbooks/configurar-cuentas.md)        | GitHub, Supabase y Cloudflare                   |
+| Documento                                                        | Para qué                                         |
+| ---------------------------------------------------------------- | ------------------------------------------------ |
+| [Plan de implementación](docs/plan-implementacion.md)            | Etapas, arquitectura, convenciones               |
+| [Avance del proyecto](docs/avance.md)                            | Etapas completadas, fechas y pendientes          |
+| [Roadmap](docs/roadmap.md)                                       | Tareas por fase, con su avance                   |
+| [Requerimientos funcionales](docs/requerimientos-funcionales.md) | Qué hace el sistema                              |
+| [Requerimientos técnicos](docs/requerimientos-tecnicos.md)       | Cómo se construye                                |
+| [Decisiones (ADR)](docs/decisiones/README.md)                    | Por qué se eligió cada cosa                      |
+| [Glosario](docs/glosario.md)                                     | Términos del negocio y sus nombres en el código  |
+| [Configurar cuentas](docs/runbooks/configurar-cuentas.md)        | GitHub, Supabase y Cloudflare                    |
+| [Preparar staging](docs/runbooks/staging.md)                     | Usuarios y datos ficticios del entorno de prueba |
 
 ## Cómo levantar el proyecto
 
