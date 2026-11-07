@@ -7,6 +7,8 @@ import styles from './AppShell.module.css';
 import { Header } from './Header';
 import { APP_MESSAGES } from './messages.es';
 import { SECTIONS, sectionIndexForPath } from './sections';
+import { OfflineBanner } from './StatusBanners';
+import { SwipeHint } from './SwipeHint';
 import { TabBar } from './TabBar';
 import { Track } from './Track';
 
@@ -61,8 +63,10 @@ export function AppShell() {
           goTo(SECTIONS.findIndex((section) => section.id === 'profile'));
         }}
       />
+      <OfflineBanner />
       <Track activeIndex={activeIndex} sections={SECTIONS} onSwipe={goTo} />
       <TabBar activeIndex={activeIndex} sections={SECTIONS} onSelect={goTo} />
+      <SwipeHint />
       <button
         type="button"
         className={cx(styles.navButton, styles.navPrevious)}

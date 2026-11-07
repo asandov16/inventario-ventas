@@ -121,6 +121,35 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
 
+  # Smoke E2E (ADR-039): production build against local Supabase with the seed, phone viewport.
+  e2e:
+    needs: changes
+    if: needs.changes.outputs.web == 'true' || needs.changes.outputs.db == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: pnpm/action-setup@73e46992e05b19abd31f2f3c20e0e7370d762115 # v6.1.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Start local Supabase (database, auth and API only)
+        run: pnpm exec supabase start -x studio,imgproxy,edge-runtime,logflare,vector,mailpit,storage-api,realtime,supavisor
+      # The local URL and anon key are the public development defaults, not secrets.
+      - name: Point the build at local Supabase
+        run: |
+          pnpm exec supabase status -o env \
+            | grep -E '^(API_URL|ANON_KEY)=' \
+            | sed -e 's/^API_URL=/VITE_SUPABASE_URL=/' -e 's/^ANON_KEY=/VITE_SUPABASE_ANON_KEY=/' \
+            | tr -d '"' >> "$GITHUB_ENV"
+      - name: Install Chromium for Playwright
+        run: pnpm --filter e2e exec playwright install --with-deps chromium
+      - name: Smoke E2E
+        run: pnpm test:e2e
+
   # Database: migrations, seed, pgTAP, linter and generated types, against local Supabase.
   db:
     needs: changes
@@ -156,7 +185,7 @@ jobs:
   # Single required status check for branch protection.
   ci:
     if: always()
-    needs: [secrets, static, unit, build, db]
+    needs: [secrets, static, unit, build, e2e, db]
     runs-on: ubuntu-latest
     steps:
       - name: All required jobs passed or were skipped
