@@ -1,0 +1,140 @@
+.search {
+  width: 100%;
+  min-height: var(--touch-target-min);
+  margin-bottom: 8px;
+  padding: 10px 12px;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-control);
+  background: var(--color-card);
+  font-size: 16px;
+}
+
+.search:focus-visible {
+  border-color: var(--color-brand);
+  outline: 2px solid var(--color-brand-soft);
+}
+
+.results {
+  margin: 0 0 8px;
+  padding: 0;
+  overflow: hidden;
+  list-style: none;
+  border-radius: var(--radius-card);
+  background: var(--color-card);
+  box-shadow: var(--shadow-card);
+}
+
+.result {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  width: 100%;
+  min-height: 52px;
+  padding: 10px 14px;
+  border: 0;
+  border-bottom: 1px solid var(--color-line);
+  background: none;
+  text-align: left;
+  cursor: pointer;
+}
+
+.results li:last-child .result {
+  border-bottom: 0;
+}
+
+.resultInfo {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.name {
+  margin: 0;
+  font-weight: 600;
+}
+
+.meta {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 13px;
+}
+
+.badgeBad,
+.badgeGold {
+  flex: none;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.badgeBad {
+  background: var(--color-bad-soft);
+  color: var(--color-bad);
+}
+
+.badgeGold {
+  background: var(--color-gold-soft);
+  color: #8a6223;
+}
+
+.note {
+  margin: 4px 2px 10px;
+  color: var(--color-muted);
+  font-size: 14px;
+}
+
+.picked {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 10px 12px;
+  border: 1.5px solid var(--color-ok);
+  border-radius: var(--radius-control);
+  background: var(--color-ok-soft);
+}
+
+.check {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--color-ok);
+  color: #fff;
+  font-weight: 800;
+}
+
+.pickedInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.newForm {
+  padding: 12px;
+  border-radius: var(--radius-card);
+  background: var(--color-card);
+}
+
+.checkbox {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  min-height: var(--touch-target-min);
+  margin-bottom: 10px;
+  color: var(--color-ink-2);
+}
+
+.checkbox input {
+  width: 22px;
+  height: 22px;
+}
+
+.formActions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
