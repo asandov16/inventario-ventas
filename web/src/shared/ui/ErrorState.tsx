@@ -3,12 +3,13 @@ import styles from './ErrorState.module.css';
 import { UI_MESSAGES } from './messages.es';
 
 interface ErrorStateProps {
-  message: string;
+  /** Defaults to "No se pudo cargar. Revisa tu internet y toca Reintentar." */
+  message?: string;
   onRetry: () => void;
 }
 
 /** A read that failed: what happened and a way out (Reintentar). */
-export function ErrorState({ message, onRetry }: ErrorStateProps) {
+export function ErrorState({ message = UI_MESSAGES.loadFailed, onRetry }: ErrorStateProps) {
   return (
     <div className={styles.errorState} role="alert">
       <p className={styles.message}>{message}</p>
