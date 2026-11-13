@@ -39,7 +39,8 @@ pnpm install
 ## 3. Supabase
 
 1. Crea la cuenta entrando con GitHub.
-2. Crea dos proyectos en **us-east-1** (ADR-016): `inv-staging` e `inv-prod`. Guarda cada contraseña de base en el gestor.
+2. Crea dos proyectos en **us-east-1** (ADR-016): `inv-staging` y el de producción. Guarda cada contraseña de base en el gestor.
+   - El de producción se creó con el nombre **`inv-main`** (ID `tkutayzwgalkavwwurvg`); en este repositorio, donde diga `inv-prod`, es `inv-main` (ADR-042).
 3. En cada proyecto:
    - Authentication → Sign In / Providers → **desactivar** "Allow new users to sign up".
    - Authentication → Sign In / Providers → **Email** (abrir el proveedor): _Minimum password length_ = **10**; _Password requirements_ = letras y dígitos como mínimo.
@@ -49,7 +50,7 @@ pnpm install
 
    | Opción                   | Valor                                 |
    | ------------------------ | ------------------------------------- |
-   | Organización y proyectos | Solo `inv-staging` e `inv-prod`       |
+   | Organización y proyectos | Solo `inv-staging` e `inv-main`       |
    | Project Settings         | Read                                  |
    | API Keys                 | Read                                  |
    | API Key Secrets          | Read (lo exige `supabase link`)       |
