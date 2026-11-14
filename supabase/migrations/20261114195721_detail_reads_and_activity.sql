@@ -6,7 +6,6 @@
 create or replace function public.get_sale_detail(p_sale_id uuid)
 returns jsonb
 language plpgsql
-stable
 security definer
 set search_path = ''
 as $$
@@ -152,7 +151,6 @@ $$;
 create or replace function public.get_product_detail(p_product_id uuid)
 returns jsonb
 language plpgsql
-stable
 security definer
 set search_path = ''
 as $$
