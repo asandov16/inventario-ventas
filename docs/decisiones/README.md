@@ -45,3 +45,4 @@ Cada decisión tiene un registro corto. ADR-001 a ADR-019 corresponden a D-01 a 
 | [ADR-039](ADR-039-e2e-de-pr-contra-supabase-local.md)                             | Pruebas E2E de cada PR contra Supabase local                    | Aceptada                | Etapa 2      |
 | [ADR-040](ADR-040-fechas-con-intl-sin-date-fns.md)                                | Fechas con `Intl`, sin `date-fns`                               | Aceptada                | Etapa 2      |
 | [ADR-041](ADR-041-dod-de-pwa-sin-lighthouse.md)                                   | DoD de la PWA sin la auditoría PWA de Lighthouse                | Aceptada                | Etapa 2      |
+| [ADR-042](ADR-042-keep-alive-adelantado-a-la-etapa-2.md)                          | Keep-alive adelantado a la Etapa 2                              | Aceptada                | Etapa 2      |

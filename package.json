@@ -21,7 +21,7 @@
     "check": "pnpm lint && pnpm typecheck && pnpm test",
     "lint": "eslint . --max-warnings=0",
     "lint:sql": "python3 -m sqlfluff lint supabase/migrations supabase/seed.sql supabase/bootstrap",
-    "typecheck": "tsc -p tsconfig.json && tsc -p e2e/tsconfig.json && pnpm --filter web typecheck",
+    "typecheck": "tsc -p tsconfig.json && tsc -p e2e/tsconfig.json && tsc -p workers/keepalive/tsconfig.json && pnpm --filter web typecheck",
     "test": "vitest run",
     "test:watch": "vitest",
     "format": "prettier --write .",
