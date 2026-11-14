@@ -46,21 +46,23 @@ La interfaz y los documentos usan el lenguaje del negocio, en español. El códi
 
 ## Funciones RPC
 
-| Roadmap                                                          | Código                                                                      |
-| ---------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| `calc_cuotas`                                                    | `private.calc_installments`                                                 |
-| `registrar_venta`                                                | `register_sale`                                                             |
-| `crear_cliente`, `actualizar_cliente`, `buscar_clientes`         | `create_customer`, `update_customer`, `search_customers`                    |
-| `registrar_abono`                                                | `register_payment`                                                          |
-| `anular_venta`                                                   | `void_sale`                                                                 |
-| `crear_producto`, `ingresar_stock`, `actualizar_producto`        | `create_product`, `restock_product`, `update_product`                       |
-| `registrar_recordatorio`                                         | `record_reminder`                                                           |
-| `actualizar_negocio`, `guardar_categoria`, `guardar_metodo_pago` | `update_business`, `save_category`, `save_payment_method`                   |
-| `mi_perfil`, `ping`                                              | `get_my_profile`, `ping`                                                    |
-| `resumen_inicio`, `resumen_cobros`, `resumen_inventario`         | `get_dashboard_summary`, `get_receivables_summary`, `get_inventory_summary` |
-| `contadores`, `analisis`, `exportar_datos`                       | `get_badge_counts`, `get_analytics`, `export_data`                          |
-| `registrar_saldo_anterior`                                       | `register_legacy_balance`                                                   |
-| `private.require_perm`, `private.has_perm`                       | `private.require_permission`, `private.has_permission`                      |
+| Roadmap                                                                     | Código                                                                            |
+| --------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| `calc_cuotas`                                                               | `private.calc_installments`                                                       |
+| `registrar_venta`                                                           | `register_sale`                                                                   |
+| `crear_cliente`, `actualizar_cliente`, `buscar_clientes`                    | `create_customer`, `update_customer`, `search_customers`                          |
+| `registrar_abono`                                                           | `register_payment`                                                                |
+| `anular_venta`                                                              | `void_sale`                                                                       |
+| `crear_producto`, `ingresar_stock`, `actualizar_producto`                   | `create_product`, `restock_product`, `update_product`                             |
+| `registrar_recordatorio`                                                    | `record_reminder`                                                                 |
+| `actualizar_negocio`, `guardar_categoria`, `guardar_metodo_pago`            | `update_business`, `save_category`, `save_payment_method`                         |
+| `mi_perfil`, `ping`                                                         | `get_my_profile`, `ping`                                                          |
+| `resumen_inicio`, `resumen_cobros`, `resumen_inventario`                    | `get_dashboard_summary`, `get_receivables_summary`, `get_inventory_summary`       |
+| `contadores`, `analisis`, `exportar_datos`                                  | `get_badge_counts`, `get_analytics`, `export_data`                                |
+| `registrar_saldo_anterior`                                                  | `register_legacy_balance`                                                         |
+| Detalle de venta, detalle de producto                                       | `get_sale_detail`, `get_product_detail`                                           |
+| Últimos ingresos, Actividad, Usuarios, categorías, métodos de pago (vistas) | `v_recent_restocks`, `v_activity`, `v_users`, `v_categories`, `v_payment_methods` |
+| `private.require_perm`, `private.has_perm`                                  | `private.require_permission`, `private.has_permission`                            |
 
 ## Permisos
 
@@ -129,14 +131,14 @@ Los mensajes que ve la persona están en `BUSINESS_ERROR_MESSAGES` de `web/src/s
 
 ## Valores de estado
 
-| Interfaz                                                                                                  | Código                                                                                                             |
-| --------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| Pagada / Parcial / Pendiente / Vencida                                                                    | `paid` / `partial` / `pending` / `overdue`                                                                         |
-| Anulada                                                                                                   | `voided`                                                                                                           |
-| OK / Bajo / Agotado                                                                                       | `ok` / `low` / `out`                                                                                               |
-| Urgente / Atención                                                                                        | `urgent` / `attention`                                                                                             |
-| Movimiento: inicial / ingreso / venta / anulación / ajuste                                                | `initial` / `restock` / `sale` / `void` / `adjustment`                                                             |
-| Actividad: venta / saldo anterior / abono / anulación / ingreso / ajuste / producto nuevo / cliente nuevo | `sale` / `legacy_balance` / `payment` / `void` / `restock` / `adjustment` / `product_created` / `customer_created` |
+| Interfaz                                                                                                                 | Código                                                                                                                          |
+| ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------- |
+| Pagada / Parcial / Pendiente / Vencida                                                                                   | `paid` / `partial` / `pending` / `overdue`                                                                                      |
+| Anulada                                                                                                                  | `voided`                                                                                                                        |
+| OK / Bajo / Agotado                                                                                                      | `ok` / `low` / `out`                                                                                                            |
+| Urgente / Atención                                                                                                       | `urgent` / `attention`                                                                                                          |
+| Movimiento: inicial / ingreso / venta / anulación / ajuste                                                               | `initial` / `restock` / `sale` / `void` / `adjustment`                                                                          |
+| Actividad: venta / saldo anterior / abono / anulación / ingreso / ajuste / producto nuevo / cliente nuevo / recordatorio | `sale` / `legacy_balance` / `payment` / `void` / `restock` / `adjustment` / `product_created` / `customer_created` / `reminder` |
 
 ## Lo que se queda en español
 

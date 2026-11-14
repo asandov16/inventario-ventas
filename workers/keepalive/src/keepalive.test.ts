@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
 
-import { pingAll, targetsFromEnv, type Target } from './keepalive';
+import { isBareProjectUrl, pingAll, targetsFromEnv, type Target } from './keepalive';
 
 const target: Target = { name: 'staging', url: 'https://example.supabase.co/', anonKey: 'anon' };
 
@@ -52,5 +52,27 @@ describe('targetsFromEnv', () => {
         PROD_SUPABASE_URL: 'https://p.supabase.co',
       }),
     ).toEqual([{ name: 'staging', url: 'https://s.supabase.co', anonKey: 'a' }]);
+  });
+
+  it('stops with the variable name when a URL has a path (every ping would be a 404)', () => {
+    expect(() =>
+      targetsFromEnv({
+        STAGING_SUPABASE_URL: 'https://s.supabase.co/rest/v1/',
+        STAGING_SUPABASE_ANON_KEY: 'a',
+      }),
+    ).toThrow('STAGING_SUPABASE_URL');
+  });
+});
+
+describe('isBareProjectUrl', () => {
+  it('accepts the project URL with or without a trailing slash', () => {
+    expect(isBareProjectUrl('https://s.supabase.co')).toBe(true);
+    expect(isBareProjectUrl('https://s.supabase.co/')).toBe(true);
+  });
+
+  it('rejects a path, a query or something that is not a URL', () => {
+    expect(isBareProjectUrl('https://s.supabase.co/rest/v1/')).toBe(false);
+    expect(isBareProjectUrl('https://s.supabase.co?x=1')).toBe(false);
+    expect(isBareProjectUrl('s.supabase.co')).toBe(false);
   });
 });
