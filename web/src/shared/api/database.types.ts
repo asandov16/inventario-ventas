@@ -125,6 +125,12 @@ isOneToOne: false
       foreignKeyName: "installments_sale_id_fkey"
       columns: ["sale_id"]
 isOneToOne: false
+      referencedRelation: "v_receivables"
+      referencedColumns: ["sale_id"]
+    },{
+      foreignKeyName: "installments_sale_id_fkey"
+      columns: ["sale_id"]
+isOneToOne: false
       referencedRelation: "v_sale_accounts"
       referencedColumns: ["sale_id"]
     },{
@@ -209,6 +215,12 @@ isOneToOne: false
 isOneToOne: false
       referencedRelation: "sales"
       referencedColumns: ["id"]
+    },{
+      foreignKeyName: "inventory_movements_sale_id_fkey"
+      columns: ["sale_id"]
+isOneToOne: false
+      referencedRelation: "v_receivables"
+      referencedColumns: ["sale_id"]
     },{
       foreignKeyName: "inventory_movements_sale_id_fkey"
       columns: ["sale_id"]
@@ -311,6 +323,12 @@ isOneToOne: false
 isOneToOne: false
       referencedRelation: "sales"
       referencedColumns: ["id"]
+    },{
+      foreignKeyName: "payments_sale_id_fkey"
+      columns: ["sale_id"]
+isOneToOne: false
+      referencedRelation: "v_receivables"
+      referencedColumns: ["sale_id"]
     },{
       foreignKeyName: "payments_sale_id_fkey"
       columns: ["sale_id"]
@@ -481,6 +499,12 @@ isOneToOne: false
       foreignKeyName: "reminders_sale_id_fkey"
       columns: ["sale_id"]
 isOneToOne: false
+      referencedRelation: "v_receivables"
+      referencedColumns: ["sale_id"]
+    },{
+      foreignKeyName: "reminders_sale_id_fkey"
+      columns: ["sale_id"]
+isOneToOne: false
       referencedRelation: "v_sale_accounts"
       referencedColumns: ["sale_id"]
     },{
@@ -599,6 +623,12 @@ isOneToOne: false
 isOneToOne: false
       referencedRelation: "sales"
       referencedColumns: ["id"]
+    },{
+      foreignKeyName: "sale_items_sale_id_fkey"
+      columns: ["sale_id"]
+isOneToOne: false
+      referencedRelation: "v_receivables"
+      referencedColumns: ["sale_id"]
     },{
       foreignKeyName: "sale_items_sale_id_fkey"
       columns: ["sale_id"]
@@ -768,6 +798,12 @@ isOneToOne: false
       foreignKeyName: "installments_sale_id_fkey"
       columns: ["sale_id"]
 isOneToOne: false
+      referencedRelation: "v_receivables"
+      referencedColumns: ["sale_id"]
+    },{
+      foreignKeyName: "installments_sale_id_fkey"
+      columns: ["sale_id"]
+isOneToOne: false
       referencedRelation: "v_sale_accounts"
       referencedColumns: ["sale_id"]
     },{
@@ -828,6 +864,32 @@ isOneToOne: false
 isOneToOne: false
       referencedRelation: "v_categories"
       referencedColumns: ["id"]
+    }
+                  ]
+                },"v_receivables": {
+                  Row: {
+                    "balance": number | null,"business_id": string,"client_created_at": string,"customer_id": string,"customer_name": string,"customer_phone_e164": string,"folio": number,"last_reminder_at": string | null,"next_due_amount": number | null,"next_due_date": string | null,"overdue_amount": number | null,"paid": number | null,"progress_pct": number | null,"sale_id": string,"source": string,"status": string | null,"total": number
+                  }
+                  ComputedFields: never
+                  Relationships: [
+                    {
+      foreignKeyName: "sales_business_id_fkey"
+      columns: ["business_id"]
+isOneToOne: false
+      referencedRelation: "businesses"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "sales_customer_id_fkey"
+      columns: ["customer_id"]
+isOneToOne: false
+      referencedRelation: "customers"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "sales_customer_id_fkey"
+      columns: ["customer_id"]
+isOneToOne: false
+      referencedRelation: "v_customer_balances"
+      referencedColumns: ["customer_id"]
     }
                   ]
                 },"v_recent_restocks": {

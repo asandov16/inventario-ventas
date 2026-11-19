@@ -6,4 +6,13 @@ export const DOMAIN_MESSAGES = {
   justNow: 'Ahora',
   minutesAgo: (minutes: number) => `hace ${String(minutes)} min`,
   hoursAgo: (hours: number) => `hace ${String(hours)} h`,
+  /** Payment reminder (roadmap F5-T07): greeting, business, installment and date, balance. */
+  reminder: (
+    customer: string,
+    business: string,
+    amount: string,
+    date: string | null,
+    balance: string,
+  ) =>
+    `Hola ${customer}, le saluda ${business}. Le recordamos su cuota de ${amount}${date ? ` con fecha ${date}` : ''}. Saldo pendiente: ${balance}. ¡Muchas gracias!`,
 } as const;

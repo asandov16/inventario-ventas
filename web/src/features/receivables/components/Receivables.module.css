@@ -1,0 +1,172 @@
+/* Ported from prototype v2 (.list, .row, .bar, .card, .opts). */
+.list {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border-radius: var(--radius-card);
+  background: var(--color-card);
+  box-shadow: var(--shadow-card);
+  list-style: none;
+}
+
+.list li + li {
+  border-top: 1px solid var(--color-line);
+}
+
+.row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  width: 100%;
+  min-height: 72px;
+  padding: 10px 14px;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.row:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: -2px;
+}
+
+.avatar {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--color-gold-soft);
+  color: #8a6223;
+  font-weight: 700;
+}
+
+.main {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.name {
+  overflow: hidden;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.meta {
+  color: var(--color-muted);
+  font-size: 13px;
+}
+
+.badText {
+  color: var(--color-bad);
+}
+
+.bar {
+  display: block;
+  height: 6px;
+  margin-top: 4px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--color-line);
+}
+
+.bar i {
+  display: block;
+  height: 100%;
+  background: var(--color-ok);
+}
+
+.end {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.card {
+  margin-bottom: 12px;
+  padding: 14px;
+  border-radius: var(--radius-card);
+  background: var(--color-card);
+  box-shadow: var(--shadow-card);
+}
+
+.cardTitle {
+  margin: 0 0 8px;
+  font-size: 15px;
+}
+
+.block {
+  margin-bottom: 12px;
+}
+
+.muted {
+  margin: 0 0 10px;
+  color: var(--color-muted);
+  font-size: 14px;
+}
+
+.quick {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: -4px 0 12px;
+}
+
+.quickButton {
+  min-height: 40px;
+  padding: 8px 12px;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-control);
+  background: var(--color-card);
+  color: var(--color-ink-2);
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.fieldError {
+  margin: 0 0 10px;
+  color: var(--color-bad);
+  font-size: 13px;
+}
+
+.two {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.whatsapp {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--touch-target-min);
+  padding: 10px 14px;
+  border: 1px solid var(--color-ok);
+  border-radius: var(--radius-control);
+  color: var(--color-ok);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.copy {
+  margin-top: 8px;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}

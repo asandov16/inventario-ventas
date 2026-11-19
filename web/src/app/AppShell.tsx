@@ -1,6 +1,7 @@
 import { useCallback, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 
+import { AccountSheet } from '@/features/receivables';
 import { SaleDetailSheet } from '@/features/sales';
 import { cx } from '@/shared/ui/cx';
 
@@ -69,6 +70,7 @@ export function AppShell() {
       <TabBar activeIndex={activeIndex} sections={SECTIONS} onSelect={goTo} />
       <SwipeHint />
       <SaleDetailSheet />
+      <AccountSheet />
       <button
         type="button"
         className={cx(styles.navButton, styles.navPrevious)}
