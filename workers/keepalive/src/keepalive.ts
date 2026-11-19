@@ -71,13 +71,33 @@ export async function pingAll(targets: readonly Target[], fetchFn: Fetch): Promi
   );
 }
 
-/** Targets from the Worker's variables; a project without both values is skipped. */
+/** True for a bare project URL (https://<ref>.supabase.co), the only form the paths can be built on. */
+export function isBareProjectUrl(url: string): boolean {
+  try {
+    const parsed = new URL(url);
+    return parsed.pathname.replace(/\/+$/, '') === '' && !parsed.search && !parsed.hash;
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Targets from the Worker's variables; a project without both values is skipped.
+ * A URL with a path (for example …/rest/v1/) would turn every ping into a 404, so it
+ * stops the run with a message that names the variable to fix.
+ */
 export function targetsFromEnv(env: Record<string, string | undefined>): Target[] {
   const targets: Target[] = [];
   for (const name of ['STAGING', 'PROD']) {
     const url = env[`${name}_SUPABASE_URL`];
     const anonKey = env[`${name}_SUPABASE_ANON_KEY`];
-    if (url && anonKey) targets.push({ name: name.toLowerCase(), url, anonKey });
+    if (!url || !anonKey) continue;
+    if (!isBareProjectUrl(url)) {
+      throw new Error(
+        `${name}_SUPABASE_URL must be the bare project URL (https://<ref>.supabase.co)`,
+      );
+    }
+    targets.push({ name: name.toLowerCase(), url, anonKey });
   }
   return targets;
 }

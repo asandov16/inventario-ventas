@@ -9,8 +9,21 @@ const DEFAULT_APP_NAME = 'Inventario y Ventas';
 const BRAND_COLOR = '#5b2a5e';
 const BACKGROUND_COLOR = '#f7f3ee';
 
+/**
+ * supabase-js builds its endpoints from the project URL (new URL('auth/v1', url)), so a
+ * URL with a path such as …/rest/v1/ silently breaks sign-in. Fail the build instead.
+ */
+function assertBareSupabaseUrl(url: string | undefined) {
+  if (!url) return;
+  const parsed = new URL(url);
+  if (parsed.pathname.replace(/\/+$/, '') !== '' || parsed.search || parsed.hash) {
+    throw new Error('VITE_SUPABASE_URL must be the bare project URL (https://<ref>.supabase.co)');
+  }
+}
+
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, import.meta.dirname, 'VITE_');
+  assertBareSupabaseUrl(env.VITE_SUPABASE_URL);
   const appName = env.VITE_APP_NAME ?? DEFAULT_APP_NAME;
   process.env.VITE_APP_NAME = appName;
 

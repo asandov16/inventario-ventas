@@ -47,7 +47,7 @@ export async function fetchCatalog(): Promise<CatalogProduct[]> {
 /** Active payment methods in their configured order (RN-14). */
 export async function fetchPaymentMethods(): Promise<PaymentMethod[]> {
   const { data, error } = await supabase
-    .from('payment_methods')
+    .from('v_payment_methods')
     .select('id, name')
     .eq('active', true)
     .order('sort');
@@ -125,28 +125,15 @@ export async function registerSale(
   return registerResponseSchema.parse(response);
 }
 
-const storedSaleSchema = z.object({
-  id: z.string(),
-  folio: z.number().int(),
-  type: z.enum(['cash', 'installments']),
-  total: z.number().int(),
-  months: z.number().int().nullable(),
-  down_payment: z.number().int(),
-  client_created_at: z.string(),
-  customers: z.object({ name: z.string() }),
-  installments: z.array(installmentRowSchema),
+const saleDetailResponseSchema = z.object({
+  status: z.literal('ok'),
+  sale: z.looseObject({ customer: z.object({ name: z.string() }) }),
 });
 
-/** A sale read back by id (the detail sheet after a reload). RLS limits it to the business. */
+/** A sale read back by id (the detail sheet after a reload), via get_sale_detail. */
 export async function fetchSale(saleId: string): Promise<SavedSale> {
-  const { data, error } = await supabase
-    .from('sales')
-    .select(
-      'id, folio, type, total, months, down_payment, client_created_at, customers(name), installments(number, due_date, amount)',
-    )
-    .eq('id', saleId)
-    .single();
-  if (error) throw toAppError(error);
-  const row = storedSaleSchema.parse(data);
-  return saleSchema.parse({ ...row, customer_name: row.customers.name });
+  const response = saleDetailResponseSchema.parse(
+    await callRpc('get_sale_detail', { p_sale_id: saleId }),
+  );
+  return saleSchema.parse({ ...response.sale, customer_name: response.sale.customer.name });
 }

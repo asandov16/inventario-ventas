@@ -24,6 +24,12 @@ isOneToOne: false
       referencedRelation: "profiles"
       referencedColumns: ["id"]
     },{
+      foreignKeyName: "activity_log_actor_id_fkey"
+      columns: ["actor_id"]
+isOneToOne: false
+      referencedRelation: "v_users"
+      referencedColumns: ["user_id"]
+    },{
       foreignKeyName: "activity_log_business_id_fkey"
       columns: ["business_id"]
 isOneToOne: false
@@ -89,6 +95,12 @@ isOneToOne: false
 isOneToOne: false
       referencedRelation: "profiles"
       referencedColumns: ["id"]
+    },{
+      foreignKeyName: "customers_created_by_fkey"
+      columns: ["created_by"]
+isOneToOne: false
+      referencedRelation: "v_users"
+      referencedColumns: ["user_id"]
     }
                   ]
                 },"installments": {
@@ -141,6 +153,12 @@ isOneToOne: false
 isOneToOne: true
       referencedRelation: "inventory_movements"
       referencedColumns: ["id"]
+    },{
+      foreignKeyName: "inventory_movement_costs_movement_id_fkey"
+      columns: ["movement_id"]
+isOneToOne: true
+      referencedRelation: "v_recent_restocks"
+      referencedColumns: ["movement_id"]
     }
                   ]
                 },"inventory_movements": {
@@ -167,6 +185,12 @@ isOneToOne: false
 isOneToOne: false
       referencedRelation: "profiles"
       referencedColumns: ["id"]
+    },{
+      foreignKeyName: "inventory_movements_created_by_fkey"
+      columns: ["created_by"]
+isOneToOne: false
+      referencedRelation: "v_users"
+      referencedColumns: ["user_id"]
     },{
       foreignKeyName: "inventory_movements_product_id_fkey"
       columns: ["product_id"]
@@ -264,11 +288,23 @@ isOneToOne: false
       referencedRelation: "payment_methods"
       referencedColumns: ["id"]
     },{
+      foreignKeyName: "payments_payment_method_id_fkey"
+      columns: ["payment_method_id"]
+isOneToOne: false
+      referencedRelation: "v_payment_methods"
+      referencedColumns: ["id"]
+    },{
       foreignKeyName: "payments_received_by_fkey"
       columns: ["received_by"]
 isOneToOne: false
       referencedRelation: "profiles"
       referencedColumns: ["id"]
+    },{
+      foreignKeyName: "payments_received_by_fkey"
+      columns: ["received_by"]
+isOneToOne: false
+      referencedRelation: "v_users"
+      referencedColumns: ["user_id"]
     },{
       foreignKeyName: "payments_sale_id_fkey"
       columns: ["sale_id"]
@@ -333,6 +369,12 @@ isOneToOne: true
 isOneToOne: false
       referencedRelation: "profiles"
       referencedColumns: ["id"]
+    },{
+      foreignKeyName: "product_costs_updated_by_fkey"
+      columns: ["updated_by"]
+isOneToOne: false
+      referencedRelation: "v_users"
+      referencedColumns: ["user_id"]
     }
                   ]
                 },"products": {
@@ -358,6 +400,12 @@ isOneToOne: false
       columns: ["category_id"]
 isOneToOne: false
       referencedRelation: "categories"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "products_category_id_fkey"
+      columns: ["category_id"]
+isOneToOne: false
+      referencedRelation: "v_categories"
       referencedColumns: ["id"]
     }
                   ]
@@ -447,6 +495,12 @@ isOneToOne: false
 isOneToOne: false
       referencedRelation: "profiles"
       referencedColumns: ["id"]
+    },{
+      foreignKeyName: "reminders_sent_by_fkey"
+      columns: ["sent_by"]
+isOneToOne: false
+      referencedRelation: "v_users"
+      referencedColumns: ["user_id"]
     }
                   ]
                 },"role_permissions": {
@@ -596,8 +650,26 @@ isOneToOne: false
       referencedRelation: "payment_methods"
       referencedColumns: ["id"]
     },{
+      foreignKeyName: "sales_payment_method_id_fkey"
+      columns: ["payment_method_id"]
+isOneToOne: false
+      referencedRelation: "v_payment_methods"
+      referencedColumns: ["id"]
+    },{
       foreignKeyName: "sales_seller_id_fkey"
       columns: ["seller_id"]
+isOneToOne: false
+      referencedRelation: "profiles"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "sales_seller_id_fkey"
+      columns: ["seller_id"]
+isOneToOne: false
+      referencedRelation: "v_users"
+      referencedColumns: ["user_id"]
+    },{
+      foreignKeyName: "sales_voided_by_fkey"
+      columns: ["voided_by"]
 isOneToOne: false
       referencedRelation: "profiles"
       referencedColumns: ["id"]
@@ -605,20 +677,66 @@ isOneToOne: false
       foreignKeyName: "sales_voided_by_fkey"
       columns: ["voided_by"]
 isOneToOne: false
-      referencedRelation: "profiles"
-      referencedColumns: ["id"]
+      referencedRelation: "v_users"
+      referencedColumns: ["user_id"]
     }
                   ]
                 }
           }
           Views: {
-            "v_alerts": {
+            "v_activity": {
+                  Row: {
+                    "actor_id": string | null,"actor_name": string | null,"amount": number | null,"business_id": string,"created_at": string,"data": NonNullable<Json>,"entity": string,"entity_id": string,"id": number,"type": string
+                  }
+                  ComputedFields: never
+                  Relationships: [
+                    {
+      foreignKeyName: "activity_log_actor_id_fkey"
+      columns: ["actor_id"]
+isOneToOne: false
+      referencedRelation: "profiles"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "activity_log_actor_id_fkey"
+      columns: ["actor_id"]
+isOneToOne: false
+      referencedRelation: "v_users"
+      referencedColumns: ["user_id"]
+    },{
+      foreignKeyName: "activity_log_business_id_fkey"
+      columns: ["business_id"]
+isOneToOne: false
+      referencedRelation: "businesses"
+      referencedColumns: ["id"]
+    }
+                  ]
+                },"v_alerts": {
                   Row: {
                     "amount": number | null,"business_id": string | null,"due_date": string | null,"entity": string | null,"entity_id": string | null,"folio": number | null,"kind": string | null,"severity": string | null,"title": string | null
                   }
                   ComputedFields: never
                   Relationships: [
                     
+                  ]
+                },"v_categories": {
+                  Row: {
+                    "active": boolean,"business_id": string,"id": string,"name": string,"prefix": string,"sort": number
+                  }
+                  ComputedFields: never
+                  Insert: {
+                           "active"?: boolean | null,"business_id"?: string | null,"id"?: string | null,"name"?: string | null,"prefix"?: string | null,"sort"?: number | null
+                         }
+                        Update: {
+                           "active"?: boolean | null,"business_id"?: string | null,"id"?: string | null,"name"?: string | null,"prefix"?: string | null,"sort"?: number | null
+                         }
+                        Relationships: [
+                    {
+      foreignKeyName: "categories_business_id_fkey"
+      columns: ["business_id"]
+isOneToOne: false
+      referencedRelation: "businesses"
+      referencedColumns: ["id"]
+    }
                   ]
                 },"v_customer_balances": {
                   Row: {
@@ -666,6 +784,26 @@ isOneToOne: false
       referencedColumns: ["id"]
     }
                   ]
+                },"v_payment_methods": {
+                  Row: {
+                    "active": boolean,"business_id": string,"id": string,"name": string,"sort": number
+                  }
+                  ComputedFields: never
+                  Insert: {
+                           "active"?: boolean | null,"business_id"?: string | null,"id"?: string | null,"name"?: string | null,"sort"?: number | null
+                         }
+                        Update: {
+                           "active"?: boolean | null,"business_id"?: string | null,"id"?: string | null,"name"?: string | null,"sort"?: number | null
+                         }
+                        Relationships: [
+                    {
+      foreignKeyName: "payment_methods_business_id_fkey"
+      columns: ["business_id"]
+isOneToOne: false
+      referencedRelation: "businesses"
+      referencedColumns: ["id"]
+    }
+                  ]
                 },"v_products_status": {
                   Row: {
                     "active": boolean,"business_id": string,"category_id": string,"category_name": string,"code": string,"min_stock": number,"name": string,"price": number,"product_id": string,"stock": number,"stock_status": string | null,"units_sold": number | null,"version": number
@@ -684,6 +822,38 @@ isOneToOne: false
 isOneToOne: false
       referencedRelation: "categories"
       referencedColumns: ["id"]
+    },{
+      foreignKeyName: "products_category_id_fkey"
+      columns: ["category_id"]
+isOneToOne: false
+      referencedRelation: "v_categories"
+      referencedColumns: ["id"]
+    }
+                  ]
+                },"v_recent_restocks": {
+                  Row: {
+                    "business_id": string,"code": string,"created_at": string,"created_by_name": string | null,"movement_id": string,"product_id": string,"product_name": string,"qty": number,"stock_after": number,"type": string
+                  }
+                  ComputedFields: never
+                  Relationships: [
+                    {
+      foreignKeyName: "inventory_movements_business_id_fkey"
+      columns: ["business_id"]
+isOneToOne: false
+      referencedRelation: "businesses"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "inventory_movements_product_id_fkey"
+      columns: ["product_id"]
+isOneToOne: false
+      referencedRelation: "products"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "inventory_movements_product_id_fkey"
+      columns: ["product_id"]
+isOneToOne: false
+      referencedRelation: "v_products_status"
+      referencedColumns: ["product_id"]
     }
                   ]
                 },"v_sale_accounts": {
@@ -742,6 +912,26 @@ isOneToOne: false
 isOneToOne: false
       referencedRelation: "profiles"
       referencedColumns: ["id"]
+    },{
+      foreignKeyName: "sales_seller_id_fkey"
+      columns: ["seller_id"]
+isOneToOne: false
+      referencedRelation: "v_users"
+      referencedColumns: ["user_id"]
+    }
+                  ]
+                },"v_users": {
+                  Row: {
+                    "active": boolean,"business_id": string,"created_at": string,"full_name": string,"phone_e164": string | null,"role_code": string,"role_name": string,"user_id": string
+                  }
+                  ComputedFields: never
+                  Relationships: [
+                    {
+      foreignKeyName: "profiles_business_id_fkey"
+      columns: ["business_id"]
+isOneToOne: false
+      referencedRelation: "businesses"
+      referencedColumns: ["id"]
     }
                   ]
                 }
@@ -771,8 +961,14 @@ isOneToOne: false
 "get_my_profile":
 { Args: Record<PropertyKey, never>; Returns: Json
                            },
+"get_product_detail":
+{ Args: { "p_product_id": string }; Returns: Json
+                           },
 "get_receivables_summary":
 { Args: Record<PropertyKey, never>; Returns: Json
+                           },
+"get_sale_detail":
+{ Args: { "p_sale_id": string }; Returns: Json
                            },
 "ping":
 { Args: Record<PropertyKey, never>; Returns: Json
