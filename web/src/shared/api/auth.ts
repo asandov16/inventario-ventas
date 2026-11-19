@@ -19,6 +19,18 @@ export async function signInWithPassword(email: string, password: string): Promi
   throw toAppError(error);
 }
 
+/**
+ * Changes the signed-in user's password (CU-14, F7-T07). Supabase enforces the
+ * minimum length (10, supabase/config.toml); its refusals come back in Spanish.
+ */
+export async function changePassword(newPassword: string): Promise<void> {
+  const { error } = await supabase.auth.updateUser({ password: newPassword });
+  if (!error) return;
+  if (error.code === 'weak_password') throw new AppError('auth', API_MESSAGES.weakPassword);
+  if (error.code === 'same_password') throw new AppError('auth', API_MESSAGES.samePassword);
+  throw toAppError(error);
+}
+
 export async function signOut(): Promise<void> {
   const { error } = await supabase.auth.signOut();
   if (error) throw toAppError(error);

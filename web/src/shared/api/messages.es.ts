@@ -50,7 +50,7 @@ export const BUSINESS_ERROR_MESSAGES: Record<string, (detail: Detail) => string>
   invalid_channel: () => 'Ese medio de envío no está disponible.',
   no_balance: (d) => `La venta #${text(d.folio)} ya no tiene saldo.`,
   name_taken: () => 'Ya existe uno con ese nombre. Usa otro.',
-  invalid_prefix: () => 'Revisa el prefijo: debe tener 3 letras.',
+  invalid_prefix: () => 'Revisa el prefijo: de 2 a 5 letras mayúsculas, sin tildes (ej. PER).',
   prefix_taken: () => 'Ese prefijo ya lo usa otra categoría. Usa otro.',
   invalid_period: () => 'Elige un período válido.',
   last_admin_required: () => 'Debe quedar al menos un administrador activo.',
@@ -63,4 +63,7 @@ export const API_MESSAGES = {
   loadFailed: 'No se pudo cargar. Revisa tu internet y toca Reintentar.',
   sessionExpired: 'Tu sesión venció. Entra de nuevo.',
   invalidCredentials: 'Usuario o clave incorrectos.',
+  weakPassword:
+    'Esa contraseña es muy débil. Usa al menos 10 caracteres, mezclando letras y números.',
+  samePassword: 'La contraseña nueva debe ser distinta de la actual.',
 } as const;

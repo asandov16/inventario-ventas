@@ -59,7 +59,7 @@ export function addMonths(isoDate: string, months: number): string {
   return toIsoDate({ year: targetYear, month: targetMonth, day: targetDay });
 }
 
-function addDays(isoDate: string, days: number): string {
+export function addDays(isoDate: string, days: number): string {
   const { year, month, day } = parseIsoDate(isoDate);
   const date = new Date(Date.UTC(year, month - 1, day + days));
   return toIsoDate({

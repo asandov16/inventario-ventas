@@ -14,18 +14,19 @@ Etapas 0 y 1 completas; la Etapa 2 (App y Vender) tiene todo el código y solo e
 
 ## Documentación
 
-| Documento                                                        | Para qué                                         |
-| ---------------------------------------------------------------- | ------------------------------------------------ |
-| [Plan de implementación](docs/plan-implementacion.md)            | Etapas, arquitectura, convenciones               |
-| [Avance del proyecto](docs/avance.md)                            | Etapas completadas, fechas y pendientes          |
-| [Roadmap](docs/roadmap.md)                                       | Tareas por fase, con su avance                   |
-| [Requerimientos funcionales](docs/requerimientos-funcionales.md) | Qué hace el sistema                              |
-| [Requerimientos técnicos](docs/requerimientos-tecnicos.md)       | Cómo se construye                                |
-| [Decisiones (ADR)](docs/decisiones/README.md)                    | Por qué se eligió cada cosa                      |
-| [Glosario](docs/glosario.md)                                     | Términos del negocio y sus nombres en el código  |
-| [Configurar cuentas](docs/runbooks/configurar-cuentas.md)        | GitHub, Supabase y Cloudflare                    |
-| [Preparar staging](docs/runbooks/staging.md)                     | Usuarios y datos ficticios del entorno de prueba |
-| [Proyecto pausado](docs/runbooks/proyecto-pausado.md)            | Evitar y resolver la pausa de Supabase Free      |
+| Documento                                                        | Para qué                                          |
+| ---------------------------------------------------------------- | ------------------------------------------------- |
+| [Plan de implementación](docs/plan-implementacion.md)            | Etapas, arquitectura, convenciones                |
+| [Avance del proyecto](docs/avance.md)                            | Etapas completadas, fechas y pendientes           |
+| [Roadmap](docs/roadmap.md)                                       | Tareas por fase, con su avance                    |
+| [Requerimientos funcionales](docs/requerimientos-funcionales.md) | Qué hace el sistema                               |
+| [Requerimientos técnicos](docs/requerimientos-tecnicos.md)       | Cómo se construye                                 |
+| [Decisiones (ADR)](docs/decisiones/README.md)                    | Por qué se eligió cada cosa                       |
+| [Glosario](docs/glosario.md)                                     | Términos del negocio y sus nombres en el código   |
+| [Configurar cuentas](docs/runbooks/configurar-cuentas.md)        | GitHub, Supabase y Cloudflare                     |
+| [Preparar staging](docs/runbooks/staging.md)                     | Usuarios y datos ficticios del entorno de prueba  |
+| [Agregar personas](docs/runbooks/crear-usuario.md)               | Dar acceso, cambiar el rol o desactivar a alguien |
+| [Proyecto pausado](docs/runbooks/proyecto-pausado.md)            | Evitar y resolver la pausa de Supabase Free       |
 
 ## Cómo levantar el proyecto
 
