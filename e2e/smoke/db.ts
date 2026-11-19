@@ -46,3 +46,35 @@ export async function setStock(code: string, stock: number): Promise<void> {
     await client.query('update public.products set stock = $2 where code = $1', [code, stock]);
   });
 }
+
+/**
+ * Rows of product_costs a user receives through the API: runs the query as the
+ * `authenticated` role with that user's JWT claims, exactly as PostgREST does.
+ */
+export async function productCostRowsVisibleTo(email: string): Promise<number> {
+  return withDb(async (client) => {
+    await client.query('begin');
+    try {
+      await client.query(
+        `select set_config('request.jwt.claims',
+           json_build_object('sub', u.id, 'role', 'authenticated')::text, true)
+         from auth.users as u where u.email = $1`,
+        [email],
+      );
+      await client.query('set local role authenticated');
+      const { rows } = await client.query<{ n: number }>(
+        'select count(*)::int as n from public.product_costs',
+      );
+      return rows[0]?.n ?? -1;
+    } finally {
+      await client.query('rollback');
+    }
+  });
+}
+
+/** Simulates someone else saving the product meanwhile (CU-11 concurrent_update). */
+export async function bumpProductVersion(code: string): Promise<void> {
+  await withDb(async (client) => {
+    await client.query('update public.products set version = version + 1 where code = $1', [code]);
+  });
+}

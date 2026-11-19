@@ -114,7 +114,8 @@ test.describe('Inventario: list and product detail (CU-08, F6-T01/T02)', () => {
 
     await productRow(inventory, ROSA).click();
     const sheet = page.getByRole('dialog', { name: ROSA });
-    await expect(sheet.getByText(/^Costo ₡/)).toBeVisible();
-    await expect(sheet.getByText(/Ganancia ₡.* por unidad \(50%\)/)).toBeVisible();
+    // The admin's detail is the edit form: the cost field and the live margin.
+    await expect(sheet.getByLabel('Costo unitario')).toHaveValue('19000');
+    await expect(sheet.getByText(/^Margen: 50% · ganancia ₡19.000 por unidad$/)).toBeVisible();
   });
 });

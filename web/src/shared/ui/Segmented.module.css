@@ -1,0 +1,29 @@
+/* Ported from prototype v2 (.seg). */
+.seg {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 14px;
+  padding: 4px;
+  border-radius: var(--radius-control);
+  background: var(--color-line);
+}
+
+.segment {
+  flex: 1;
+  min-height: 40px;
+  padding: 8px 10px;
+  border: 0;
+  border-radius: 9px;
+  background: none;
+  color: var(--color-ink-2);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.selected {
+  background: var(--color-card);
+  box-shadow: var(--shadow-card);
+  color: var(--color-ink);
+}
