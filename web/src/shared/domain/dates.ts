@@ -95,3 +95,22 @@ export function formatRelativeTime(instant: Date, now: Date = new Date()): strin
   }
   return formatDayLabel(instant, now);
 }
+
+const timeFormatter = new Intl.DateTimeFormat('es-CR', {
+  timeZone: BUSINESS_TIME_ZONE,
+  hour: 'numeric',
+  minute: '2-digit',
+});
+
+/** Time of day in the business time zone: "2:30 p. m." (history rows, payments). */
+export function formatTime(instant: Date): string {
+  return timeFormatter.format(instant);
+}
+
+/**
+ * The instant a business day starts, for date-range filters. Costa Rica keeps
+ * UTC−6 all year (no daylight saving), so the offset is fixed.
+ */
+export function businessDayStart(isoDate: string): string {
+  return `${isoDate}T00:00:00-06:00`;
+}

@@ -1,6 +1,7 @@
 import { useCallback, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 
+import { SaleDetailSheet } from '@/features/sales';
 import { cx } from '@/shared/ui/cx';
 
 import styles from './AppShell.module.css';
@@ -67,6 +68,7 @@ export function AppShell() {
       <Track activeIndex={activeIndex} sections={SECTIONS} onSwipe={goTo} />
       <TabBar activeIndex={activeIndex} sections={SECTIONS} onSelect={goTo} />
       <SwipeHint />
+      <SaleDetailSheet />
       <button
         type="button"
         className={cx(styles.navButton, styles.navPrevious)}

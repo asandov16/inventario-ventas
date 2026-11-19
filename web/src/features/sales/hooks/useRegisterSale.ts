@@ -82,7 +82,6 @@ export function useRegisterSale() {
         ...result.response.sale,
         ...(paymentMethodName ? { paymentMethodName } : {}),
       };
-      queryClient.setQueryData(queryKeys.sale(sale.id), sale);
       showToast('ok', successMessage(sale));
       return { type: 'saved', sale };
     },

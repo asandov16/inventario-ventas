@@ -884,7 +884,7 @@ isOneToOne: false
                   ]
                 },"v_sales_list": {
                   Row: {
-                    "balance": number | null,"business_id": string,"client_created_at": string,"customer_id": string,"customer_name": string,"customer_phone_e164": string,"description": string | null,"folio": number,"items_count": number | null,"sale_id": string,"seller_id": string,"seller_name": string,"source": string,"status": string | null,"total": number,"type": string,"voided_at": string | null
+                    "balance": number | null,"business_id": string,"client_created_at": string,"customer_id": string,"customer_name": string,"customer_phone_e164": string,"customer_search": string | null,"description": string | null,"folio": number,"items_count": number | null,"sale_id": string,"seller_id": string,"seller_name": string,"source": string,"status": string | null,"total": number,"type": string,"voided_at": string | null
                   }
                   ComputedFields: never
                   Relationships: [

@@ -27,3 +27,13 @@
   background: var(--color-line);
   color: var(--color-muted);
 }
+
+.gold {
+  background: var(--color-gold-soft);
+  color: var(--color-gold);
+}
+
+.brand {
+  background: var(--color-brand-soft);
+  color: var(--color-brand);
+}

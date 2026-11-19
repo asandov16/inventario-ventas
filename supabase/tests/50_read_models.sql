@@ -2,7 +2,7 @@
 -- The seed has: 2 cash sales (13 000 today, 9 500 yesterday), an overdue installment sale,
 -- a partially paid one, a paid one, a carried-over balance and a voided sale; BIS-003 is out of stock.
 begin;
-select plan(24);
+select plan(25);
 
 select tests.authenticate_as('vendedor@test.local');
 
@@ -94,6 +94,14 @@ select is(
      where pubname = 'supabase_realtime' and schemaname = 'public'),
     array['activity_log', 'customers', 'inventory_movements', 'payments', 'products', 'sales'],
     'Realtime publishes the business tables and none of the cost tables'
+);
+
+-- CU-04 search without accents, as a seller through the API role.
+select tests.clear_authentication();
+select tests.authenticate_as('vendedor@test.local');
+select is(
+    (select count(*)::int from public.v_sales_list where customer_search like '%danae zeledon%'),
+    1, 'the history search ignores accents and case'
 );
 
 select * from finish();

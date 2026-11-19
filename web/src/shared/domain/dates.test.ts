@@ -2,11 +2,23 @@ import { describe, expect, it } from 'vitest';
 
 import {
   addMonths,
+  businessDayStart,
   formatDayLabel,
   formatRelativeTime,
   formatShortDate,
+  formatTime,
   toBusinessDate,
 } from './dates';
+
+describe('formatTime and businessDayStart', () => {
+  it('shows the time in Costa Rica, whatever the browser zone', () => {
+    expect(formatTime(new Date('2026-11-05T20:30:00Z'))).toMatch(/^2:30\s?p\.?\s?m\.?$/);
+  });
+
+  it('starts the business day at midnight UTC−6', () => {
+    expect(new Date(businessDayStart('2026-11-05')).toISOString()).toBe('2026-11-05T06:00:00.000Z');
+  });
+});
 
 describe('toBusinessDate', () => {
   it('uses Costa Rica time, not UTC: 23:30 in CR is still the same day', () => {
