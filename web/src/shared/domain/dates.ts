@@ -107,6 +107,18 @@ export function formatTime(instant: Date): string {
   return timeFormatter.format(instant);
 }
 
+const time24Formatter = new Intl.DateTimeFormat('en-GB', {
+  timeZone: BUSINESS_TIME_ZONE,
+  hour: '2-digit',
+  minute: '2-digit',
+  hourCycle: 'h23',
+});
+
+/** "2026-11-19 15:30" in the business time zone: sortable, for the backup file (F7-T09). */
+export function toBusinessDateTime(instant: Date): string {
+  return `${toBusinessDate(instant)} ${time24Formatter.format(instant)}`;
+}
+
 /**
  * The instant a business day starts, for date-range filters. Costa Rica keeps
  * UTC−6 all year (no daylight saving), so the offset is fixed.

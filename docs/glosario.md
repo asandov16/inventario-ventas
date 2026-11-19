@@ -24,6 +24,7 @@ La interfaz y los documentos usan el lenguaje del negocio, en español. El códi
 | Liquidada / Pagada     | `paid`                | `status = 'paid'`                                                        |
 | Anular                 | `void`                | `voided_at`, `voided_by`, `void_reason`                                  |
 | Saldo anterior         | `legacy balance`      | `sales.source = 'legacy_import'`                                         |
+| Respaldo               | `backup`              | `export_data()` → archivo `respaldo-<fecha>.xlsx`                        |
 | Cliente                | `customer`            | Tabla `customers`                                                        |
 | Producto               | `product`             | Tabla `products`                                                         |
 | Código de producto     | `code`                | `PER-001`; se dice "código", nunca "SKU"                                 |

@@ -1,4 +1,5 @@
 // Public API of the sales feature: the only entry point for other modules.
+export { InstallmentPlan } from './components/InstallmentPlan';
 export { PaymentPlanCard } from './components/PaymentPlanCard';
 export {
   ACCOUNT_SHEET_PARAM,
