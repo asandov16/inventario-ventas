@@ -1,8 +1,11 @@
+import { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router';
 
 import { sellProductPath } from '@/features/sales';
 import { formatRelativeTime } from '@/shared/domain/dates';
 import { formatColones } from '@/shared/domain/money';
+import { usePermission } from '@/shared/hooks/usePermission';
+import { useUnsavedChangesGuard } from '@/shared/hooks/useUnsavedChangesGuard';
 import { Badge } from '@/shared/ui/Badge';
 import { Banner } from '@/shared/ui/Banner';
 import { Button } from '@/shared/ui/Button';
@@ -15,26 +18,33 @@ import { unitMargin, type ProductDetail, type ProductMovement } from '../domain/
 import { useProductDetail } from '../hooks/useInventory';
 import { INVENTORY_MESSAGES } from '../messages.es';
 import styles from './Inventory.module.css';
+import { ProductEditForm } from './ProductEditForm';
 import { BADGE_FOR_STATUS } from './stockBadge';
 
 interface ProductSheetProps {
   productId: string | null;
   onClose: () => void;
+  /** "📦 Ingresar stock": opens Agregar stock with this product chosen. */
+  onRestock: (productId: string) => void;
 }
 
 /**
- * Product detail (F6-T02): stock, price, units sold and the last movements with
- * who and when (F6 DoD). Costs appear only when the database sent them, which it
- * does only for someone with costs.read.
+ * Product detail (F6-T02) and, with products.edit, its edit form (F6-T04).
+ * Movements show who and when (F6 DoD). Costs appear only when the database
+ * sent them, which it does only for someone with costs.read.
  */
-export function ProductSheet({ productId, onClose }: ProductSheetProps) {
+export function ProductSheet({ productId, onClose, onRestock }: ProductSheetProps) {
   const detail = useProductDetail(productId);
+  const [isDirty, setIsDirty] = useState(false);
+  const guardClose = useUnsavedChangesGuard(isDirty);
 
   return (
     <Sheet
       open={productId !== null}
       title={detail.data?.name ?? INVENTORY_MESSAGES.productSheetTitle}
-      onClose={onClose}
+      onClose={() => {
+        void guardClose(onClose);
+      }}
     >
       {detail.isPending ? (
         <Loading label={INVENTORY_MESSAGES.loadingProduct} />
@@ -46,7 +56,12 @@ export function ProductSheet({ productId, onClose }: ProductSheetProps) {
           }}
         />
       ) : (
-        <ProductBody product={detail.data} />
+        <ProductBody
+          product={detail.data}
+          onDirtyChange={setIsDirty}
+          onClose={onClose}
+          onRestock={onRestock}
+        />
       )}
     </Sheet>
   );
@@ -75,12 +90,29 @@ function movementMeta(movement: ProductMovement): string {
     .join(' · ');
 }
 
-function ProductBody({ product }: { product: ProductDetail }) {
+interface ProductBodyProps {
+  product: ProductDetail;
+  onDirtyChange: (isDirty: boolean) => void;
+  onClose: () => void;
+  onRestock: (productId: string) => void;
+}
+
+function ProductBody({ product, onDirtyChange, onClose, onRestock }: ProductBodyProps) {
   const navigate = useNavigate();
+  const canEdit = usePermission('products.edit');
+  const canRestock = usePermission('inventory.restock');
+  const canSeeCosts = usePermission('costs.read');
+  const [staleMessage, setStaleMessage] = useState<string | null>(null);
   const margin = unitMargin(product.priceColones, product.unitCostColones);
+
+  const onDeactivated = useCallback(() => {
+    onDirtyChange(false);
+    onClose();
+  }, [onClose, onDirtyChange]);
 
   return (
     <>
+      {staleMessage && <Banner kind="warn" title={staleMessage} />}
       {!product.active && <Banner kind="info" title={INVENTORY_MESSAGES.inactive} />}
       <KpiGrid>
         <Kpi
@@ -98,16 +130,57 @@ function ProductBody({ product }: { product: ProductDetail }) {
         <Kpi label={INVENTORY_MESSAGES.sold} value={product.unitsSold} />
       </KpiGrid>
 
-      <p className={styles.details}>
-        {INVENTORY_MESSAGES.details(product.categoryName, product.code, product.minStock)}
-      </p>
-      {product.unitCostColones !== null && (
-        <p className={styles.details}>
-          {INVENTORY_MESSAGES.costLine(formatColones(product.unitCostColones))}
-          {margin &&
-            ` · ${INVENTORY_MESSAGES.marginLine(formatColones(margin.profitColones), margin.marginPct)}`}
-        </p>
+      {canEdit ? (
+        <ProductEditForm
+          // A new version (saved here or by someone else) starts the form from the stored data.
+          key={`${product.id}-${String(product.version)}`}
+          product={product}
+          canSeeCosts={canSeeCosts}
+          onDirtyChange={onDirtyChange}
+          onStale={setStaleMessage}
+          onDeactivated={onDeactivated}
+        />
+      ) : (
+        <>
+          <p className={styles.details}>
+            {INVENTORY_MESSAGES.details(product.categoryName, product.code, product.minStock)}
+          </p>
+          {product.unitCostColones !== null && (
+            <p className={styles.details}>
+              {INVENTORY_MESSAGES.costLine(formatColones(product.unitCostColones))}
+              {margin &&
+                ` · ${INVENTORY_MESSAGES.marginLine(formatColones(margin.profitColones), margin.marginPct)}`}
+            </p>
+          )}
+        </>
       )}
+
+      <div className={canRestock ? styles.two : undefined}>
+        <Button
+          block
+          variant="light"
+          disabled={product.stock === 0 || !product.active}
+          onClick={() => {
+            // The link adds the product to the cart in Vender; replacing this
+            // history entry means "back" from Vender returns to Inventario.
+            void navigate(sellProductPath(product.id), { replace: true });
+          }}
+        >
+          {INVENTORY_MESSAGES.sell}
+        </Button>
+        {canRestock && (
+          <Button
+            block
+            variant="light"
+            onClick={() => {
+              onRestock(product.id);
+            }}
+          >
+            {INVENTORY_MESSAGES.restockShortcut}
+          </Button>
+        )}
+      </div>
+      {product.stock === 0 && <p className={styles.hint}>{INVENTORY_MESSAGES.sellUnavailable}</p>}
 
       <h3 className={styles.sectionLabel}>{INVENTORY_MESSAGES.movementsTitle}</h3>
       {product.movements.length === 0 ? (
@@ -137,20 +210,6 @@ function ProductBody({ product }: { product: ProductDetail }) {
           ))}
         </ul>
       )}
-
-      <Button
-        block
-        variant="light"
-        disabled={product.stock === 0 || !product.active}
-        onClick={() => {
-          // The link adds the product to the cart in Vender; replacing this
-          // history entry means "back" from Vender returns to Inventario.
-          void navigate(sellProductPath(product.id), { replace: true });
-        }}
-      >
-        {INVENTORY_MESSAGES.sell}
-      </Button>
-      {product.stock === 0 && <p className={styles.hint}>{INVENTORY_MESSAGES.sellUnavailable}</p>}
     </>
   );
 }

@@ -140,3 +140,110 @@
   font-size: 13px;
   text-align: center;
 }
+
+/* Forms: Agregar stock and Editar producto (prototype v2 .card, .field, .two, .qty). */
+.card {
+  margin-bottom: 14px;
+  padding: 14px;
+  border-radius: var(--radius-card);
+  background: var(--color-card);
+  box-shadow: var(--shadow-card);
+}
+
+.card .movement,
+.list .movement {
+  padding: 10px 14px;
+}
+
+.cardTitle {
+  margin: 0 0 10px;
+  font-size: 16px;
+}
+
+.two {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  align-items: start;
+}
+
+.field {
+  margin-bottom: 12px;
+}
+
+.fieldLabel {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--color-ink-2);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.fieldError {
+  margin: 6px 0 0;
+  color: var(--color-bad);
+  font-size: 13px;
+}
+
+.select {
+  width: 100%;
+  min-height: var(--touch-target-min);
+  padding: 10px 12px;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-control);
+  background: var(--color-card);
+  color: inherit;
+  font-size: 16px;
+}
+
+.select[aria-invalid='true'],
+.stepper:has(input[aria-invalid='true']) {
+  border-color: var(--color-bad);
+}
+
+.stepper {
+  display: flex;
+  overflow: hidden;
+  height: 48px;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-control);
+  background: var(--color-card);
+}
+
+.stepper button {
+  flex: none;
+  width: 44px;
+  border: 0;
+  background: var(--color-brand-soft);
+  color: var(--color-brand);
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.stepper input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  background: none;
+  font-size: 16px;
+  text-align: center;
+}
+
+.done {
+  margin-bottom: 12px;
+}
+
+.done .two {
+  margin-top: 8px;
+}
+
+.similar {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.deactivate {
+  margin-top: 10px;
+  color: var(--color-bad);
+}
