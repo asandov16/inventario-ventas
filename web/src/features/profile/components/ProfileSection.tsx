@@ -9,21 +9,25 @@ import { Sheet } from '@/shared/ui/Sheet';
 import { PROFILE_MESSAGES } from '../messages.es';
 import { AccountPanel } from './AccountPanel';
 import { BusinessPanel } from './BusinessPanel';
+import { DataPanel } from './DataPanel';
 import { UsersPanel } from './UsersPanel';
 
 /** URL parameter of the "about" sheet: /perfil?acerca=1. */
 const ABOUT_SHEET_PARAM = 'acerca';
 
-type Tab = 'account' | 'business' | 'users';
+type Tab = 'account' | 'business' | 'data' | 'users';
 
 /**
- * Perfil (CU-14, CU-15): everyone has "Mi cuenta"; "Negocio" and "Usuarios"
+ * Perfil (CU-14, CU-15): everyone has "Mi cuenta"; "Negocio", "Datos" and "Usuarios"
  * appear only with their permissions (the database checks them again).
  */
 export function ProfileSection() {
   const aboutSheet = useUrlSheet(ABOUT_SHEET_PARAM);
   const canConfigure = usePermission('business.configure');
   const canSeeUsers = usePermission('users.admin');
+  const canExport = usePermission('data.export');
+  const canImport = usePermission('legacy_balances.import');
+  const canUseData = canExport || canImport;
   const [tab, setTab] = useState<Tab>('account');
 
   const segments: Segment<Tab>[] = [
@@ -31,6 +35,7 @@ export function ProfileSection() {
     ...(canConfigure
       ? [{ value: 'business' as const, label: PROFILE_MESSAGES.tabs.business }]
       : []),
+    ...(canUseData ? [{ value: 'data' as const, label: PROFILE_MESSAGES.tabs.data }] : []),
     ...(canSeeUsers ? [{ value: 'users' as const, label: PROFILE_MESSAGES.tabs.users }] : []),
   ];
 
@@ -48,6 +53,8 @@ export function ProfileSection() {
 
       {tab === 'business' && canConfigure ? (
         <BusinessPanel />
+      ) : tab === 'data' && canUseData ? (
+        <DataPanel />
       ) : tab === 'users' && canSeeUsers ? (
         <UsersPanel />
       ) : (

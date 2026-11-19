@@ -1,10 +1,141 @@
-// Spanish copy for the profile feature (CU-14, CU-15, F7-T07/T08/T10, prototype v2).
+// Spanish copy for the profile feature (CU-14, CU-15, F7-T07 to T12, prototype v2).
+import type { BackupLabels } from './domain/backup';
+import type { LegacyField, LegacyIssue } from './domain/legacyBalance';
 import type { PermissionCode } from './domain/profile';
+
+const backupLabels: BackupLabels = {
+  sheets: {
+    sales: 'Ventas',
+    lines: 'Productos vendidos',
+    installments: 'Cuotas',
+    payments: 'Abonos',
+    customers: 'Clientes',
+    inventory: 'Inventario',
+    movements: 'Movimientos',
+  },
+  columns: {
+    sales: [
+      'Folio',
+      'Fecha',
+      'Cliente',
+      'Tipo',
+      'Total',
+      'Prima',
+      'Meses',
+      'Descripción',
+      'Anulada el',
+      'Motivo de anulación',
+    ],
+    lines: ['Folio', 'Código', 'Producto', 'Cantidad', 'Precio unitario', 'Costo unitario'],
+    installments: ['Folio', 'Cuota', 'Vence', 'Monto'],
+    payments: ['Folio', 'Fecha', 'Tipo', 'Monto'],
+    customers: [
+      'Nombre',
+      'Teléfono',
+      'Correo',
+      'Zona',
+      'Notas',
+      'Acepta WhatsApp',
+      'Registrado el',
+    ],
+    inventory: ['Código', 'Nombre', 'Precio', 'Costo unitario', 'Stock', 'Mínimo', 'Activo'],
+    movements: ['Fecha', 'Código', 'Tipo', 'Cantidad', 'Stock después', 'Motivo', 'Costo unitario'],
+  },
+  values: {
+    cash: 'Contado',
+    installments: 'A pagos',
+    legacy: 'Saldo anterior',
+    yes: 'Sí',
+    no: 'No',
+    paymentKinds: {
+      cash: 'Contado',
+      down_payment: 'Prima',
+      payment: 'Abono',
+      legacy: 'Pagado antes de la app',
+    },
+    movementTypes: {
+      initial: 'Inicial',
+      restock: 'Ingreso',
+      sale: 'Venta',
+      void: 'Anulación',
+      adjustment: 'Ajuste',
+    },
+  },
+};
 
 export const PROFILE_MESSAGES = {
   title: 'Perfil',
   tabsLabel: 'Secciones del perfil',
-  tabs: { account: 'Mi cuenta', business: 'Negocio', users: 'Usuarios' },
+  tabs: { account: 'Mi cuenta', business: 'Negocio', data: 'Datos', users: 'Usuarios' },
+
+  // Datos → respaldo (F7-T09, RNF-07)
+  backup: {
+    title: 'Respaldo en Excel',
+    hint: 'Descarga todas las ventas, abonos, cuotas, clientes, inventario y movimientos en un archivo de Excel.',
+    privacy:
+      'El archivo trae teléfonos de clientes y costos. Guárdalo en un lugar seguro y no lo compartas.',
+    button: 'Descargar respaldo',
+    busy: 'Preparando el archivo…',
+    filePrefix: 'respaldo',
+    downloaded: (fileName: string, salesCount: number) =>
+      `Respaldo descargado · ${fileName} · ${String(salesCount)} ${salesCount === 1 ? 'venta' : 'ventas'}`,
+    failed: 'No se pudo preparar el respaldo. Revisa la señal e inténtalo otra vez.',
+    labels: backupLabels,
+  },
+
+  // Datos → cargar saldo anterior (D-12, F7-T12)
+  legacy: {
+    title: 'Cargar saldo anterior',
+    hint: 'Para las deudas anotadas en el cuaderno antes de usar la app. No mueven el inventario.',
+    customer: 'Cliente',
+    saleDate: 'Fecha de la compra',
+    description: 'Qué se llevó',
+    descriptionPlaceholder: 'Ej.: perfume y aretes',
+    total: 'Total de la compra',
+    paid: 'Ya pagó',
+    paidHint: 'Lo que abonó antes de hoy. Déjalo vacío si no ha pagado nada.',
+    installments: 'Cuotas que faltan',
+    installmentOption: (count: number) => (count === 1 ? '1 cuota' : `${String(count)} cuotas`),
+    firstDueDate: 'Primera cuota vence el',
+    firstDueDateHint: 'Las demás vencen el mismo día de los meses siguientes.',
+    owed: 'Le queda por pagar',
+    previewTitle: 'Así quedarán las cuotas',
+    previewNote: 'La app calcula las cuotas al guardar; esto es una vista previa.',
+    issues: {
+      customer: { required: 'Elige el cliente.' },
+      saleDate: {
+        required: 'Elige la fecha de la compra.',
+        future: 'La fecha de la compra no puede ser después de hoy.',
+      },
+      description: { required: 'Escribe qué se llevó.' },
+      total: {
+        required: 'Escribe el total de la compra.',
+        not_a_number: 'Escribe solo números.',
+        positive: 'Escribe un total mayor a ₡0.',
+      },
+      paid: {
+        not_a_number: 'Escribe solo números.',
+        paid_covers_total: 'Si ya pagó todo, no hay saldo que cargar.',
+      },
+      installments: {
+        required: 'Elige cuántas cuotas faltan.',
+        term_too_long: 'El saldo es muy pequeño para tantas cuotas. Elige menos cuotas.',
+      },
+      firstDueDate: {
+        required: 'Elige cuándo vence la primera cuota.',
+        before_sale: 'La primera cuota tiene que vencer después de la fecha de la compra.',
+      },
+    } satisfies Record<LegacyField, Partial<Record<LegacyIssue, string>>>,
+    save: 'Cargar saldo',
+    saving: 'Cargando…',
+    saved: (customer: string, balance: string, count: number) =>
+      `Saldo anterior de ${customer} cargado · ${balance} en ${count === 1 ? '1 cuota' : `${String(count)} cuotas`}`,
+    savedTitle: (customer: string) => `Saldo de ${customer} cargado`,
+    savedBody: (folio: number) =>
+      `Quedó como la venta #${String(folio)} y ya aparece en Por cobrar.`,
+    loadAnother: 'Cargar otro',
+    summary: (count: number, total: string) => `Saldos cargados: ${String(count)} · ${total}`,
+  },
   businessLabel: 'Negocio',
   roleLabel: 'Rol',
   aboutButton: 'Acerca de la app',

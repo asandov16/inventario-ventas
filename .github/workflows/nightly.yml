@@ -1,0 +1,58 @@
+name: nightly
+
+# Full E2E run in Chromium and WebKit (F7-T11), every night at 3:00 Costa Rica
+# (09:00 UTC), against local Supabase on the runner with the fictional seed
+# (ADR-039). Each browser starts from a fresh reset because the specs change data.
+on:
+  schedule:
+    - cron: '0 9 * * *'
+  workflow_dispatch:
+
+# Public repository: least privilege by default. Never use pull_request_target.
+permissions:
+  contents: read
+
+concurrency:
+  group: nightly
+  cancel-in-progress: false
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: pnpm/action-setup@73e46992e05b19abd31f2f3c20e0e7370d762115 # v6.1.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Start local Supabase (database, auth, API and Realtime)
+        run: pnpm exec supabase start -x studio,imgproxy,edge-runtime,logflare,vector,mailpit,storage-api,supavisor
+      # The local URL and anon key are the public development defaults, not secrets.
+      - name: Point the build at local Supabase
+        run: |
+          pnpm exec supabase status -o env \
+            | grep -E '^(API_URL|ANON_KEY)=' \
+            | sed -e 's/^API_URL=/VITE_SUPABASE_URL=/' -e 's/^ANON_KEY=/VITE_SUPABASE_ANON_KEY=/' \
+            | tr -d '"' >> "$GITHUB_ENV"
+      - name: Install Chromium and WebKit for Playwright
+        run: pnpm --filter e2e exec playwright install --with-deps chromium webkit
+      - name: Build
+        id: build
+        run: pnpm build
+      - name: E2E in Chromium
+        run: |
+          pnpm db:reset
+          pnpm --filter e2e exec playwright test --project=phone-chromium
+      - name: E2E in WebKit
+        # Runs even when Chromium failed, so one night shows both browsers.
+        if: ${{ !cancelled() && steps.build.outcome == 'success' }}
+        env:
+          E2E_WEBKIT: '1'
+        run: |
+          pnpm db:reset
+          pnpm --filter e2e exec playwright test --project=phone-webkit
