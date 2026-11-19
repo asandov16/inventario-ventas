@@ -52,10 +52,11 @@ export function useUrlSheet(param: string) {
    * checkout becomes the sale detail after saving; "back" then closes it.
    */
   const switchTo = useCallback(
-    (otherParam: string, otherValue: string) => {
+    (otherParam: string, otherValue: string, extra: Readonly<Record<string, string>> = {}) => {
       const next = new URLSearchParams(location.search);
       next.delete(param);
       next.set(otherParam, otherValue);
+      for (const [key, value] of Object.entries(extra)) next.set(key, value);
       void navigate(
         { pathname: location.pathname, search: `?${next.toString()}` },
         { replace: true, state: location.state as unknown },

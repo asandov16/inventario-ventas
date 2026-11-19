@@ -124,16 +124,3 @@ export async function registerSale(
   });
   return registerResponseSchema.parse(response);
 }
-
-const saleDetailResponseSchema = z.object({
-  status: z.literal('ok'),
-  sale: z.looseObject({ customer: z.object({ name: z.string() }) }),
-});
-
-/** A sale read back by id (the detail sheet after a reload), via get_sale_detail. */
-export async function fetchSale(saleId: string): Promise<SavedSale> {
-  const response = saleDetailResponseSchema.parse(
-    await callRpc('get_sale_detail', { p_sale_id: saleId }),
-  );
-  return saleSchema.parse({ ...response.sale, customer_name: response.sale.customer.name });
-}

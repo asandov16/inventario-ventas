@@ -1,0 +1,185 @@
+/* Sale sheet, ported from prototype v2 (.card, .list, .plan, .sumline, .bar). */
+.block {
+  margin-bottom: 12px;
+}
+
+.card {
+  margin-bottom: 12px;
+  padding: 14px;
+  border-radius: var(--radius-card);
+  background: var(--color-card);
+  box-shadow: var(--shadow-card);
+}
+
+.cardTitle {
+  margin: 0 0 8px;
+  font-size: 15px;
+}
+
+.customerRow {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.customerName {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.muted {
+  display: block;
+  margin: 2px 0 0;
+  color: var(--color-muted);
+  font-size: 13px;
+}
+
+.lines,
+.plan,
+.others {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.lines {
+  margin-bottom: 12px;
+  overflow: hidden;
+  border-radius: var(--radius-card);
+  background: var(--color-card);
+  box-shadow: var(--shadow-card);
+}
+
+.lines li {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+}
+
+.lines li + li {
+  border-top: 1px solid var(--color-line);
+}
+
+.lineName {
+  display: block;
+  font-weight: 500;
+}
+
+.totalLine strong:last-child {
+  font-size: 17px;
+}
+
+.struck {
+  color: var(--color-muted);
+  text-decoration: line-through;
+}
+
+.sumLine {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 0 4px;
+}
+
+.okText {
+  color: var(--color-ok);
+}
+
+.bar {
+  height: 8px;
+  margin: 8px 0 12px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--color-line);
+}
+
+.bar i {
+  display: block;
+  height: 100%;
+  background: var(--color-ok);
+}
+
+.plan {
+  margin-bottom: 12px;
+}
+
+.plan li {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0;
+  font-size: 14px;
+}
+
+.plan li + li {
+  border-top: 1px solid var(--color-line);
+}
+
+.planAmount {
+  display: inline-flex;
+  flex: none;
+  gap: 6px;
+  align-items: center;
+}
+
+.sectionLabel {
+  margin: 10px 0 4px;
+  color: var(--color-ink-2);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.otherSale {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: var(--touch-target-min);
+  padding: 6px 0;
+  border: 0;
+  border-top: 1px solid var(--color-line);
+  background: none;
+  color: inherit;
+  font: inherit;
+  font-size: 14px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.voidStart {
+  margin-top: 16px;
+}
+
+.voidPanel {
+  display: grid;
+  gap: 10px;
+  margin-top: 16px;
+  padding: 14px;
+  border: 1px solid var(--color-bad-soft);
+  border-radius: var(--radius-card);
+  background: var(--color-card);
+}
+
+.two {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.hint {
+  margin: 6px 0 0;
+  color: var(--color-muted);
+  font-size: 13px;
+  text-align: center;
+}
+
+.fieldError {
+  margin: 0;
+  color: var(--color-bad);
+  font-size: 13px;
+}

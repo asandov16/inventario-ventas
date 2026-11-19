@@ -16,13 +16,11 @@ import { SALES_MESSAGES } from '../messages.es';
 import { CartBar } from './CartBar';
 import { CheckoutSheet } from './CheckoutSheet';
 import { ProductCard } from './ProductCard';
-import { SaleDoneSheet } from './SaleDoneSheet';
+import { JUST_REGISTERED_PARAM, SALE_SHEET_PARAM } from './SaleDetailSheet';
 import styles from './Sell.module.css';
 
 /** URL parameter of the checkout sheet: /vender?cobrar=1 (ADR-037). */
 const CHECKOUT_SHEET_PARAM = 'cobrar';
-/** URL parameter of the sale shown after registering: /vender?venta=<id>. */
-const SALE_SHEET_PARAM = 'venta';
 
 /** Vender (CU-01, F4-T01 to T03): catalog, cart and the checkout sheet. */
 export function SellSection() {
@@ -32,7 +30,6 @@ export function SellSection() {
   const cart = useCart(products);
   useAddFromLink(products, cart);
   const checkoutSheet = useUrlSheet(CHECKOUT_SHEET_PARAM);
-  const saleSheet = useUrlSheet(SALE_SHEET_PARAM);
 
   const [query, setQuery] = useState('');
   const [categoryId, setCategoryId] = useState<string | null>(null);
@@ -124,12 +121,12 @@ export function SellSection() {
         onSaved={(sale) => {
           // CU-01: the cart empties and the new sale opens in place of the checkout.
           cart.clear({ silent: true });
-          checkoutSheet.switchTo(SALE_SHEET_PARAM, sale.id);
+          // The shared sale sheet (rendered by the shell) shows the confirmation.
+          checkoutSheet.switchTo(SALE_SHEET_PARAM, sale.id, { [JUST_REGISTERED_PARAM]: '1' });
         }}
         cart={cart}
         paymentMethods={paymentMethods.data ?? []}
       />
-      <SaleDoneSheet saleId={saleSheet.value} onClose={saleSheet.close} />
     </>
   );
 }
