@@ -101,6 +101,8 @@ export const SALES_MESSAGES = {
   },
   installmentPaidPart: (paid: string) => `abonado ${paid}`,
   paymentsTitle: 'Pagos recibidos',
+  newPayment: 'Nuevo',
+  registerPayment: 'Registrar abono',
   paymentLine: (when: string, method: string | null) => (method ? `${when} · ${method}` : when),
   paymentLegacy: 'Pagado antes del sistema',
   customerTitle: 'Este cliente',

@@ -1,6 +1,26 @@
 import { describe, expect, it } from 'vitest';
 
-import { buildWhatsappLink } from './whatsapp';
+import { buildReminderMessage, buildWhatsappLink } from './whatsapp';
+
+describe('buildReminderMessage', () => {
+  const facts = {
+    customerName: 'Danae Zeledón',
+    businessName: 'Mi Negocio',
+    amountColones: 10000,
+    dueDate: '2026-11-05',
+    balanceColones: 30000,
+  };
+
+  it('says who writes, the installment with its date and the balance', () => {
+    expect(buildReminderMessage(facts, 2026).replace(/\s/g, ' ')).toBe(
+      'Hola Danae Zeledón, le saluda Mi Negocio. Le recordamos su cuota de ₡10 000 con fecha 5 nov. Saldo pendiente: ₡30 000. ¡Muchas gracias!',
+    );
+  });
+
+  it('leaves the date out when there is none', () => {
+    expect(buildReminderMessage({ ...facts, dueDate: null })).not.toContain('con fecha');
+  });
+});
 
 describe('buildWhatsappLink', () => {
   it('uses the international number without + and encodes the message', () => {
