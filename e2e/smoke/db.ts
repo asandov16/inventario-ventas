@@ -78,3 +78,43 @@ export async function bumpProductVersion(code: string): Promise<void> {
     await client.query('update public.products set version = version + 1 where code = $1', [code]);
   });
 }
+
+/**
+ * Another phone registers a cash sale (1 unit) through register_sale as that user,
+ * exactly as the API would. Returns the folio.
+ */
+export async function registerCashSaleAs(
+  email: string,
+  productCode: string,
+  customerPhoneE164: string,
+): Promise<number> {
+  return withDb(async (client) => {
+    await client.query('begin');
+    try {
+      await client.query(
+        `select set_config('request.jwt.claims',
+           json_build_object('sub', u.id, 'role', 'authenticated')::text, true)
+         from auth.users as u where u.email = $1`,
+        [email],
+      );
+      await client.query('set local role authenticated');
+      const { rows } = await client.query<{ folio: number }>(
+        `select (public.register_sale(
+           p_idempotency_key => gen_random_uuid(),
+           p_customer_id => (select id from public.customers where phone_e164 = $2),
+           p_type => 'cash',
+           p_items => jsonb_build_array(jsonb_build_object(
+             'product_id', (select id from public.products where code = $1), 'qty', 1)),
+           p_payment_method_id => (select id from public.v_payment_methods where name = 'Efectivo'),
+           p_expected_total => (select price from public.products where code = $1)
+         ) -> 'sale' ->> 'folio')::int as folio`,
+        [productCode, customerPhoneE164],
+      );
+      await client.query('commit');
+      return rows[0]?.folio ?? -1;
+    } catch (error) {
+      await client.query('rollback');
+      throw error;
+    }
+  });
+}

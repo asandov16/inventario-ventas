@@ -114,3 +114,29 @@ export function formatTime(instant: Date): string {
 export function businessDayStart(isoDate: string): string {
   return `${isoDate}T00:00:00-06:00`;
 }
+
+const longDateFormatter = new Intl.DateTimeFormat('es-CR', {
+  timeZone: BUSINESS_TIME_ZONE,
+  weekday: 'long',
+  day: 'numeric',
+  month: 'long',
+});
+
+/** "miércoles, 19 de noviembre" in the business time zone (Inicio's greeting). */
+export function formatLongDate(instant: Date): string {
+  return longDateFormatter.format(instant);
+}
+
+const weekdayFormatter = new Intl.DateTimeFormat('es-CR', {
+  timeZone: BUSINESS_TIME_ZONE,
+  weekday: 'short',
+});
+
+/** Short weekday of a calendar date, "lun", for the 7-day chart. */
+export function formatWeekdayShort(isoDate: string): string {
+  // Noon in Costa Rica keeps the calendar day whatever the browser zone.
+  return weekdayFormatter
+    .format(new Date(`${isoDate}T12:00:00-06:00`))
+    .replace('.', '')
+    .slice(0, 3);
+}

@@ -55,6 +55,8 @@ test.describe('app shell (F3)', () => {
 
   test('the seller does not see cost data; the admin does', async ({ page }) => {
     await signInAndWait(page, USERS.seller);
+    await page.getByRole('tab', { name: 'Análisis' }).click();
+    await expect(page.getByText('Venta promedio')).toBeVisible();
     await expect(page.getByTestId('profit-card')).toHaveCount(0);
 
     await page.evaluate(() => {
@@ -63,6 +65,7 @@ test.describe('app shell (F3)', () => {
     await page.context().clearCookies();
     await skipSwipeHint(page);
     await signInAndWait(page, USERS.admin);
+    await page.getByRole('tab', { name: 'Análisis' }).click();
     await expect(page.getByTestId('profit-card')).toBeVisible();
   });
 

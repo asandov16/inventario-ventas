@@ -1,8 +1,12 @@
 import { useCallback, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 
+import { useBadgeCounts } from '@/features/home';
 import { AccountSheet } from '@/features/receivables';
 import { SaleDetailSheet } from '@/features/sales';
+import { useCurrentProfile } from '@/features/session';
+import { usePermission } from '@/shared/hooks/usePermission';
+import { useRealtimeSync } from '@/shared/hooks/useRealtimeSync';
 import { cx } from '@/shared/ui/cx';
 
 import styles from './AppShell.module.css';
@@ -31,6 +35,16 @@ export function AppShell() {
   const navigate = useNavigate();
   const activeIndex = sectionIndexForPath(location.pathname);
   const activeSection = SECTIONS[activeIndex] ?? SECTIONS[0];
+  const profile = useCurrentProfile();
+  // Other phones' changes refresh this one (RNF-04, F7-T06).
+  useRealtimeSync(profile.business.id);
+  // Red counters of the tab bar (RF-UX-04, F7-T05).
+  const canReadDashboard = usePermission('dashboard.read');
+  const badgeCounts = useBadgeCounts(canReadDashboard);
+  const badges = {
+    receivables: badgeCounts.data?.overdueAccounts ?? 0,
+    inventory: badgeCounts.data?.stockAlerts ?? 0,
+  };
 
   // Changing section replaces the history entry: "back" closes sheets or
   // leaves the app instead of walking through every section visited.
@@ -67,7 +81,7 @@ export function AppShell() {
       />
       <OfflineBanner />
       <Track activeIndex={activeIndex} sections={SECTIONS} onSwipe={goTo} />
-      <TabBar activeIndex={activeIndex} sections={SECTIONS} onSelect={goTo} />
+      <TabBar activeIndex={activeIndex} sections={SECTIONS} onSelect={goTo} badges={badges} />
       <SwipeHint />
       <SaleDetailSheet />
       <AccountSheet />
