@@ -1,3 +1,5 @@
+import { normalizeSearch } from '@/shared/domain/search';
+
 /** A product as the sales catalog shows it (from v_products_status). */
 export interface CatalogProduct {
   id: string;
@@ -19,14 +21,7 @@ export interface PaymentMethod {
   name: string;
 }
 
-/** Lowercase without accents, so "rosa" finds "Rosa" and "ambar" finds "Ámbar". */
-export function normalizeSearch(text: string): string {
-  return text
-    .normalize('NFD')
-    .replace(/\p{Diacritic}/gu, '')
-    .toLowerCase()
-    .trim();
-}
+export { normalizeSearch };
 
 /** Products matching the search (name or code) and the selected category. */
 export function filterCatalog(

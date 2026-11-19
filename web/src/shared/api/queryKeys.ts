@@ -5,6 +5,10 @@
 export const queryKeys = {
   profile: (userId: string) => ['profile', userId] as const,
   products: () => ['products'] as const,
+  // Under the products prefix, so anything that changes stock refreshes them too.
+  inventory: () => ['products', 'inventory'] as const,
+  inventorySummary: () => ['products', 'summary'] as const,
+  product: (productId: string) => ['products', 'detail', productId] as const,
   paymentMethods: () => ['payment-methods'] as const,
   customers: (query: string) => ['customers', query] as const,
   sales: () => ['sales'] as const,

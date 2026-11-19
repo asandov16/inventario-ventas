@@ -15,6 +15,8 @@ export const SALES_MESSAGES = {
   noProductsTitle: 'Todavía no hay productos a la venta',
   noProductsBody: 'Agrégalos desde Inventario.',
   noMoreUnits: (name: string) => `No hay más unidades de ${name}`,
+  addedFromLink: (name: string) => `${name} agregado a la venta`,
+  productUnavailable: 'Ese producto ya no está disponible para vender.',
   cartCleared: 'Carrito vaciado',
   cartUnits: (units: number) => `${String(units)} ${units === 1 ? 'artículo' : 'artículos'}`,
   clearCart: 'vaciar',

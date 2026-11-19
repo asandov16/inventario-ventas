@@ -1,0 +1,142 @@
+/* Ported from prototype v2 (.list, .row, .ic, .m, .e). */
+.list,
+.movements {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.list {
+  overflow: hidden;
+  border-radius: var(--radius-card);
+  background: var(--color-card);
+  box-shadow: var(--shadow-card);
+}
+
+.list li + li,
+.movement + .movement {
+  border-top: 1px solid var(--color-line);
+}
+
+.row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  width: 100%;
+  min-height: 64px;
+  padding: 10px 14px;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.row:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: -2px;
+}
+
+.thumb {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: var(--color-brand-soft);
+  color: var(--color-brand);
+  font-weight: 700;
+}
+
+.main {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.name {
+  overflow: hidden;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.meta {
+  color: var(--color-muted);
+  font-size: 13px;
+}
+
+.end {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  gap: 2px;
+  align-items: flex-end;
+}
+
+.stock {
+  font-size: 18px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.stockLow {
+  color: var(--color-warn);
+}
+
+.stockOut {
+  color: var(--color-bad);
+}
+
+.kpiStock {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.details {
+  margin: 0 2px 8px;
+  color: var(--color-muted);
+  font-size: 14px;
+}
+
+.sectionLabel {
+  margin: 16px 2px 6px;
+  color: var(--color-ink-2);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.movements {
+  margin-bottom: 16px;
+}
+
+.movement {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 10px 2px;
+}
+
+.delta {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.deltaIn {
+  color: var(--color-ok);
+}
+
+.deltaOut {
+  color: var(--color-ink-2);
+}
+
+.hint {
+  margin: 6px 0 0;
+  color: var(--color-muted);
+  font-size: 13px;
+  text-align: center;
+}
