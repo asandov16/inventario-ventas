@@ -10,7 +10,7 @@ App web instalable (PWA) para que un negocio familiar registre ventas de contado
 
 ## Estado
 
-2 de 6 etapas completas (3 nov 2026): Fundaciones y Núcleo de datos. Siguiente: App y Vender. Detalle en [Avance del proyecto](docs/avance.md).
+Etapas 0 y 1 completas; la Etapa 2 (App y Vender) tiene todo el código y solo espera la prueba en el celular (12 nov 2026). Siguiente: Operación diaria. Detalle en [Avance del proyecto](docs/avance.md).
 
 ## Documentación
 
