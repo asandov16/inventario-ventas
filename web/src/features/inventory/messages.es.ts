@@ -1,6 +1,50 @@
-// Spanish copy for the inventory feature.
+// Spanish copy for the inventory feature (CU-08, F6-T01/T02, prototype v2).
 export const INVENTORY_MESSAGES = {
   title: 'Inventario',
-  placeholderTitle: 'Aquí verás tus productos y cuántos quedan',
-  placeholderBody: 'Con avisos cuando algo se esté acabando.',
+  productsCount: (count: number) => `${String(count)} ${count === 1 ? 'producto' : 'productos'}`,
+  units: 'Unidades',
+  valueAtPrice: 'Valor a precio de venta',
+  valueAtCost: 'Valor a costo',
+  searchPlaceholder: 'Buscar producto o código',
+  searchLabel: 'Buscar en el inventario',
+  filtersLabel: 'Filtros del inventario',
+  allCategories: 'Todos',
+  lowStockChip: '⚠️ Stock bajo',
+  stockStatus: { ok: 'OK', low: 'Bajo', out: 'Agotado' },
+  loading: 'Cargando inventario…',
+  noProductsTitle: 'Todavía no hay productos',
+  noProductsBody: 'Cuando ingreses mercadería aparecerá aquí.',
+  noResultsTitle: 'No hay productos que coincidan',
+  noResultsBody: 'Prueba con otro nombre o filtro.',
+  clearFilters: 'Limpiar filtros',
+  rowMeta: (code: string, formattedPrice: string) => `${code} · ${formattedPrice}`,
+  rowLabel: (name: string, stock: number, status: string) =>
+    `${name}: ${String(stock)} en stock, ${status}`,
+
+  productSheetTitle: 'Producto',
+  loadingProduct: 'Cargando producto…',
+  inStock: 'En stock',
+  price: 'Precio',
+  sold: 'Vendidos',
+  details: (category: string, code: string, minStock: number) =>
+    `Categoría: ${category} · Código ${code} · Mínimo ${String(minStock)}`,
+  costLine: (formattedCost: string) => `Costo ${formattedCost} por unidad`,
+  marginLine: (formattedProfit: string, marginPct: number) =>
+    `Ganancia ${formattedProfit} por unidad (${String(marginPct)}%)`,
+  movementsTitle: 'Últimos movimientos',
+  noMovements: 'Todavía no hay movimientos.',
+  movement: {
+    initial: 'Inventario inicial',
+    restock: 'Ingreso de stock',
+    sale: (folio: number | null) => (folio === null ? 'Venta' : `Venta #${String(folio)}`),
+    void: (folio: number | null) =>
+      folio === null ? 'Venta anulada' : `Venta #${String(folio)} anulada`,
+    adjustment: 'Ajuste de conteo',
+  },
+  movementBy: (name: string) => `por ${name}`,
+  movementCost: (formattedCost: string) => `costo ${formattedCost} c/u`,
+  stockAfter: (stock: number) => `quedan ${String(stock)}`,
+  sell: '🛍️ Vender',
+  sellUnavailable: 'No hay unidades para vender.',
+  inactive: 'Este producto está desactivado: no aparece para vender.',
 } as const;

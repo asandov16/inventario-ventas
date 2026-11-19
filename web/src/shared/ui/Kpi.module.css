@@ -1,0 +1,33 @@
+/* Ported from prototype v2 (.kpis, .kpi). */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.kpi {
+  padding: 12px 14px;
+  border-radius: var(--radius-card);
+  background: var(--color-card);
+  box-shadow: var(--shadow-card);
+}
+
+.label {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 13px;
+}
+
+.value {
+  margin: 2px 0 0;
+  font-size: 20px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.hint {
+  margin: 2px 0 0;
+  color: var(--color-muted);
+  font-size: 12px;
+}

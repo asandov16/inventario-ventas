@@ -1,0 +1,29 @@
+/* Ported from prototype v2 (.badge). */
+.badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.ok {
+  background: var(--color-ok-soft);
+  color: var(--color-ok);
+}
+
+.warn {
+  background: var(--color-warn-soft);
+  color: var(--color-warn);
+}
+
+.bad {
+  background: var(--color-bad-soft);
+  color: var(--color-bad);
+}
+
+.muted {
+  background: var(--color-line);
+  color: var(--color-muted);
+}

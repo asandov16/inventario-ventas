@@ -2,12 +2,14 @@ import { useMemo, useState } from 'react';
 
 import { useUrlSheet } from '@/shared/hooks/useUrlSheet';
 import { Button } from '@/shared/ui/Button';
-import { cx } from '@/shared/ui/cx';
 import { Empty } from '@/shared/ui/Empty';
 import { ErrorState, Loading } from '@/shared/ui/ErrorState';
+import { FilterChips } from '@/shared/ui/FilterChips';
 import { PageTitle } from '@/shared/ui/PageTitle';
+import { SearchInput } from '@/shared/ui/SearchInput';
 
 import { categoriesOf, filterCatalog } from '../domain/catalog';
+import { useAddFromLink } from '../hooks/useAddFromLink';
 import { useCart } from '../hooks/useCart';
 import { useCatalog, usePaymentMethods } from '../hooks/useCatalog';
 import { SALES_MESSAGES } from '../messages.es';
@@ -28,6 +30,7 @@ export function SellSection() {
   const paymentMethods = usePaymentMethods();
   const products = useMemo(() => catalog.data ?? [], [catalog.data]);
   const cart = useCart(products);
+  useAddFromLink(products, cart);
   const checkoutSheet = useUrlSheet(CHECKOUT_SHEET_PARAM);
   const saleSheet = useUrlSheet(SALE_SHEET_PARAM);
 
@@ -43,32 +46,26 @@ export function SellSection() {
     <>
       <PageTitle title={SALES_MESSAGES.title} aside={SALES_MESSAGES.subtitle} />
 
-      <input
-        type="search"
-        className={styles.search}
-        placeholder={SALES_MESSAGES.searchPlaceholder}
-        aria-label={SALES_MESSAGES.searchLabel}
+      <SearchInput
         value={query}
-        onChange={(event) => {
-          setQuery(event.target.value);
-        }}
+        onChange={setQuery}
+        placeholder={SALES_MESSAGES.searchPlaceholder}
+        label={SALES_MESSAGES.searchLabel}
       />
       {categories.length > 1 && (
-        <div className={styles.chips} role="group" aria-label={SALES_MESSAGES.categoriesLabel}>
-          {[{ id: null, name: SALES_MESSAGES.allCategories }, ...categories].map((category) => (
-            <button
-              key={category.id ?? 'all'}
-              type="button"
-              className={cx(styles.chip, categoryId === category.id && styles.chipSelected)}
-              aria-pressed={categoryId === category.id}
-              onClick={() => {
+        <FilterChips
+          label={SALES_MESSAGES.categoriesLabel}
+          chips={[{ id: null, name: SALES_MESSAGES.allCategories }, ...categories].map(
+            (category) => ({
+              key: category.id ?? 'all',
+              label: category.name,
+              selected: categoryId === category.id,
+              onToggle: () => {
                 setCategoryId(category.id);
-              }}
-            >
-              {category.name}
-            </button>
-          ))}
-        </div>
+              },
+            }),
+          )}
+        />
       )}
 
       {catalog.isPending ? (
