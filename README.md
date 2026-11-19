@@ -25,6 +25,7 @@ Etapas 0 y 1 completas; la Etapa 2 (App y Vender) tiene todo el código y solo e
 | [Glosario](docs/glosario.md)                                     | Términos del negocio y sus nombres en el código  |
 | [Configurar cuentas](docs/runbooks/configurar-cuentas.md)        | GitHub, Supabase y Cloudflare                    |
 | [Preparar staging](docs/runbooks/staging.md)                     | Usuarios y datos ficticios del entorno de prueba |
+| [Proyecto pausado](docs/runbooks/proyecto-pausado.md)            | Evitar y resolver la pausa de Supabase Free      |
 
 ## Cómo levantar el proyecto
 

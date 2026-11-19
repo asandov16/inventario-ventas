@@ -1,0 +1,10 @@
+# Keep-alive Worker (F8-T07, ADR-042). Deployed by .github/workflows/keepalive.yml.
+# The Supabase URLs and anon keys are passed at deploy time with --var (public values,
+# kept out of this public repository anyway).
+name = "inv-keepalive"
+main = "src/index.ts"
+compatibility_date = "2026-11-01"
+workers_dev = false
+
+[triggers]
+crons = ["0 */6 * * *"]
