@@ -1,48 +1,63 @@
-import { SESSION_MESSAGES, useCurrentProfile, useSignOut } from '@/features/session';
+import { useState } from 'react';
+
+import { usePermission } from '@/shared/hooks/usePermission';
 import { useUrlSheet } from '@/shared/hooks/useUrlSheet';
-import { Button } from '@/shared/ui/Button';
 import { PageTitle } from '@/shared/ui/PageTitle';
+import { Segmented, type Segment } from '@/shared/ui/Segmented';
 import { Sheet } from '@/shared/ui/Sheet';
 
 import { PROFILE_MESSAGES } from '../messages.es';
-import styles from './ProfileSection.module.css';
+import { AccountPanel } from './AccountPanel';
+import { BusinessPanel } from './BusinessPanel';
+import { UsersPanel } from './UsersPanel';
 
 /** URL parameter of the "about" sheet: /perfil?acerca=1. */
 const ABOUT_SHEET_PARAM = 'acerca';
 
-/** Who is signed in and how to leave (CU-14). Settings arrive in Stage 3. */
+type Tab = 'account' | 'business' | 'users';
+
+/**
+ * Perfil (CU-14, CU-15): everyone has "Mi cuenta"; "Negocio" and "Usuarios"
+ * appear only with their permissions (the database checks them again).
+ */
 export function ProfileSection() {
-  const profile = useCurrentProfile();
-  const signOut = useSignOut();
   const aboutSheet = useUrlSheet(ABOUT_SHEET_PARAM);
+  const canConfigure = usePermission('business.configure');
+  const canSeeUsers = usePermission('users.admin');
+  const [tab, setTab] = useState<Tab>('account');
+
+  const segments: Segment<Tab>[] = [
+    { value: 'account', label: PROFILE_MESSAGES.tabs.account },
+    ...(canConfigure
+      ? [{ value: 'business' as const, label: PROFILE_MESSAGES.tabs.business }]
+      : []),
+    ...(canSeeUsers ? [{ value: 'users' as const, label: PROFILE_MESSAGES.tabs.users }] : []),
+  ];
 
   return (
     <>
       <PageTitle title={PROFILE_MESSAGES.title} />
-      <section className={styles.card}>
-        <p className={styles.name}>{profile.fullName}</p>
-        <dl className={styles.facts}>
-          <dt>{PROFILE_MESSAGES.roleLabel}</dt>
-          <dd>{profile.roleName}</dd>
-          <dt>{PROFILE_MESSAGES.businessLabel}</dt>
-          <dd>{profile.business.name}</dd>
-        </dl>
-      </section>
-      <p className={styles.note}>{PROFILE_MESSAGES.settingsSoon}</p>
-      <div className={styles.actions}>
-        <Button
-          variant="light"
-          block
-          onClick={() => {
+      {segments.length > 1 && (
+        <Segmented<Tab>
+          label={PROFILE_MESSAGES.tabsLabel}
+          value={tab}
+          onChange={setTab}
+          segments={segments}
+        />
+      )}
+
+      {tab === 'business' && canConfigure ? (
+        <BusinessPanel />
+      ) : tab === 'users' && canSeeUsers ? (
+        <UsersPanel />
+      ) : (
+        <AccountPanel
+          onAbout={() => {
             aboutSheet.open();
           }}
-        >
-          {PROFILE_MESSAGES.aboutButton}
-        </Button>
-        <Button variant="light" block onClick={() => void signOut()}>
-          {SESSION_MESSAGES.signOut}
-        </Button>
-      </div>
+        />
+      )}
+
       <Sheet
         open={aboutSheet.isOpen}
         title={PROFILE_MESSAGES.aboutTitle}
