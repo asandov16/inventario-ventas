@@ -1,6 +1,6 @@
 -- Staging demo data (ADR-038). Run ONCE from the Supabase SQL editor of inv-staging, after
 -- bootstrap/prod.sql and after linking the staging users (docs/runbooks/staging.md).
--- Never run it in production. Fictional products and customers only (phones +506 8000-00NN);
+-- Never run it in production. Fictional products and customers only (phones +506 1230-00NN);
 -- same catalog as the local seed, without users or sales: sales are made from the app.
 
 do $$
@@ -65,7 +65,7 @@ where i.stock > 0;
 
 update public.categories set last_seq = 5;
 
--- Fictional customers (names changed from the prototype; phones in the 8000-00NN range).
+-- Fictional customers (names changed from the prototype; phones in the 1230-00NN range).
 insert into public.customers (business_id, name, phone_e164)
 select
     b.id,
@@ -74,19 +74,19 @@ select
 from public.businesses as b
 cross join (
     values
-    ('Tamara Odio', '+50680000001'),
-    ('Ana Celia Barquero', '+50680000002'),
-    ('Danae Zeledón', '+50680000003'),
-    ('Josué Irigaray', '+50680000004'),
-    ('Fiorella Cascante', '+50680000005'),
-    ('Anabel Quirós', '+50680000006'),
-    ('Rodolfo Esquivel', '+50680000007'),
-    ('Marisol Ugalde', '+50680000008'),
-    ('Ruth Alfaro', '+50680000009'),
-    ('Selene Matarrita', '+50680000010'),
-    ('Kenia Brizuela', '+50680000011'),
-    ('Priscila Obando', '+50680000012'),
-    ('Mireya Leitón', '+50680000013'),
-    ('Leonor Villalta', '+50680000014'),
-    ('Graciela Sibaja', '+50680000015')
+    ('Tamara Odio', '+50612300001'),
+    ('Ana Celia Barquero', '+50612300002'),
+    ('Danae Zeledón', '+50612300003'),
+    ('Josué Irigaray', '+50612300004'),
+    ('Fiorella Cascante', '+50612300005'),
+    ('Anabel Quirós', '+50612300006'),
+    ('Rodolfo Esquivel', '+50612300007'),
+    ('Marisol Ugalde', '+50612300008'),
+    ('Ruth Alfaro', '+50612300009'),
+    ('Selene Matarrita', '+50612300010'),
+    ('Kenia Brizuela', '+50612300011'),
+    ('Priscila Obando', '+50612300012'),
+    ('Mireya Leitón', '+50612300013'),
+    ('Leonor Villalta', '+50612300014'),
+    ('Graciela Sibaja', '+50612300015')
 ) as c (name, phone);

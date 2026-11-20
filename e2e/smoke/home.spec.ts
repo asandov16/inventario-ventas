@@ -74,7 +74,7 @@ test('a sale on another phone shows on Inicio in under 3 seconds (RNF-04, F7-T06
   // Give the Realtime channel a moment to subscribe before the other phone sells.
   await page.waitForTimeout(1500);
 
-  const folio = await registerCashSaleAs(USERS.seller, 'BIS-004', '+50680000009');
+  const folio = await registerCashSaleAs(USERS.seller, 'BIS-004', '+50612300009');
   await expect(inicio.getByText(`Venta #${String(folio)} a Ruth Alfaro`)).toBeVisible({
     timeout: 3_000,
   });

@@ -4,17 +4,17 @@ select plan(13);
 
 select tests.authenticate_as('vendedor@test.local');
 
-select public.create_customer('  Nidia Rojas  ', '8000-0099') as created \gset
+select public.create_customer('  Nidia Rojas  ', '1230-0099') as created \gset
 select is(:'created'::jsonb ->> 'status', 'ok', 'a seller can create a customer');
-select is(:'created'::jsonb -> 'customer' ->> 'phone_e164', '+50680000099', 'the phone is stored as E.164');
+select is(:'created'::jsonb -> 'customer' ->> 'phone_e164', '+50612300099', 'the phone is stored as E.164');
 select is(:'created'::jsonb -> 'customer' ->> 'name', 'Nidia Rojas', 'the name is trimmed');
 
 select is(
-    public.create_customer('Otra Persona', '+506 8000 0099') ->> 'status',
+    public.create_customer('Otra Persona', '+506 1230 0099') ->> 'status',
     'exists', 'a phone already registered offers the existing customer (RN-01)'
 );
 select is(
-    public.create_customer('Otra Persona', '506-80000099') -> 'customer' ->> 'name',
+    public.create_customer('Otra Persona', '506-12300099') -> 'customer' ->> 'name',
     'Nidia Rojas', 'exists returns the customer that owns the phone'
 );
 select throws_ok(
@@ -22,18 +22,18 @@ select throws_ok(
     'P0001', 'invalid_phone', 'a phone without 8 digits is rejected'
 );
 select throws_ok(
-    $$select public.create_customer(' ', '80000098')$$,
+    $$select public.create_customer(' ', '12300098')$$,
     'P0001', 'invalid_name', 'an empty name is rejected'
 );
 
 -- Offline-created customers keep the id generated on the phone (D-05).
 select is(
-    public.create_customer('Desde Celular', '80000097', p_id => '40000000-0000-4000-8000-000000000001')
+    public.create_customer('Desde Celular', '12300097', p_id => '40000000-0000-4000-8000-000000000001')
         -> 'customer' ->> 'id',
     '40000000-0000-4000-8000-000000000001', 'the id generated on the phone is kept'
 );
 select is(
-    public.create_customer('Desde Celular', '80000097', p_id => '40000000-0000-4000-8000-000000000001') ->> 'status',
+    public.create_customer('Desde Celular', '12300097', p_id => '40000000-0000-4000-8000-000000000001') ->> 'status',
     'replay', 'sending the same offline customer again is a replay'
 );
 
@@ -53,7 +53,7 @@ select ok(
 
 select is(
     public.update_customer(
-        (:'created'::jsonb -> 'customer' ->> 'id')::uuid, 'Nidia Rojas', '80000001'
+        (:'created'::jsonb -> 'customer' ->> 'id')::uuid, 'Nidia Rojas', '12300001'
     ) ->> 'status',
     'exists', 'changing to a phone of another customer is refused with that customer'
 );

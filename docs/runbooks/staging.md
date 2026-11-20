@@ -62,11 +62,30 @@ SQL Editor → nueva consulta.
    select private.link_user('<correo del vendedor>', 'seller', 'Vendedor de pruebas');
    ```
 
-3. Pega y ejecuta el contenido de `supabase/bootstrap/staging-demo.sql`. Carga 10 productos y 15 clientes ficticios.
+3. Pega y ejecuta el contenido de `supabase/bootstrap/staging-demo.sql`. Carga 10 productos y 15 clientes ficticios, con teléfonos `1230-NNNN`.
 
 ### 4. Probar
 
-Abre `https://staging.inv-web-326.pages.dev` en el celular y entra con el Administrador. La pantalla de entrada llega con el PR de sesión de la Etapa 2.
+Abre `https://staging.inv-web-326.pages.dev` en el celular y entra con el Administrador.
+
+**Teléfonos al probar:** usa siempre números que empiecen con **1230** (por ejemplo `1230-0050`). Ninguna línea de Costa Rica empieza con 1, así que un recordatorio por WhatsApp nunca le llega a una persona real. Nunca pruebes con un número de verdad, ni siquiera el tuyo.
+
+## Pasar los teléfonos de staging al rango ficticio (una vez, 20 nov 2026)
+
+Los datos de staging se cargaron con teléfonos `8000-NNNN`, que pueden ser de personas reales. Para cambiarlos todos:
+
+1. Supabase → proyecto **`inv-staging`** (revisa el nombre arriba a la izquierda; **nunca** en `inv-main`) → SQL Editor → nueva consulta.
+2. Pega y ejecuta el contenido de `supabase/bootstrap/staging-fictional-phones.sql`.
+3. La tabla del final debe mostrar `customers` igual a `customers_fictional` y `reminders` igual a `reminders_fictional`.
+
+Qué cambia:
+
+- Los clientes de prueba conservan sus 4 últimos dígitos: `8000-0003` pasa a `1230-0003`.
+- Cualquier otro número que se haya escrito al probar pasa a `1239-NNNN`.
+- Los teléfonos del personal, si hay, pasan a `1238-NNNN`.
+- El registro de recordatorios sigue el número nuevo de su cliente.
+
+El script se niega a correr si no encuentra el catálogo ficticio de prueba, así que no hace nada en producción. Corre todo o nada.
 
 ## Si algo sale mal
 

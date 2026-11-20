@@ -3,7 +3,7 @@ begin;
 select plan(11);
 
 select
-    (select id from public.customers where phone_e164 = '+50680000011') as customer_id,
+    (select id from public.customers where phone_e164 = '+50612300011') as customer_id,
     (select id from public.products where code = 'BIS-004') as product_id,
     (select stock from public.products where code = 'BIS-004') as stock_before,
     (select id from public.payment_methods where name = 'Efectivo') as cash_id \gset

@@ -113,11 +113,11 @@ test('CU-03: new customer inside the sale, and a repeated phone', async ({ page 
   await expect(sheet.getByLabel('Nombre completo')).toHaveValue('Zoila Prueba');
 
   // A phone without 8 digits is pointed out on the field.
-  await sheet.getByLabel('Teléfono (8 números)').fill('8000-009');
+  await sheet.getByLabel('Teléfono (8 números)').fill('1230-009');
   await sheet.getByRole('button', { name: 'Guardar cliente' }).click();
   await expect(sheet.getByText('El teléfono debe tener 8 números')).toBeVisible();
 
-  await sheet.getByLabel('Teléfono (8 números)').fill('80000099');
+  await sheet.getByLabel('Teléfono (8 números)').fill('12300099');
   await sheet.getByRole('button', { name: 'Guardar cliente' }).click();
   await expect(
     page.getByRole('status').filter({ hasText: 'Cliente Zoila Prueba guardado' }),
@@ -128,7 +128,7 @@ test('CU-03: new customer inside the sale, and a repeated phone', async ({ page 
   await sheet.getByRole('button', { name: 'Cambiar' }).click();
   await sheet.getByRole('button', { name: '＋ Nuevo cliente' }).click();
   await sheet.getByLabel('Nombre completo').fill('Tamara O.');
-  await sheet.getByLabel('Teléfono (8 números)').fill('80000001');
+  await sheet.getByLabel('Teléfono (8 números)').fill('12300001');
   await sheet.getByRole('button', { name: 'Guardar cliente' }).click();
   const dialog = page.getByRole('alertdialog', { name: 'Ese teléfono ya está registrado' });
   await expect(dialog).toContainText('Pertenece a Tamara Odio. ¿Es la misma persona?');

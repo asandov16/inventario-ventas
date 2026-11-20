@@ -3,7 +3,7 @@ begin;
 select plan(30);
 
 select
-    (select id from public.customers where phone_e164 = '+50680000009') as customer_id,
+    (select id from public.customers where phone_e164 = '+50612300009') as customer_id,
     (select id from public.products where code = 'PER-004') as perfume_id,
     (select id from public.products where code = 'BIS-004') as rings_id,
     (select id from public.products where code = 'BIS-003') as out_of_stock_id,

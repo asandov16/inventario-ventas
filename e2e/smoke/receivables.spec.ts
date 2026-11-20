@@ -100,9 +100,9 @@ test.describe('Por cobrar (CU-06, CU-07, F5-T05 to T07)', () => {
     await accountRow(receivables, 'Danae Zeledón').click();
     const sheet = page.getByRole('dialog', { name: 'Danae Zeledón' });
 
-    const link = sheet.getByRole('link', { name: /^💬 Enviar por WhatsApp a 8000-0003$/ });
+    const link = sheet.getByRole('link', { name: /^💬 Enviar por WhatsApp a 1230-0003$/ });
     const href = (await link.getAttribute('href')) ?? '';
-    expect(href).toMatch(/^https:\/\/wa\.me\/50680000003\?text=/);
+    expect(href).toMatch(/^https:\/\/wa\.me\/50612300003\?text=/);
     const text = decodeURIComponent(href.split('?text=')[1] ?? '');
     expect(text).toMatch(
       /^Hola Danae Zeledón, le saluda Mi Negocio\. Le recordamos su cuota de ₡10.000 con fecha .+\. Saldo pendiente: ₡30.000\. ¡Muchas gracias!$/,

@@ -3,7 +3,7 @@ begin;
 select plan(17);
 
 select
-    (select id from public.customers where phone_e164 = '+50680000010') as customer_id,
+    (select id from public.customers where phone_e164 = '+50612300010') as customer_id,
     (select id from public.products where code = 'PER-003') as product_id,
     (select id from public.payment_methods where name = 'SINPE Móvil') as sinpe_id \gset
 

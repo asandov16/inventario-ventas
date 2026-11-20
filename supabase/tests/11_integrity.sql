@@ -26,7 +26,7 @@ select throws_ok(
 -- A valid cash sale inserted directly (as the owner) to exercise sales constraints.
 select c.id as customer_id, p.id as seller_id, m.id as method_id, b.id as business_id
 from public.customers as c, public.profiles as p, public.payment_methods as m, public.businesses as b
-where c.phone_e164 = '+50680000001' and p.full_name = 'Bruno Arrieta' and m.name = 'Efectivo'
+where c.phone_e164 = '+50612300001' and p.full_name = 'Bruno Arrieta' and m.name = 'Efectivo'
 limit 1 \gset
 
 select throws_ok(

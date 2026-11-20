@@ -156,7 +156,7 @@ Estas reglas aplican a todas las fases y van resumidas en `CLAUDE.md`.
 **Datos**
 
 - Montos en colones como `integer` (RN-13); nunca `numeric` ni flotantes. Toda cantidad de dinero > 0 lleva `CHECK`.
-- Teléfonos guardados en E.164 (`+50680000001`), `CHECK (phone_e164 ~ '^\+506[0-9]{8}$')`; se muestran como `8000-0001`.
+- Teléfonos guardados en E.164 (`+50612300001`), `CHECK (phone_e164 ~ '^\+506[0-9]{8}$')`; se muestran como `1230-0001`.
 - Fechas-hora en `timestamptz`; fechas de vencimiento en `date`. "Hoy" se calcula en la zona del negocio: `(now() AT TIME ZONE b.timezone)::date`, con `timezone = 'America/Costa_Rica'`.
 - Toda tabla de negocio lleva `business_id uuid NOT NULL` desde el día uno.
 - Estados como `text` + `CHECK (... IN (...))`, no tipos `ENUM` (más fáciles de extender).
@@ -402,7 +402,7 @@ Orden dentro de la transacción:
 
 **F2-T04 · Clientes (CU-03)**
 
-- `crear_cliente(p_name, p_phone, p_email, p_zone, p_notes, p_whatsapp_opt_in, p_id DEFAULT NULL)`: normaliza teléfono a E.164 (acepta `8000-0001`, `80000001`, `+506 8811 2233`); si el teléfono ya existe → `{status:'exists', customer}` (no error) para que la UI pregunte "¿Es la misma persona?".
+- `crear_cliente(p_name, p_phone, p_email, p_zone, p_notes, p_whatsapp_opt_in, p_id DEFAULT NULL)`: normaliza teléfono a E.164 (acepta `1230-0001`, `12300001`, `+506 1230 0001`); si el teléfono ya existe → `{status:'exists', customer}` (no error) para que la UI pregunte "¿Es la misma persona?".
 - `buscar_clientes(p_q text, p_limit int DEFAULT 8)`: coincide por dígitos del teléfono o por nombre sin tildes (`unaccent` + `ILIKE` + `similarity`); retorna `balance` y `overdue` de `v_customer_balances`.
 
 **F2-T05 · `registrar_abono` (CU-06, RN-06, RN-08)**

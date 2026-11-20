@@ -36,7 +36,7 @@ const data: ExportData = {
   generatedAt: '2026-11-19T21:00:00Z',
   businessName: 'Mi Negocio',
   customers: [
-    { id: 'c1', name: 'Tamara Odio', phone_e164: '+50680000001', whatsapp_opt_in: false },
+    { id: 'c1', name: 'Tamara Odio', phone_e164: '+50612300001', whatsapp_opt_in: false },
   ],
   products: [
     {
