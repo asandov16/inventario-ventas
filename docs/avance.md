@@ -2,16 +2,16 @@
 
 Bitácora de lo completado por etapa. Se actualiza al cerrar cada etapa, junto con la presentación de avance (privada, en claude.ai).
 
-**Estado al 19 nov 2026:** etapas 0 y 1 completas. Las etapas 2 y 3 tienen todo el código en `main` y la revisión automatizada aprobada; a las dos les falta la prueba en el celular. Siguiente: Etapa 4, Producción y beta (espera visto bueno del plan).
+**Estado al 20 nov 2026:** etapas 0 a 3 completas; la app ya se instaló y se probó en un celular sobre staging. Siguiente: Etapa 4, Producción y beta (espera visto bueno del plan).
 
-| Etapa                   | Fases        | Estado                                      | Cierre     | PRs            |
-| ----------------------- | ------------ | ------------------------------------------- | ---------- | -------------- |
-| **0 Fundaciones**       | F0           | ✅ Completa                                 | 3 nov 2026 | #1, #3, #4, #5 |
-| **1 Núcleo de datos**   | F1 + F2      | ✅ Completa                                 | 3 nov 2026 | #6, #7, #8, #9 |
-| **2 App y Vender**      | F3 + F4      | 🔶 En cierre: falta la prueba en el celular | —          | #11–#18        |
-| **3 Operación diaria**  | F6 + F5 + F7 | 🔶 En cierre: falta la prueba en el celular | —          | #24–#34        |
-| **4 Producción y beta** | F8 + F9      | ⏭️ Siguiente                                | —          | —              |
-| **5 Sin conexión**      | F10          | Pendiente                                   | —          | —              |
+| Etapa                   | Fases        | Estado       | Cierre      | PRs            |
+| ----------------------- | ------------ | ------------ | ----------- | -------------- |
+| **0 Fundaciones**       | F0           | ✅ Completa  | 3 nov 2026  | #1, #3, #4, #5 |
+| **1 Núcleo de datos**   | F1 + F2      | ✅ Completa  | 3 nov 2026  | #6, #7, #8, #9 |
+| **2 App y Vender**      | F3 + F4      | ✅ Completa  | 20 nov 2026 | #11–#18        |
+| **3 Operación diaria**  | F6 + F5 + F7 | ✅ Completa  | 20 nov 2026 | #24–#34        |
+| **4 Producción y beta** | F8 + F9      | ⏭️ Siguiente | —           | —              |
+| **5 Sin conexión**      | F10          | Pendiente    | —           | —              |
 
 ## Etapa 0 — Fundaciones (3 nov 2026)
 
@@ -47,7 +47,7 @@ Bitácora de lo completado por etapa. Se actualiza al cerrar cada etapa, junto c
 - Hay 20 tablas, no 19: los costos de cada ingreso van en una tabla aparte (`inventory_movement_costs`, ADR-036), para que el Vendedor no los vea.
 - Dos solicitudes simultáneas con la misma llave fallaban en el índice único. Ahora se serializan con un bloqueo por llave (`private.lock_key`), y RN-18 queda cubierta también en paralelo.
 
-## Etapa 2 — App y Vender (código completo el 7 nov 2026; falta la prueba en el celular)
+## Etapa 2 — App y Vender (20 nov 2026; código completo el 7 nov)
 
 **Resultado:** una app instalable con las 6 secciones, sesión y permisos, y la pantalla Vender de punta a punta: de contado y a pagos, siempre con cliente.
 
@@ -70,7 +70,7 @@ Bitácora de lo completado por etapa. Se actualiza al cerrar cada etapa, junto c
 - El keep-alive (F8-T07) se adelantó porque Supabase avisó que pausaría producción (ADR-042).
 - El proyecto de producción en Supabase se llama `inv-main`, no `inv-prod`.
 
-## Etapa 3 — Operación diaria (código completo el 19 nov 2026; falta la prueba en el celular)
+## Etapa 3 — Operación diaria (20 nov 2026; código completo el 19 nov)
 
 **Resultado:** las seis secciones funcionan con datos reales: inventario, historial con anulación, cobros con recordatorio por WhatsApp, Inicio en tiempo real entre celulares, Perfil con la configuración del negocio, respaldo en Excel y carga de las deudas del cuaderno.
 
@@ -93,17 +93,20 @@ Bitácora de lo completado por etapa. Se actualiza al cerrar cada etapa, junto c
 - Fueron 8 PRs de código, no 7: Perfil se partió en dos (#32 y #34).
 - El respaldo tiene 7 hojas: se agregó **Cuotas**.
 - Una migración extra para buscar ventas sin tildes (`customer_search`).
-- La primera corrida nocturna falló una prueba en WebKit (CU-11); se corrige en el PR de la revisión del DoD.
+- La primera corrida nocturna falló una prueba en WebKit (CU-11); se corrigió en #35 y la corrida nocturna del 20 nov pasó en Chromium y WebKit.
+
+**Cierre:** Prueba en el celular hecha el 20 nov 2026 por la persona dueña, sobre staging: instalación y todos los flujos (vender de contado y a pagos, abono, recordatorio, ingreso de stock, anulación, saldo anterior y respaldo). Cierra también la Etapa 2. Dejó dos detalles de interfaz, anotados abajo.
 
 ## Pendientes conocidos
 
 | Pendiente                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | Cuándo                                                                                                    |
 | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
 | Cambiar OrbStack por Docker Desktop (vence la prueba)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | Antes del 2 dic 2026                                                                                      |
-| Prueba de instalación y venta en el celular (Etapa 2) y día de trabajo simulado (Etapa 3)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | Antes de cerrar las etapas 2 y 3                                                                          |
 | Alertas de Dependabot: `minimatch` (ESLint), `glob` y `deepmerge` (`workbox-build`); ninguna llega a la app                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | Con versiones nuevas de esas herramientas                                                                 |
 | **Editar un cliente desde la app.** Hoy, si se registra un cliente con un dato mal (lo común: un error en el teléfono), no hay forma de corregirlo: el cliente queda así y el recordatorio por WhatsApp va al número equivocado. La base ya tiene `update_customer` (F2-T04, permiso `customers.edit`, que también tiene el Vendedor) con aviso si el teléfono nuevo ya es de otro cliente; falta la pantalla. Por decidir: dónde se edita (sugerido: un botón **Editar cliente** en la hoja de la venta y en la cuenta de Por cobrar) y si queda registro del cambio en la actividad        | Por decidir; sugerido antes de la beta (F9), cuando entren clientes reales                                |
 | **Campos que se salen de la pantalla en el celular.** En Inventario → Agregar stock, el campo **Costo unitario** (al lado de **Cantidad**) se sale por la derecha. Causa: las filas de dos columnas usan `grid-template-columns: 1fr 1fr`, y una columna no se encoge por debajo del ancho mínimo de un `<input>` (unos 20 caracteres). Arreglo: `repeat(2, minmax(0, 1fr))`. El mismo patrón está en Editar producto, los filtros de fecha de Historial, Por cobrar, Perfil, el detalle de la venta, el selector de cliente y los diálogos: revisarlos todos en un celular angosto (360 px) | ✅ Arreglado en la Etapa 3 (#34): siete hojas de estilo cambiadas y una prueba E2E a 360 px que lo vigila |
+| **Montos rápidos del abono sin marca de elegido.** En Registrar abono (desde Historial o Por cobrar), los botones de monto rápido (**Cuota**, **Todo**) llenan el campo, pero no queda marcado cuál se tocó. Arreglo sugerido: el botón cuyo monto coincide con el del campo se ve elegido (`aria-pressed` y el estilo de chip activo); si se escribe otro monto, ninguno queda marcado                                                                                                                                                                                                      | Detalle menor; antes de la beta (F9)                                                                      |
+| **Campo «Fecha de la compra» desalineado en el celular.** En Perfil → Datos → Cargar saldo anterior, el campo de fecha no se alinea con los demás en la versión móvil (visto en la prueba del 20 nov). Es un `<input type="date">`: el navegador del celular le da su propio alto, ancho y alineación. Arreglo sugerido: en `TextField.module.css`, igualar alto, ancho y alineación del texto para los campos de fecha (también el de «Primera cuota vence el») y revisarlo en Android y iPhone                                                                                             | Detalle menor; antes de la beta (F9)                                                                      |
 
 ## Cómo se actualiza
 

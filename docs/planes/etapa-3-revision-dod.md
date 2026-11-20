@@ -1,6 +1,6 @@
 # Revisión del DoD — Etapa 3: Operación diaria
 
-**Resultado: cumplido en todo lo automatizable; falta la prueba en el celular (un día de trabajo simulado).**
+**Resultado: cumplido.** Prueba en el celular hecha el 20 nov 2026 por la persona dueña, sobre staging: instalación y todos los flujos. La corrida nocturna del 20 nov pasó en Chromium y WebKit.
 
 Revisión del 19 nov 2026 sobre `main` (`6d5e876`, PRs #24 a #34), con instalación limpia y base reiniciada. La primera corrida nocturna en Chromium y WebKit encontró una prueba inestable en WebKit, que se corrige en este PR (ver «Hallazgos»).
 
@@ -13,8 +13,8 @@ Revisión del 19 nov 2026 sobre `main` (`6d5e876`, PRs #24 a #34), con instalaci
 | **F5:** los abonos actualizan saldo, estados y contadores sin recargar               | ✅ E2E CU-06: abono parcial, saldo nuevo y cuenta liquidada que pasa a "Liquidadas" sin recargar. Los contadores rojos se refrescan con la misma invalidación; ninguna prueba E2E mira el número del contador después de un abono |
 | **F5:** una venta anulada desaparece de Por cobrar y de los totales; su stock vuelve | ✅ E2E CU-05: el stock vuelve; pgTAP `32_void_sale` y `52_receivables`: la venta anulada no debe nada y sale de Por cobrar y de los resúmenes (RN-09)                                                                             |
 | **F7:** una venta en un navegador actualiza Inicio en otro en menos de 3 s           | ✅ E2E `home.spec.ts`: el Vendedor registra una venta con `register_sale` desde otra conexión y el Inicio del Admin la muestra en menos de 3 s (RNF-04), en cada PR y en la corrida nocturna                                      |
-| **F7:** los 15 casos de uso pasan en la corrida completa, en Chromium y WebKit       | 🔶 Chromium: 44/44 en local, en cada PR y en la corrida nocturna. WebKit: 43/44 en la primera corrida nocturna; la prueba que falló (CU-11) se corrige en este PR y se confirma en la próxima corrida                             |
-| Prueba en el celular: un día de trabajo simulado                                     | ⏳ **Pendiente.** Venta, abono, recordatorio, ingreso de stock, anulación y carga de un saldo anterior, en staging, desde un celular real                                                                                         |
+| **F7:** los 15 casos de uso pasan en la corrida completa, en Chromium y WebKit       | ✅ 44/44 en los dos navegadores en la corrida nocturna del 20 nov, después de la corrección de #35 (la primera corrida falló CU-11 en WebKit)                                                                                     |
+| Prueba en el celular: un día de trabajo simulado                                     | ✅ 20 nov 2026, sobre staging: venta, abono, recordatorio, ingreso de stock, anulación, saldo anterior y respaldo. Dejó dos detalles de interfaz, anotados en `docs/avance.md`                                                    |
 | Casillas F5, F6 y F7 del roadmap                                                     | ✅ 8/8, 5/5 y 12/12                                                                                                                                                                                                               |
 
 ## Casos de uso cubiertos por E2E
@@ -68,8 +68,8 @@ Revisión del 19 nov 2026 sobre `main` (`6d5e876`, PRs #24 a #34), con instalaci
 
 ## Pendientes conocidos (no bloquean)
 
-- **Prueba en el celular:** el día de trabajo simulado de arriba, en Android y iPhone. Es lo único que falta para cerrar la etapa (y sigue pendiente la de la Etapa 2).
-- **Corrida nocturna en WebKit en verde:** confirmar en la próxima corrida, después del merge de este PR.
+- ~~**Prueba en el celular**~~: hecha el 20 nov 2026.
+- ~~**Corrida nocturna en WebKit en verde**~~: confirmada el 20 nov 2026.
 - **Editar un cliente desde la app:** la RPC existe; falta la pantalla. Por decidir antes de la beta.
 - **Contador rojo después de un abono:** funciona por la invalidación de consultas, pero no tiene prueba E2E propia.
 - **Docker:** cambiar OrbStack por Docker Desktop antes del 2 dic 2026.
