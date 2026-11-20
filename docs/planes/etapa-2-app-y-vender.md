@@ -121,7 +121,7 @@ web/src/
 **Datos de staging:**
 
 - `supabase/bootstrap/prod.sql` crea negocio, roles y catálogos.
-- `supabase/bootstrap/staging-demo.sql` carga productos y clientes ficticios (teléfonos 8000-00NN) mediante las RPC.
+- `supabase/bootstrap/staging-demo.sql` carga productos y clientes ficticios (teléfonos 1230-00NN) mediante las RPC.
 - Ambos se corren una vez con el runbook nuevo `docs/runbooks/staging.md`. `private.link_user` vincula a los 2 usuarios.
 
 **Seguridad:**
@@ -150,7 +150,7 @@ web/src/
 
 | Tipo                          | Qué cubre                                                                                                                                                              |
 | ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Vitest (`shared/domain`)      | Dinero `₡38 000`, teléfonos `8000-0001` ↔ `+50680000001`, "Hoy/Ayer" en zona CR, cuotas con el JSON compartido, enlace de WhatsApp                                     |
+| Vitest (`shared/domain`)      | Dinero `₡38 000`, teléfonos `1230-0001` ↔ `+50612300001`, "Hoy/Ayer" en zona CR, cuotas con el JSON compartido, enlace de WhatsApp                                     |
 | Vitest (reductores y gateway) | Carrito (no pasa el stock, vaciar, persistencia) y `useRpcMutation` (llave reutilizada al reintentar, mapeo de errores y estados). Usa `jsdom`                         |
 | Playwright smoke (PR 4)       | Entrar como Admin, deslizar por las 6 secciones, salir; el Vendedor no ve lo marcado con `costs.read`                                                                  |
 | Playwright Vender (PR 6)      | CU-01 de contado; CU-02 a pagos con plan; CU-03 cliente nuevo y teléfono repetido; botón deshabilitado sin cliente; doble toque crea **una** venta; stock insuficiente |

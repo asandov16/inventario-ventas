@@ -14,7 +14,7 @@ function account(overrides: Partial<ReceivableAccount>): ReceivableAccount {
     saleId: 's',
     folio: 1001,
     customerName: 'Marisol Ugalde',
-    customerPhoneE164: '+50680000008',
+    customerPhoneE164: '+50612300008',
     source: 'app',
     totalColones: 30000,
     paidColones: 10000,

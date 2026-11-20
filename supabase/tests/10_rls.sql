@@ -26,7 +26,7 @@ select is(
 -- Nobody writes tables directly, not even an admin.
 select throws_ok(
     $$insert into public.customers (business_id, name, phone_e164)
-      select id, 'Directo', '+50680000099' from public.businesses$$,
+      select id, 'Directo', '+50612300099' from public.businesses$$,
     '42501', null, 'seller cannot insert rows directly'
 );
 

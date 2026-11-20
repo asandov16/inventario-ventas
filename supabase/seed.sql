@@ -5,7 +5,7 @@
 --   admin@test.local      Administrador
 --   admin2@test.local     Administrador
 --   vendedor@test.local   Vendedor
--- Phones use the fictional range +506 8000-00NN.
+-- Phones use the fictional range +506 1230-00NN.
 
 do $$
 declare
@@ -95,7 +95,7 @@ where i.stock > 0;
 
 update public.categories set last_seq = 5;
 
--- Fictional customers (names changed from the prototype; phones in the 8000-00NN range).
+-- Fictional customers (names changed from the prototype; phones in the 1230-00NN range).
 insert into public.customers (business_id, name, phone_e164)
 select
     b.id,
@@ -104,21 +104,21 @@ select
 from public.businesses as b
 cross join (
     values
-    ('Tamara Odio', '+50680000001'),
-    ('Ana Celia Barquero', '+50680000002'),
-    ('Danae Zeledón', '+50680000003'),
-    ('Josué Irigaray', '+50680000004'),
-    ('Fiorella Cascante', '+50680000005'),
-    ('Anabel Quirós', '+50680000006'),
-    ('Rodolfo Esquivel', '+50680000007'),
-    ('Marisol Ugalde', '+50680000008'),
-    ('Ruth Alfaro', '+50680000009'),
-    ('Selene Matarrita', '+50680000010'),
-    ('Kenia Brizuela', '+50680000011'),
-    ('Priscila Obando', '+50680000012'),
-    ('Mireya Leitón', '+50680000013'),
-    ('Leonor Villalta', '+50680000014'),
-    ('Graciela Sibaja', '+50680000015')
+    ('Tamara Odio', '+50612300001'),
+    ('Ana Celia Barquero', '+50612300002'),
+    ('Danae Zeledón', '+50612300003'),
+    ('Josué Irigaray', '+50612300004'),
+    ('Fiorella Cascante', '+50612300005'),
+    ('Anabel Quirós', '+50612300006'),
+    ('Rodolfo Esquivel', '+50612300007'),
+    ('Marisol Ugalde', '+50612300008'),
+    ('Ruth Alfaro', '+50612300009'),
+    ('Selene Matarrita', '+50612300010'),
+    ('Kenia Brizuela', '+50612300011'),
+    ('Priscila Obando', '+50612300012'),
+    ('Mireya Leitón', '+50612300013'),
+    ('Leonor Villalta', '+50612300014'),
+    ('Graciela Sibaja', '+50612300015')
 ) as c (name, phone);
 
 -- Sample sales, created through the real RPCs as the admin so they follow every business
@@ -142,7 +142,7 @@ begin
 
     -- Cash sale today: 2 x Aretes argolla dorada.
     perform public.register_sale(
-        gen_random_uuid(), (select id from public.customers where phone_e164 = '+50680000001'), 'cash',
+        gen_random_uuid(), (select id from public.customers where phone_e164 = '+50612300001'), 'cash',
         jsonb_build_array(jsonb_build_object(
             'product_id', (select id from public.products where code = 'BIS-001'), 'qty', 2
         )),
@@ -151,7 +151,7 @@ begin
 
     -- Cash sale yesterday: Splash Coco Fresh.
     perform public.register_sale(
-        gen_random_uuid(), (select id from public.customers where phone_e164 = '+50680000002'), 'cash',
+        gen_random_uuid(), (select id from public.customers where phone_e164 = '+50612300002'), 'cash',
         jsonb_build_array(jsonb_build_object(
             'product_id', (select id from public.products where code = 'PER-005'), 'qty', 1
         )),
@@ -160,7 +160,7 @@ begin
 
     -- 3 months, 40 days ago, no payment since the down payment: first installment overdue.
     perform public.register_sale(
-        gen_random_uuid(), (select id from public.customers where phone_e164 = '+50680000003'), 'installments',
+        gen_random_uuid(), (select id from public.customers where phone_e164 = '+50612300003'), 'installments',
         jsonb_build_array(jsonb_build_object(
             'product_id', (select id from public.products where code = 'PER-001'), 'qty', 1
         )),
@@ -170,7 +170,7 @@ begin
 
     -- 3 months, 5 days ago, with one payment: partially paid, nothing overdue.
     v_sale := public.register_sale(
-        gen_random_uuid(), (select id from public.customers where phone_e164 = '+50680000008'), 'installments',
+        gen_random_uuid(), (select id from public.customers where phone_e164 = '+50612300008'), 'installments',
         jsonb_build_array(
             jsonb_build_object('product_id', (select id from public.products where code = 'PER-002'), 'qty', 1),
             jsonb_build_object('product_id', (select id from public.products where code = 'BIS-005'), 'qty', 1)
@@ -182,7 +182,7 @@ begin
 
     -- 2 months, 70 days ago, fully paid.
     v_sale := public.register_sale(
-        gen_random_uuid(), (select id from public.customers where phone_e164 = '+50680000005'), 'installments',
+        gen_random_uuid(), (select id from public.customers where phone_e164 = '+50612300005'), 'installments',
         jsonb_build_array(jsonb_build_object(
             'product_id', (select id from public.products where code = 'BIS-002'), 'qty', 1
         )),
@@ -198,7 +198,7 @@ begin
     );
 
     -- Balance carried over from the paper notebook (D-12): 50 000 total, 30 000 already paid.
-    v_customer := (select id from public.customers where phone_e164 = '+50680000014');
+    v_customer := (select id from public.customers where phone_e164 = '+50612300014');
     perform public.register_legacy_balance(
         gen_random_uuid(), v_customer, (now() - interval '60 days')::date, 'Perfume Rosa + aretes',
         50000, 30000, 2, (now() + interval '15 days')::date
@@ -206,7 +206,7 @@ begin
 
     -- A voided sale: products return to stock.
     v_sale := public.register_sale(
-        gen_random_uuid(), (select id from public.customers where phone_e164 = '+50680000007'), 'cash',
+        gen_random_uuid(), (select id from public.customers where phone_e164 = '+50612300007'), 'cash',
         jsonb_build_array(jsonb_build_object(
             'product_id', (select id from public.products where code = 'PER-003'), 'qty', 1
         )),

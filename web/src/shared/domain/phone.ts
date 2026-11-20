@@ -1,5 +1,5 @@
 /**
- * Costa Rican phones are stored as E.164 (+506XXXXXXXX) and shown as 8000-0001.
+ * Costa Rican phones are stored as E.164 (+506XXXXXXXX) and shown as 1230-0001.
  * The database normalizes too (create_customer); this is for input and display.
  */
 
@@ -19,13 +19,13 @@ export function isValidPhone(input: string): boolean {
   return toE164(input) !== null;
 }
 
-/** "+50680000001" → "8000-0001". Anything unexpected is returned unchanged. */
+/** "+50612300001" → "1230-0001". Anything unexpected is returned unchanged. */
 export function formatPhone(e164: string): string {
   const local = toE164(e164)?.slice(-LOCAL_DIGITS);
   return local ? `${local.slice(0, 4)}-${local.slice(4)}` : e164;
 }
 
-/** Formats a phone while it is being typed: "80000" → "8000-0". */
+/** Formats a phone while it is being typed: "12300" → "1230-0". */
 export function formatPhoneInput(input: string): string {
   const digits = input.replace(/\D/g, '').slice(0, LOCAL_DIGITS);
   return digits.length > 4 ? `${digits.slice(0, 4)}-${digits.slice(4)}` : digits;

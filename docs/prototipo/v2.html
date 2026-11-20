@@ -271,7 +271,7 @@ function seed(){
     ['BIS-005','Tobillera plata 925','Bisutería',12000,5200,3,3],
   ];
   const products=P.map(([sku,name,cat,price,cost,stock,min])=>({id:uid(),sku,name,cat,price,cost,stock,min,active:true}));
-  const CL=[['Tamara Odio','80000014'],['Ana Celia Barquero','80000009'],['Danae Zeledón','80000017'],['Josué Irigaray','80000003'],['Fiorella Cascante','80000005'],['Anabel Quirós','80000012'],['Rodolfo Esquivel','80000016'],['Marisol Ugalde','80000007'],['Ruth Alfaro','80000001'],['Selene Matarrita','80000004'],['Kenia Brizuela','80000010'],['Priscila Obando','80000002'],['Mireya Leitón','80000015'],['Leonor Villalta','80000006'],['Graciela Sibaja','80000011']];
+  const CL=[['Tamara Odio','12300014'],['Ana Celia Barquero','12300009'],['Danae Zeledón','12300017'],['Josué Irigaray','12300003'],['Fiorella Cascante','12300005'],['Anabel Quirós','12300012'],['Rodolfo Esquivel','12300016'],['Marisol Ugalde','12300007'],['Ruth Alfaro','12300001'],['Selene Matarrita','12300004'],['Kenia Brizuela','12300010'],['Priscila Obando','12300002'],['Mireya Leitón','12300015'],['Leonor Villalta','12300006'],['Graciela Sibaja','12300011']];
   const clients=CL.map(([name,phone],i)=>({id:uid(),name,phone,created:now-(140-i)*DAY}));
   const cl=n=>clients.find(c=>c.name===n);
   const sales=[], events=[]; let folio=1000;
@@ -308,7 +308,7 @@ function seed(){
   events.push({t:now-15*DAY,type:'new',pid:products[9].id,text:'Nuevo producto: Tobillera plata 925'});
   events.sort((a,b)=>a.t-b.t);
   return {v:2,biz:'Mi Negocio',cur:'u1',folio,
-    users:[{id:'u1',name:'Ximena Ledezma',phone:'80000013',role:'admin',active:true},{id:'u2',name:'Bruno Arrieta',phone:'80000008',role:'vendedor',active:true}],
+    users:[{id:'u1',name:'Ximena Ledezma',phone:'12300013',role:'admin',active:true},{id:'u2',name:'Bruno Arrieta',phone:'12300008',role:'vendedor',active:true}],
     clients,products,sales,events};
 }
 let S;

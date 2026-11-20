@@ -59,7 +59,7 @@ describe('groupByDay', () => {
 describe('readSearch', () => {
   it('reads a folio or phone as digits', () => {
     expect(readSearch(' #1003 ')).toEqual({ kind: 'number', digits: '1003' });
-    expect(readSearch('8000-0003')).toEqual({ kind: 'number', digits: '80000003' });
+    expect(readSearch('1230-0003')).toEqual({ kind: 'number', digits: '12300003' });
   });
 
   it('reads a name and drops characters that would change the query', () => {

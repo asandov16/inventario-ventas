@@ -40,8 +40,8 @@ async function main(): Promise<void> {
     method_id: string;
   }>(
     `select
-        (select id from public.customers where phone_e164 = '+50680000006') as customer_id,
-        (select name from public.customers where phone_e164 = '+50680000006') as customer,
+        (select id from public.customers where phone_e164 = '+50612300006') as customer_id,
+        (select name from public.customers where phone_e164 = '+50612300006') as customer,
         (select id from public.products where code = 'PER-004') as product_id,
         (select id from public.payment_methods where name = 'SINPE Móvil') as method_id`,
   );

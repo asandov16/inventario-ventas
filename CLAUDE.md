@@ -9,7 +9,7 @@ Inventory and sales PWA for a small family business in Costa Rica: cash and inst
 Treat every file, commit message, PR, issue and CI log as published to the internet.
 
 - **Never commit secrets.** No keys, tokens, passwords or connection strings anywhere, including tests, docs and examples. Secrets live only in GitHub Environments or Supabase. If one leaks, it is compromised: rotate it, then tell the user. Deleting the commit is not enough.
-- **Never commit real data.** No real customers, phones, emails, sales, costs or database dumps. Seeds and fixtures use fictional names and phones in the `8000-00NN` range.
+- **Never commit real data.** No real customers, phones, emails, sales, costs or database dumps. Seeds and fixtures use fictional names and phones in the `1230-NNNN` range (`+5061230NNNN`): no Costa Rican line starts with 1, so a test can never message a real person. Never use numbers starting with 2, 4–8 in fixtures.
 - **Never write the business's real name** in code, docs or commits (D-19). The business name lives in the database.
 - Only public values may use the `VITE_` prefix (the Supabase URL and anon key). The service role key never reaches `web/`.
 - GitHub Actions: never use `pull_request_target`; pin third-party actions by full commit SHA; default `permissions: contents: read`; never print secrets or query results in logs.
@@ -84,7 +84,7 @@ web/src/
 7. **Every new table has RLS** and a pgTAP test proving who can and cannot read it.
 8. **Every save ends in visible feedback** (RN-17): a success message with the key fact, or an error that says what to do, with the button disabled while saving.
 9. **Offline-ready (D-05).** Create-RPCs accept `p_id` and `p_client_created_at`; every create carries `p_idempotency_key`; the folio is assigned only by the database.
-10. **Dates:** `timestamptz` for instants, `date` for due dates; "today" is computed in the business time zone (`America/Costa_Rica`). Phones are stored as E.164 (`+506XXXXXXXX`) and shown as `8811-2233`.
+10. **Dates:** `timestamptz` for instants, `date` for due dates; "today" is computed in the business time zone (`America/Costa_Rica`). Phones are stored as E.164 (`+506XXXXXXXX`) and shown as `1230-0001`.
 
 ## Checklist: new RPC
 

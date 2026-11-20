@@ -21,7 +21,7 @@ beforeAll(async () => {
   const [row] = await asOwner<{ category_id: string; customer_id: string; method_id: string }>(
     `select
         (select id from public.categories where prefix = 'BIS') as category_id,
-        (select id from public.customers where phone_e164 = '+50680000013') as customer_id,
+        (select id from public.customers where phone_e164 = '+50612300013') as customer_id,
         (select id from public.payment_methods where name = 'Efectivo') as method_id`,
   );
   if (!row) throw new Error('Seed data missing: run pnpm db:reset');

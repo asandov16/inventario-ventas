@@ -5,7 +5,7 @@ import { expect, test, type Locator, type Page } from '@playwright/test';
 import { signInAndWait, skipSwipeHint, tab, USERS } from './helpers';
 
 // Perfil → Datos (CU-15, F7-T09, F7-T12) and the narrow-phone layout check.
-// Selene Matarrita (seed, 8000-0010) is used by no other spec, so the balance loaded
+// Selene Matarrita (seed, 1230-0010) is used by no other spec, so the balance loaded
 // here changes nothing the later specs count.
 const CUSTOMER = 'Selene Matarrita';
 

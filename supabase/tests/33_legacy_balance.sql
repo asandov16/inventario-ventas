@@ -2,7 +2,7 @@
 begin;
 select plan(12);
 
-select (select id from public.customers where phone_e164 = '+50680000012') as customer_id \gset
+select (select id from public.customers where phone_e164 = '+50612300012') as customer_id \gset
 
 select tests.authenticate_as('vendedor@test.local');
 select throws_ok(

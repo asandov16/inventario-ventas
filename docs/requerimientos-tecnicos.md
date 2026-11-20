@@ -146,7 +146,7 @@ WhatsApp entra en tres fases; solo la primera es gratuita, porque desde el 1 de 
 
 Lo que se deja listo desde la v1 para no rehacer nada después:
 
-- Teléfonos guardados en formato internacional (`+50680000001`), además de mostrarlos como 8000-0001.
+- Teléfonos guardados en formato internacional (`+50612300001`), además de mostrarlos como 1230-0001.
 - Campo de consentimiento del cliente para recibir mensajes (Ley 8968, RNF-06).
 - Tabla `notification_outbox` (canal, plantilla, destinatario, estado, intentos) desde el inicio. En la fase 0 registra el enlace abierto; en la fase 1 la consume la Edge Function. Cambiar de canal no toca las pantallas.
 - `reminders` ya guarda canal y estado, así que CU-07 sigue igual cuando el envío pase a ser automático.
