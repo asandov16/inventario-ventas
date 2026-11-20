@@ -7,8 +7,18 @@ import pg from 'pg';
  */
 const LOCAL_DB_URL = 'postgres://postgres:postgres@127.0.0.1:54322/postgres';
 
+// pg waits forever by default; a stalled connect or query once used up a whole
+// test (nightly WebKit run). Fail fast instead, so the retry starts clean.
+const TIMEOUT_MS = 10_000;
+
 export async function withDb<T>(work: (client: pg.Client) => Promise<T>): Promise<T> {
-  const client = new pg.Client({ connectionString: LOCAL_DB_URL });
+  const client = new pg.Client({
+    connectionString: LOCAL_DB_URL,
+    connectionTimeoutMillis: TIMEOUT_MS,
+    query_timeout: TIMEOUT_MS,
+    statement_timeout: TIMEOUT_MS,
+    lock_timeout: TIMEOUT_MS,
+  });
   await client.connect();
   try {
     return await work(client);

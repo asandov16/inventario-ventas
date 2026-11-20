@@ -129,7 +129,8 @@ test.describe('Inventario: stock and products (CU-09 to CU-11)', () => {
     await expect(toast(page)).toContainText(
       `Cambios guardados · stock ajustado ${String(stock)} → ${String(stock - 1)}`,
     );
-    await expect(sheet.getByText('Ajuste de conteo')).toBeVisible();
+    // .first(): on a retry the earlier attempt's adjustment is listed too.
+    await expect(sheet.getByText('Ajuste de conteo').first()).toBeVisible();
     await expect(sheet.getByText(/por Ximena Ledezma/).first()).toBeVisible();
 
     // Price below cost: a warning that does not block.
