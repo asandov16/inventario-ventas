@@ -1,24 +1,24 @@
 # Revisión del DoD — Etapa 2: App y Vender
 
-**Resultado: cumplido en todo lo automatizable; falta la prueba en el celular.**
+**Resultado: cumplido.** Prueba en el celular hecha el 20 nov 2026 por la persona dueña, sobre staging: instalación y todos los flujos.
 
 Revisión del 12 nov 2026 sobre `main` (`1bed11a`, PRs #11 a #18), con instalación limpia y base reiniciada. Solo queda abierta la instalación y la venta de prueba en un celular real sobre staging, que hace la persona dueña.
 
 ## Criterios del plan
 
-| Criterio                                                    | Resultado                                                                                                                               |
-| ----------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| Entrar con el Admin muestra las 6 secciones                 | ✅ E2E `shell.spec.ts`: entrar, recorrer las 6 por pestaña y deslizando, salir                                                          |
-| El Vendedor no ve lo marcado con `costs.read`               | ✅ E2E: la tarjeta de ganancia no existe para el Vendedor y sí para el Admin                                                            |
-| La app se instala en Android y iPhone desde la vista previa | ⏳ **Pendiente.** Automatizado: manifest válido, íconos PNG y service worker activo (`pwa.spec.ts`, ADR-041). Falta la instalación real |
-| Vitest de `shared/domain` en verde                          | ✅ 138 pruebas unitarias en total, incluidas las cuotas con el mismo JSON que pgTAP                                                     |
-| Smoke E2E en verde                                          | ✅ 17/17 en local y en el job `e2e` de cada PR                                                                                          |
-| Venta de contado en menos de 1 minuto                       | ✅ E2E CU-01 mide el tiempo: la venta completa queda muy por debajo de 60 s                                                             |
-| Imposible guardar sin cliente                               | ✅ E2E: "Registrar venta" deshabilitado sin cliente; la base también lo exige (RN-01)                                                   |
-| A pagos muestra el plan y, al guardar, el plan de la base   | ✅ E2E CU-02: vista previa de 3 cuotas y, después, las cuotas que devolvió `register_sale`                                              |
-| Doble toque = una venta                                     | ✅ E2E: doble clic y la base cuenta exactamente una venta nueva                                                                         |
-| Cada guardado termina en toast o error con salida (RN-17)   | ✅ Venta, cliente nuevo y cierre de sesión con toast; stock, duplicado y precios con mensaje que dice qué hacer                         |
-| Casillas F3 y F4 del roadmap                                | ✅ 11/11 y 7/7                                                                                                                          |
+| Criterio                                                    | Resultado                                                                                                                                                                                                                                                          |
+| ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Entrar con el Admin muestra las 6 secciones                 | ✅ E2E `shell.spec.ts`: entrar, recorrer las 6 por pestaña y deslizando, salir                                                                                                                                                                                     |
+| El Vendedor no ve lo marcado con `costs.read`               | ✅ E2E: la tarjeta de ganancia no existe para el Vendedor y sí para el Admin                                                                                                                                                                                       |
+| La app se instala en Android y iPhone desde la vista previa | ✅ Instalada en un celular desde staging el 20 nov 2026 y probada con todos los flujos; la instalación en el otro sistema (Android o iPhone) se repite en la beta (F9). Automatizado: manifest válido, íconos PNG y service worker activo (`pwa.spec.ts`, ADR-041) |
+| Vitest de `shared/domain` en verde                          | ✅ 138 pruebas unitarias en total, incluidas las cuotas con el mismo JSON que pgTAP                                                                                                                                                                                |
+| Smoke E2E en verde                                          | ✅ 17/17 en local y en el job `e2e` de cada PR                                                                                                                                                                                                                     |
+| Venta de contado en menos de 1 minuto                       | ✅ E2E CU-01 mide el tiempo: la venta completa queda muy por debajo de 60 s                                                                                                                                                                                        |
+| Imposible guardar sin cliente                               | ✅ E2E: "Registrar venta" deshabilitado sin cliente; la base también lo exige (RN-01)                                                                                                                                                                              |
+| A pagos muestra el plan y, al guardar, el plan de la base   | ✅ E2E CU-02: vista previa de 3 cuotas y, después, las cuotas que devolvió `register_sale`                                                                                                                                                                         |
+| Doble toque = una venta                                     | ✅ E2E: doble clic y la base cuenta exactamente una venta nueva                                                                                                                                                                                                    |
+| Cada guardado termina en toast o error con salida (RN-17)   | ✅ Venta, cliente nuevo y cierre de sesión con toast; stock, duplicado y precios con mensaje que dice qué hacer                                                                                                                                                    |
+| Casillas F3 y F4 del roadmap                                | ✅ 11/11 y 7/7                                                                                                                                                                                                                                                     |
 
 ## Otras verificaciones
 
@@ -54,7 +54,7 @@ Revisión del 12 nov 2026 sobre `main` (`1bed11a`, PRs #11 a #18), con instalaci
 
 ## Pendientes conocidos (no bloquean)
 
-- **Prueba en el celular:** instalar y vender en Android y iPhone desde staging. Es lo único que falta para cerrar la etapa.
+- ~~**Prueba en el celular**~~: hecha el 20 nov 2026.
 - **Alertas de Dependabot**, ninguna llega a la app del celular:
   - `minimatch`, de ESLint;
   - `glob` y `deepmerge`, de `workbox-build`, que solo se usa al construir.

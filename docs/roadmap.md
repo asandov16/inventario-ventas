@@ -4,7 +4,7 @@
 > Ajustes vigentes: nombres de código en inglés (`docs/glosario.md`) y correcciones en `docs/decisiones/`.
 > Donde este documento y un ADR difieran, manda el ADR.
 
-> **Punto actual (19 nov 2026):** F0 a F7 completas en código (etapas 0 a 3). Las etapas 2 y 3 solo esperan la prueba en el celular. F8-T07 (keep-alive) se adelantó. Siguiente: Etapa 4 (F8 + F9), que empieza por su plan y espera visto bueno. Bitácora con fechas y PRs: [`docs/avance.md`](avance.md).
+> **Punto actual (20 nov 2026):** F0 a F7 completas (etapas 0 a 3), con la app probada en un celular sobre staging. F8-T07 (keep-alive) se adelantó. Siguiente: Etapa 4 (F8 + F9), que empieza por su plan y espera visto bueno. Bitácora con fechas y PRs: [`docs/avance.md`](avance.md).
 
 Revisión 2: lleva el sistema de un repositorio vacío a una beta en producción en 10 fases (F0–F9), más el modo sin conexión (F10) justo después.
 
